@@ -7,12 +7,41 @@ int	cd(char *path)	// EM TESTES AINDA
 {
 	char	*command;
 	char	*pwd;
+	int		i;
+printf("%s\n", path);
 
-	chdir(command);
+	path += 2;
+	while (*path != ' ' && *path != '	')
+		path++;
 
 	pwd = getcwd(NULL, 0);
 
-	printf("onde estou: %s\n", pwd);
+	if (path[0] == '.' && path[1] == '.')
+	{
+		i = 0;
+		while (pwd[i])
+			i++;
+
+		while (pwd[i] != '/')
+		{
+			pwd[i] = '\0';
+			i--;
+		}
+		pwd[i] = '\0';	// pwd[i] == '/';
+	}
+	else
+	{
+
+	}
+
+printf("%s\n", path);
+printf("%s\n", pwd);
+
+	// chdir(pwd);
+	// // chdir(command);
+
+
+	// printf("onde estou: %s\n", pwd);
 
 	free(command);
 	free(pwd);
@@ -21,7 +50,7 @@ int	cd(char *path)	// EM TESTES AINDA
 
 int	main(int argc, char **argv)
 {
-	pwd(argv[1]);
+	cd(argv[1]);
 	return (0);
 }
 

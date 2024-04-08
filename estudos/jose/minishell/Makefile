@@ -10,7 +10,11 @@
 #                                                                              #
 # **************************************************************************** #
 
-FILE =	minishell.c
+COMMANDS = ./commands/
+FILE =	minishell.c\
+	$(COMMANDS)echo.c\
+	$(COMMANDS)cd.c\
+	$(COMMANDS)pwd.c
 CC = cc
 FLAGS = -Wall -Wextra -Werror -o
 READLINE = -lreadline

@@ -23,18 +23,24 @@
 
 
 
-// int	main(void)
-// {
-// 	int		status;
-// 	char	buffer[100];
+int	main(void)
+{
+	char	buffer[100];
 
-// 	getcwd(buffer, sizeof(buffer));
-// 	printf("diretorio atual: %s\n", buffer);
+	getcwd(buffer, sizeof(buffer));
+	printf("diretorio atual: %s\n", buffer);
 
-// 	chdir("/nfs/homes/joseanto");
-// 	getcwd(buffer, sizeof(buffer));
-// 	printf("status: %d\tdiretorio atual: %s\n", status, buffer);
+	// chdir("/nfs/homes/joseanto");
 
-// 	return (0);
-// }
+	// chdir("/home/jose/programacao/42/42cursus/minishell/estudos/jose");
+	chdir("/home/jose/programacao/42/42cursus/minishell/estudos/jose/mensagem");
+	// chdir("../");
+	// chdir("..");
+	chdir("../minishell");
+
+	getcwd(buffer, sizeof(buffer));
+	printf("diretorio atual: %s\n", buffer);
+
+	return (0);
+}
 

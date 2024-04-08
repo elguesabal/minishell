@@ -18,7 +18,22 @@
 #include <unistd.h>
 #include <readline/readline.h>
 
+// ./commands/echo.c
+void	echo(char *comand);
 
+// ./commands/cd.c
+void    cd(char *path);
+
+// ./commands/pwd.c
+void	pwd(void);
+
+// ./commands/export.c
+
+// ./commands/unset.c
+
+// ./commands/env.c
+
+// ./commands/exit.c
 
 
 #endif
