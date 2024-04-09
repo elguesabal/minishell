@@ -1,10 +1,9 @@
 #include "../minishell.h"
 
-void    cd(char *path)
+void    cd(char *command)
 {
-	path += 2;
-	while (*path == ' ' || *path == '	')
-		path++;
-	if (chdir(path) == -1)
-        printf("minishell: cd: %s: Arquivo ou diretório inexistente\n", path);
+	command = skip_char(command);
+	command = skip_space(command);
+	if (chdir(command) == -1)
+		printf("minishell: cd: %s: Arquivo ou diretório inexistente\n", command);
 }

@@ -6,13 +6,13 @@
 /*   By: joseanto <joseanto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 18:23:25 by joseanto          #+#    #+#             */
-/*   Updated: 2024/04/05 19:55:53 by joseanto         ###   ########.fr       */
+/*   Updated: 2024/04/09 14:49:27 by joseanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	compare(char *s1, char *s2)	// AUXILIAR
+int	compare(char *s1, char *s2)	// TRANSFERIR PARA PASTA assistant
 {
 	int			i;
 

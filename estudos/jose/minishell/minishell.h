@@ -6,7 +6,7 @@
 /*   By: joseanto <joseanto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 18:10:16 by joseanto          #+#    #+#             */
-/*   Updated: 2024/04/05 19:22:59 by joseanto         ###   ########.fr       */
+/*   Updated: 2024/04/09 18:19:09 by joseanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,24 @@
 #include <unistd.h>
 #include <readline/readline.h>
 
+// ./assistant/ft_strlen.c
+// size_t	ft_strlen(const char *str); // NAO USANDO POR ENQUANTO
+
+// ./assistant/ft_strtrim
+// char	*ft_strtrim(char const *s1, char const *set); // NAO USANDO POR ENQUANTO
+
+// ./assistant/ft_split.c
+// char	**ft_split(char const *s, char c); // NAO USANDO POR ENQUANTO
+
+// ./assistant/skip_str.c
+char	*skip_char(char *str);
+char	*skip_space(char *str);
+
 // ./commands/echo.c
-void	echo(char *comand);
+void	echo(char *command);
 
 // ./commands/cd.c
-void    cd(char *path);
+void    cd(char *command);
 
 // ./commands/pwd.c
 void	pwd(void);

@@ -10,7 +10,7 @@ int	main(void)
 	char	*str;
 
 	// str = getenv("USER");
-	str = getenv("TERM");
+	str = getenv("A");
 
 	printf("variavel: %s\n", str);
 
