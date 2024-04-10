@@ -11,17 +11,19 @@
 # **************************************************************************** #
 
 
-#	$(ASSISTANT)ft_strlen.c\ // NAO USANDO POR ENQUANTO
-#	$(ASSISTANT)ft_strtrim.c\ // NAO USANDO POR ENQUANTO
-#	$(ASSISTANT)ft_split.c\ // NAO USANDO POR ENQUANTO
+
 
 ASSISTANT = ./assistant/
 COMMANDS = ./commands/
 FILE =	minishell.c\
+	$(ASSISTANT)ft_strlen.c\
+	$(ASSISTANT)ft_strtrim.c\
+	$(ASSISTANT)ft_split.c\
 	$(ASSISTANT)skip_str.c\
 	$(COMMANDS)echo.c\
 	$(COMMANDS)cd.c\
-	$(COMMANDS)pwd.c
+	$(COMMANDS)pwd.c\
+	$(COMMANDS)exit.c
 CC = cc
 FLAGS = -Wall -Wextra -Werror -o
 READLINE = -lreadline

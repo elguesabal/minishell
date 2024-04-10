@@ -12,10 +12,16 @@
 
 #include "minishell.h"
 
+
+// PROCURA UMA ESTRING NO COMECO DE OUTRA LEVANADO EM CONSIDERACAO O FINAL DA COMPARACAO
+// SE AO FINAL DA COMPARACAO TENHA ' ' '	' OU '\0' RETORNA 1 EXEMPLO: "ls", "ls -all" ou "pwd", "pwd"
+// CASO NO FINAL DA COMPARACAO TENHA ALGO DIFERENTE RETORNA 0 EXEMPLO: "ls", "ls-all" ou "pwd", "pwdx"
 int	compare(char *s1, char *s2)	// TRANSFERIR PARA PASTA assistant
 {
 	int			i;
 
+	if (s2 == NULL)
+		return (0);
 	i = 0;
 	while ((s1[i] || s2[i]) && s2[i] != ' ' && s2[i] != '	')
 	{
@@ -27,15 +33,18 @@ int	compare(char *s1, char *s2)	// TRANSFERIR PARA PASTA assistant
 }
 
 
+
 int	main(void)
 {
 	char	*str;
+	char	**argv;
 
-	str = readline("minishell: ");
-	while (!compare("exit", str))
+	while (1)
 	{
+		str = readline("minishell: ");
+		argv = ft_split(str, ' ');
 		if (compare("echo", str))
-			echo(str);
+			echo(argv);
 		else if (compare("cd", str))
 			cd(str);
 		else if (compare("pwd", str))
@@ -46,10 +55,12 @@ int	main(void)
 		{}
 		else if (compare("env", str))
 		{}
+		else if (compare("exit", str))
+			exit_shell(argv, str);
 		else
 			printf("%s: comando não encontrado\n", str);
 		free(str);
-		str = readline("minishell: ");
+		free_argv(argv);
 	}
 	return (0);
 }

@@ -69,3 +69,63 @@
 
 // 	return (0);
 // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+int	main(void)
+{
+	int	fd;
+	int	new_fd;
+
+	write(STDOUT_FILENO, "teste\n", 6);
+	fd = open("a.txt", O_WRONLY | O_APPEND | O_CREAT, S_IRUSR | S_IWUSR);
+
+	new_fd = dup(STDOUT_FILENO);
+	dup2(fd, STDOUT_FILENO);
+
+	write(STDOUT_FILENO, "teste a\n", 8);
+	write(new_fd, "teste b\n", 8);
+
+printf("aaaaaaaaaaaaaaaaaaaaaa: %d\n", STDOUT_FILENO);
+	int teste = dup2(new_fd, STDOUT_FILENO);
+printf("bbbbbbbbbbbbbbbbbbbbbb: %d\n", STDOUT_FILENO);
+	// teste += 48;
+	// write(1, &teste, 1);
+	// write(1, "aaa\n", 4);
+	// printf("aaa: %d\n", teste);
+
+	return (0);
+}
+
+
+// int	main(void)
+// {
+// 	char	*str = getcwd(NULL, 0);
+// 	printf("%s\n", str);
+// 	chdir("/bin");
+// 	str = getcwd(NULL, 0);
+// 	printf("%s\n", str);
+
+
+// 	char	*args[] = {"./ls", "-all", NULL};
+
+// 	execve("./ls", args, NULL);
+
+// 	printf("Esta linha nunca sera alcancada\n");
+
+// 	return (0);
+// }

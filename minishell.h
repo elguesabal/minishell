@@ -17,25 +17,27 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <readline/readline.h>
+#include <fcntl.h>
 
 // ./assistant/ft_strlen.c
-// size_t	ft_strlen(const char *str); // NAO USANDO POR ENQUANTO
+size_t	ft_strlen(const char *str); // NAO USANDO POR ENQUANTO
 
 // ./assistant/ft_strtrim
-// char	*ft_strtrim(char const *s1, char const *set); // NAO USANDO POR ENQUANTO
+char	*ft_strtrim(char const *s1, char const *set); // NAO USANDO POR ENQUANTO
 
 // ./assistant/ft_split.c
-// char	**ft_split(char const *s, char c); // NAO USANDO POR ENQUANTO
+char	**ft_split(char const *s, char c); // NAO USANDO POR ENQUANTO
 
 // ./assistant/skip_str.c
 char	*skip_char(char *str);
 char	*skip_space(char *str);
 
 // ./commands/echo.c
-void	echo(char *command);
+int	search_operator(char *str, char *operator);    // TEMPORARIO
+void	echo(char **argv);
 
 // ./commands/cd.c
-void    cd(char *command);
+void	cd(char *command);
 
 // ./commands/pwd.c
 void	pwd(void);
@@ -47,6 +49,16 @@ void	pwd(void);
 // ./commands/env.c
 
 // ./commands/exit.c
+void	free_argv(char **argv);    // TEMPORARIO
+void	exit_shell(char **argv, char *str);
+
+
+
+
+
+// ./minishell.c
+int	compare(char *s1, char *s2);    // TEMPORARIO
+
 
 
 #endif
