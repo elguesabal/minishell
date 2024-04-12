@@ -20,6 +20,7 @@ FILE =	minishell.c\
 	$(ASSISTANT)ft_strtrim.c\
 	$(ASSISTANT)ft_split.c\
 	$(ASSISTANT)skip_str.c\
+	$(ASSISTANT)build_path.c\
 	$(COMMANDS)echo.c\
 	$(COMMANDS)cd.c\
 	$(COMMANDS)pwd.c\

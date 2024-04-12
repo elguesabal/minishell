@@ -27,7 +27,18 @@ int	main(int argc, char **argv, char **env)
 	// }
 
 
-	printf("%s\n", getenv("PATH"));
+	// printf("%s\n", getenv("PATH"));
 
+
+	char	*teste;
+
+
+	teste = malloc(5 * sizeof(char));
+printf("%p\n", teste);
+printf("%s\n", teste);
+	free(teste);
+
+printf("%p\n", teste);
+printf("%s\n", teste);
 	return (0);
 }

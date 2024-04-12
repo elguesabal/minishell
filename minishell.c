@@ -40,17 +40,19 @@ int	compare(char *s1, char *s2)	// TRANSFERIR PARA PASTA assistant
 // }
 
 
-int	main(void)
+int	main(int argc, char **argv, char **env)
 {
 	char	*str;
-	char	**argv;
+	char	**args;
 
+	(void)argc;
+	(void)argv;
 	while (1)
 	{
 		str = readline("minishell: ");
-		argv = ft_split(str, ' ');
+		args = ft_split(str, ' ');
 		if (compare("echo", str))
-			echo(argv);
+			echo(args);
 		else if (compare("cd", str))
 			cd(str);
 		else if (compare("pwd", str))
@@ -62,11 +64,11 @@ int	main(void)
 		else if (compare("env", str))
 		{}
 		else if (compare("exit", str))
-			exit_shell(argv, str);
+			exit_shell(args, str);
 		else
-			exec_program(argv);
+			exec_program(args, env, str);
 		free(str);
-		free_split(argv);
+		free_split(args);
 	}
 	return (0);
 }

@@ -19,6 +19,7 @@
 #include <readline/readline.h>
 #include <fcntl.h>
 #include <sys/wait.h>
+#include <sys/stat.h>
 
 // ./assistant/ft_strlen.c
 size_t	ft_strlen(const char *str); // NAO USANDO POR ENQUANTO
@@ -32,6 +33,9 @@ char	**ft_split(char const *s, char c); // NAO USANDO POR ENQUANTO
 // ./assistant/skip_str.c
 char	*skip_char(char *str);
 char	*skip_space(char *str);
+
+// ./assistant/concatenate.c
+char    *build_path(char *str1, char *str2);
 
 // ./commands/echo.c
 // int	search_operator(char *str, char *operator) // TEMPORARIO // NAO USANDO POR ENQUANTO
@@ -55,13 +59,13 @@ void	free_split(char **argv);    // TEMPORARIO
 void	exit_shell(char **argv, char *str);
 
 // ./commands/exec_program.c
-void    exec_program(char **argv);
-
+void    exec_program(char **argv, char **env, char *str);
 
 
 
 
 // ./minishell.c
+char    *tester_path(char **path, char *file);
 int	compare(char *s1, char *s2);    // TEMPORARIO
 
 

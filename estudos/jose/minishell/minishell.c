@@ -12,10 +12,16 @@
 
 #include "minishell.h"
 
+
+// PROCURA UMA ESTRING NO COMECO DE OUTRA LEVANADO EM CONSIDERACAO O FINAL DA COMPARACAO
+// SE AO FINAL DA COMPARACAO TENHA ' ' '	' OU '\0' RETORNA 1 EXEMPLO: "ls", "ls -all" ou "pwd", "pwd"
+// CASO NO FINAL DA COMPARACAO TENHA ALGO DIFERENTE RETORNA 0 EXEMPLO: "ls", "ls-all" ou "pwd", "pwdx"
 int	compare(char *s1, char *s2)	// TRANSFERIR PARA PASTA assistant
 {
 	int			i;
 
+	if (s2 == NULL)
+		return (0);
 	i = 0;
 	while ((s1[i] || s2[i]) && s2[i] != ' ' && s2[i] != '	')
 	{
@@ -27,15 +33,26 @@ int	compare(char *s1, char *s2)	// TRANSFERIR PARA PASTA assistant
 }
 
 
-int	main(void)
+// char	*return_path(char *program) // RETORNA UMA STRING COM O CAMINHO CORRETO DO PROGRAMA
+// {
+
+// 	return ();
+// }
+
+
+int	main(int argc, char **argv, char **env)
 {
 	char	*str;
+	char	**args;
 
-	str = readline("minishell: ");
-	while (!compare("exit", str))
+	(void)argc;
+	(void)argv;
+	while (1)
 	{
+		str = readline("minishell: ");
+		args = ft_split(str, ' ');
 		if (compare("echo", str))
-			echo(str);
+			echo(args);
 		else if (compare("cd", str))
 			cd(str);
 		else if (compare("pwd", str))
@@ -46,10 +63,12 @@ int	main(void)
 		{}
 		else if (compare("env", str))
 		{}
+		else if (compare("exit", str))
+			exit_shell(args, str);
 		else
-			printf("%s: comando não encontrado\n", str);
+			exec_program(args, env, str);
 		free(str);
-		str = readline("minishell: ");
+		free_split(args);
 	}
 	return (0);
 }

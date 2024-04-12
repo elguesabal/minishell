@@ -15,7 +15,15 @@ void	free_split(char **argv)
 
 void	exit_shell(char **argv, char *str)
 {
-	free(str);
-	free_split(argv);
+	if (str)
+	{
+		free(str);
+		str = NULL;
+	}
+	if (argv)
+	{
+		free_split(argv);
+		argv = NULL;
+	}
 	exit(0);
 }
