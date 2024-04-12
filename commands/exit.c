@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-void	free_argv(char **argv)
+void	free_split(char **argv)
 {
 	int	i;
 
@@ -16,6 +16,6 @@ void	free_argv(char **argv)
 void	exit_shell(char **argv, char *str)
 {
 	free(str);
-	free_argv(argv);
+	free_split(argv);
 	exit(0);
 }

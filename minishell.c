@@ -33,6 +33,12 @@ int	compare(char *s1, char *s2)	// TRANSFERIR PARA PASTA assistant
 }
 
 
+// char	*return_path(char *program) // RETORNA UMA STRING COM O CAMINHO CORRETO DO PROGRAMA
+// {
+
+// 	return ();
+// }
+
 
 int	main(void)
 {
@@ -58,9 +64,9 @@ int	main(void)
 		else if (compare("exit", str))
 			exit_shell(argv, str);
 		else
-			printf("%s: comando não encontrado\n", str);
+			exec_program(argv);
 		free(str);
-		free_argv(argv);
+		free_split(argv);
 	}
 	return (0);
 }

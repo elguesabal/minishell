@@ -23,7 +23,8 @@ FILE =	minishell.c\
 	$(COMMANDS)echo.c\
 	$(COMMANDS)cd.c\
 	$(COMMANDS)pwd.c\
-	$(COMMANDS)exit.c
+	$(COMMANDS)exit.c\
+	$(COMMANDS)exec_program.c
 CC = cc
 FLAGS = -Wall -Wextra -Werror -o
 READLINE = -lreadline

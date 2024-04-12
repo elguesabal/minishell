@@ -18,6 +18,7 @@
 #include <unistd.h>
 #include <readline/readline.h>
 #include <fcntl.h>
+#include <sys/wait.h>
 
 // ./assistant/ft_strlen.c
 size_t	ft_strlen(const char *str); // NAO USANDO POR ENQUANTO
@@ -33,7 +34,8 @@ char	*skip_char(char *str);
 char	*skip_space(char *str);
 
 // ./commands/echo.c
-int	search_operator(char *str, char *operator);    // TEMPORARIO
+// int	search_operator(char *str, char *operator) // TEMPORARIO // NAO USANDO POR ENQUANTO
+int	search_operator(char **argv, char *operator); // TEMPORARIO
 void	echo(char **argv);
 
 // ./commands/cd.c
@@ -49,8 +51,11 @@ void	pwd(void);
 // ./commands/env.c
 
 // ./commands/exit.c
-void	free_argv(char **argv);    // TEMPORARIO
+void	free_split(char **argv);    // TEMPORARIO
 void	exit_shell(char **argv, char *str);
+
+// ./commands/exec_program.c
+void    exec_program(char **argv);
 
 
 

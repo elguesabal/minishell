@@ -1,14 +1,33 @@
+#include <stdio.h>
 #include <stdlib.h>
-#include <readline/readline.h>
 
-int	main(void)
+int	main(int argc, char **argv, char **env)
 {
-	char	*command;
+	// int	i = 0;
 
-	command = readline("minishell: ");
+	// while (argv[i])
+	// {
+	// 	printf("%s\n", argv[i]);
+	// 	i++;
+	// }
 
-	
+	// i++;
 
-	free(command);
+	// while (argv[i])
+	// {
+	// 	printf("%s\n", argv[i]);
+	// 	i++;
+	// }
+
+	// i = 0;
+	// while (env[i])
+	// {
+	// 	printf("%s\n", env[i]);
+	// 	i++;
+	// }
+
+
+	printf("%s\n", getenv("PATH"));
+
 	return (0);
 }
