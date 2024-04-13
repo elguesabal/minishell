@@ -1,5 +1,9 @@
 #include "../minishell.h"
 
+
+// PROCURA O ARQUIVOS DO ARGUMENTO *file EM TODOS OS CAMINHOS DO ARGUMENTO **path
+// RETORNA O CAMIHNO ABSOLUTO CONSTRUIDO PELA FUNCAO build_path() CASO A FUNCAO stat() AFIRME Q O CAMINHO E ARQUIVO SAO VALIDOS
+// CASO A FUNCAO stat() RETORN -1 EM TODAS AS TENTATIVAS A FUNCAO tester_path() RETORNA UM ENDERECO DE MEMORIA CONTENDO '\0'
 char    *tester_path(char **path, char *file)
 {
     char    *path_file;
@@ -18,7 +22,9 @@ char    *tester_path(char **path, char *file)
         free(path_file);
         path++;
     }
-    return (NULL);
+	path_file = malloc(sizeof(char));
+	*path_file = '\0';
+    return (path_file);
 }
 
 void    exec_program(char **argv, char **env, char *str)
@@ -41,15 +47,15 @@ void    exec_program(char **argv, char **env, char *str)
 
 		path = ft_split(getenv("PATH"), ':');
 		path_file = tester_path(path, *argv);
-		if (execve(path_file, argv, env) == -1) // AO ESCREVER UM COMANDO INEXISTENTE APRESENTA ESSE ERRO: Syscall param execve(filename) points to unaddressable byte(s)
-		{
+        free_split(path);
+
+		if (execve(path_file, argv, env) == -1) // O ERRO DESCRITO ACIMA ACONTECIA PQ EU ESTAVA PASSANDO NULL AI A FUNCAO NAO LIDA BEM E OCORRE ACESSO DE MEMORIA INDEVIDO
+		{ // PRECISA DE UM IF VERIFICANDO execve() RETORNOU -1? CASO ISSO NAO ACONTECESSE NENHUMA LINHA A SEGUIR SERIA EXECUTADA KKKK
 			printf("%s: comando não encontrado\n", argv[0]);
-	        free_split(path);
 			free(path_file);
 			exit_shell(argv, str); // MATAR O PROCESSO PRA NAO DUPLICAR
 		}
-        free_split(path);
-		free(path_file);
+		// free(path_file); // SE execve(path_file, argv, env) != -1 ESSA LINHA NUNCA VAI ACONTECER KKKKKK
     }
     else if (pid > 0)
     {

@@ -33,13 +33,6 @@ int	compare(char *s1, char *s2)	// TRANSFERIR PARA PASTA assistant
 }
 
 
-// char	*return_path(char *program) // RETORNA UMA STRING COM O CAMINHO CORRETO DO PROGRAMA
-// {
-
-// 	return ();
-// }
-
-
 int	main(int argc, char **argv, char **env)
 {
 	char	*str;
@@ -51,7 +44,12 @@ int	main(int argc, char **argv, char **env)
 	{
 		str = readline("minishell: ");
 		args = ft_split(str, ' ');
-		if (compare("echo", str))
+
+
+// AKI EU TENHO Q COMECAR A ANALIZAR OS ARGUMENTOS PASSADOS E VERIFICAR $ > >> |
+
+
+		if (compare("echo", str)) // VERIFICAR COMO O COMANDO echo SE COMPORTA COM A FUNCAO execve()
 			echo(args);
 		else if (compare("cd", str))
 			cd(str);
