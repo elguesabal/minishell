@@ -33,10 +33,20 @@ int	compare(char *s1, char *s2)	// TRANSFERIR PARA PASTA assistant
 }
 
 
+void	init_count(t_token *info)
+{
+	info->command = 0;
+	info->bigger_then = 0;
+	info->two_greater_than = 0;
+	info->pipe = 0;
+}
+
+
 int	main(int argc, char **argv, char **env)
 {
 	char	*str;
 	char	**args;
+	t_token	info;
 
 	(void)argc;
 	(void)argv;
@@ -47,7 +57,8 @@ int	main(int argc, char **argv, char **env)
 
 
 // AKI EU TENHO Q COMECAR A ANALIZAR OS ARGUMENTOS PASSADOS E VERIFICAR $ > >> |
-
+init_count(&info);
+printf("teste: %d\n", info.pipe);
 
 		if (compare("echo", str)) // VERIFICAR COMO O COMANDO echo SE COMPORTA COM A FUNCAO execve()
 			echo(args);

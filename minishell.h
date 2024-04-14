@@ -21,6 +21,16 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 
+
+typedef struct s_token
+{
+    int command;
+    int bigger_then;
+    int two_greater_than;
+    int pipe;
+}   t_token;
+
+
 // ./assistant/ft_strlen.c
 size_t	ft_strlen(const char *str); // NAO USANDO POR ENQUANTO
 
