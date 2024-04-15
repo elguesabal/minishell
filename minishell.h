@@ -25,6 +25,10 @@
 typedef struct s_token
 {
     int command;
+    // int arguments;
+    int dollar_sign;
+    int single_quotes;
+    int double_quotes;
     int bigger_then;
     int two_greater_than;
     int pipe;
@@ -32,13 +36,14 @@ typedef struct s_token
 
 
 // ./assistant/ft_strlen.c
-size_t	ft_strlen(const char *str); // NAO USANDO POR ENQUANTO
+size_t	ft_strlen(const char *str);
+int	strlen_char(char *str, char c);
 
 // ./assistant/ft_strtrim
-char	*ft_strtrim(char const *s1, char const *set); // NAO USANDO POR ENQUANTO
+char	*ft_strtrim(char const *s1, char const *set);
 
 // ./assistant/ft_split.c
-char	**ft_split(char const *s, char c); // NAO USANDO POR ENQUANTO
+char	**ft_split(char const *s, char c);
 
 // ./assistant/skip_str.c
 char	*skip_char(char *str);
@@ -49,7 +54,7 @@ char    *build_path(char *str1, char *str2);
 
 // ./commands/echo.c
 // int	search_operator(char *str, char *operator) // TEMPORARIO // NAO USANDO POR ENQUANTO
-int	search_operator(char **argv, char *operator); // TEMPORARIO
+// int	search_operator(char **argv, char *operator); // TEMPORARIO // NAO USANDO POR ENQUANTO
 void	echo(char **argv);
 
 // ./commands/cd.c
@@ -76,6 +81,8 @@ void    exec_program(char **argv, char **env, char *str);
 
 // ./minishell.c
 char    *tester_path(char **path, char *file);
+char	*expand_variable(char *free_str, char *new_str);
+void	analyze(char **argv, t_token *info);
 int	compare(char *s1, char *s2);    // TEMPORARIO
 
 

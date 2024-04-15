@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-void	pwd(void)
+void	pwd(void) // FALTA ATUALIZAR A VARIAVEL DE AMBIENTE PWD
 {
 	char	*pwd;
 
