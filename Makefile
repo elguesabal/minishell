@@ -15,12 +15,14 @@
 
 ASSISTANT = ./assistant/
 COMMANDS = ./commands/
+ARGUMENTS = ./argument_management/
 FILE =	minishell.c\
 	$(ASSISTANT)ft_strlen.c\
 	$(ASSISTANT)ft_strtrim.c\
 	$(ASSISTANT)ft_split.c\
 	$(ASSISTANT)skip_str.c\
 	$(ASSISTANT)build_path.c\
+	$(ARGUMENTS)environment_variable.c\
 	$(COMMANDS)echo.c\
 	$(COMMANDS)cd.c\
 	$(COMMANDS)pwd.c\

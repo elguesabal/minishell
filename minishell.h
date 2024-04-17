@@ -52,6 +52,11 @@ char	*skip_space(char *str);
 // ./assistant/concatenate.c
 char    *build_path(char *str1, char *str2);
 
+// ./argument management/
+int	search_dollar_sign(char *str);
+char	*expand_variable(char *str, char *new_str);
+void	analyze_argument_management(char *arg);
+
 // ./commands/echo.c
 // int	search_operator(char *str, char *operator) // TEMPORARIO // NAO USANDO POR ENQUANTO
 // int	search_operator(char **argv, char *operator); // TEMPORARIO // NAO USANDO POR ENQUANTO
