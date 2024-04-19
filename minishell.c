@@ -6,7 +6,7 @@
 /*   By: joseanto <joseanto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 18:23:25 by joseanto          #+#    #+#             */
-/*   Updated: 2024/04/09 14:49:27 by joseanto         ###   ########.fr       */
+/*   Updated: 2024/04/19 19:50:16 by joseanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	init_count(t_token *info)
 }
 
 
-
 void	analyze(char **argv, t_token *info)
 {
 (void)info;
@@ -57,20 +56,19 @@ void	analyze(char **argv, t_token *info)
 	i = 1; // TEM Q COMECAR A VERIFICAR APARTIR DO SEGUNDO ARGUMENTO PQ O PRIMEIRO E O COMANDO
 	while (argv[i])
 	{
-		if (search_dollar_sign(argv[i]))
-		{
-			info->dollar_sign++;
-			argv[i] = expand_variable(argv[i], getenv(&argv[i][strlen_char(argv[i], '$') + 1]));
-		}
-		// analyze_argument_management(argv[i]); // NAO SEI ONDE TO ERRANDO MAS QUANDO CHAMO ESSA FUNCAO ESSE ERRO ACONTECE: free(): double free detected in tcache 2		Abortado (imagem do núcleo gravada)
-
+		// if (search_dollar_sign(argv[i]))
+		// {
+		// 	info->dollar_sign++;
+		// 	argv[i] = expand_variable(argv[i], getenv(&argv[i][strlen_char(argv[i], '$') + 1]));
+		// }
+		argv[i] = environment_variable(argv[i]);
 
 		i++;
 	}
 }
 
 
-int	main(int argc, char **argv, char **env)
+int	main(int argc, char **argv, char **argenv)
 {
 	char	*str;
 	char	**args;
@@ -78,9 +76,11 @@ int	main(int argc, char **argv, char **env)
 
 	(void)argc;
 	(void)argv;
+	argenv = copy_str_str(argenv);
 	while (1)
 	{
 		str = readline("minishell: ");
+// printf("teste :%d\n", (*str == '\0')); // CASO PRESSIONE ENTER SEM DIGITAR NADA NO SHELL *str == 0
 		args = ft_split(str, ' ');
 
 
@@ -98,13 +98,15 @@ int	main(int argc, char **argv, char **env)
 		else if (compare("export", str))
 		{}
 		else if (compare("unset", str))
-		{}
+		{
+			// unset(argenv);
+		}
 		else if (compare("env", str))
-		{}
+			env(argenv);
 		else if (compare("exit", str))
-			exit_shell(args, str);
+			exit_shell(args, str, argenv);
 		else
-			exec_program(args, env, str);
+			exec_program(args, argenv, str);
 		free(str);
 		free_split(args);
 	}

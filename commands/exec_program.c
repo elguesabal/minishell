@@ -53,7 +53,7 @@ void    exec_program(char **argv, char **env, char *str)
 		{ // PRECISA DE UM IF VERIFICANDO execve() RETORNOU -1? CASO ISSO NAO ACONTECESSE NENHUMA LINHA A SEGUIR SERIA EXECUTADA KKKK
 			printf("%s: comando não encontrado\n", argv[0]);
 			free(path_file);
-			exit_shell(argv, str); // MATAR O PROCESSO PRA NAO DUPLICAR
+			exit_shell(argv, str, env); // MATAR O PROCESSO PRA NAO DUPLICAR
 		}
 		// free(path_file); // SE execve(path_file, argv, env) != -1 ESSA LINHA NUNCA VAI ACONTECER KKKKKK
     }

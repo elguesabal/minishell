@@ -13,7 +13,7 @@ void	free_split(char **argv)
 	free(argv);
 }
 
-void	exit_shell(char **argv, char *str)
+void	exit_shell(char **argv, char *str, char **env)
 {
 	if (str)
 	{
@@ -24,6 +24,11 @@ void	exit_shell(char **argv, char *str)
 	{
 		free_split(argv);
 		argv = NULL;
+	}
+	if (env)
+	{
+		free_split(env);
+		env = NULL;
 	}
 	exit(0);
 }

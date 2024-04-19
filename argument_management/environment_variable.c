@@ -21,8 +21,8 @@ int	search_dollar_sign(char *str)
 /// @return ENDERO COM A COPIA DE new_str
 char	*expand_variable(char *str, char *new_str)
 {
-	int	i;
 	char	*copy_new;
+	int	i;
 
 	if (new_str == NULL)
 	{
@@ -54,12 +54,13 @@ char	*expand_variable(char *str, char *new_str)
 	return (copy_new);
 }
 
-// void	analyze_argument_management(char *arg) // NAO SEI ONDE TO ERRANDO MAS QUANDO CHAMO ESSA FUNCAO ESSE ERRO ACONTECE: free(): double free detected in tcache 2		Abortado (imagem do núcleo gravada)
-// {
-// 	if (search_dollar_sign(arg))
-// 	{
-// 		// info->dollar_sign++;
-// printf("teste: %s", &arg[strlen_char(arg, '$') + 1]);
-// 		arg = expand_variable(arg, getenv(&arg[strlen_char(arg, '$') + 1]));
-// 	}
-// }
+char	*environment_variable(char *arg)
+{
+	if (search_dollar_sign(arg))
+	{
+		// info->dollar_sign++;
+		arg = expand_variable(arg, getenv(&arg[strlen_char(arg, '$') + 1]));
+		return (arg);
+	}
+	return (arg);
+}

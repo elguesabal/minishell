@@ -6,7 +6,7 @@
 /*   By: joseanto <joseanto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 18:10:16 by joseanto          #+#    #+#             */
-/*   Updated: 2024/04/09 18:19:09 by joseanto         ###   ########.fr       */
+/*   Updated: 2024/04/19 19:21:50 by joseanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@ typedef struct s_token
 }   t_token;
 
 
-// ./assistant/ft_strlen.c
+// ./assistant/len.c
 size_t	ft_strlen(const char *str);
+int strstrlen(char **array_ptr);
 int	strlen_char(char *str, char c);
 
 // ./assistant/ft_strtrim
@@ -52,10 +53,14 @@ char	*skip_space(char *str);
 // ./assistant/concatenate.c
 char    *build_path(char *str1, char *str2);
 
-// ./argument management/
+// ./assistant/copy.c
+char	*copy_str(char *str);
+char	**copy_str_str(char	**env);
+
+// ./argument management/environment_variable.c
 int	search_dollar_sign(char *str);
 char	*expand_variable(char *str, char *new_str);
-void	analyze_argument_management(char *arg);
+char	*environment_variable(char *arg);
 
 // ./commands/echo.c
 // int	search_operator(char *str, char *operator) // TEMPORARIO // NAO USANDO POR ENQUANTO
@@ -63,7 +68,8 @@ void	analyze_argument_management(char *arg);
 void	echo(char **argv);
 
 // ./commands/cd.c
-void	cd(char *command);
+void	cd(char *command); // DESSE MODO O COMANDO FUNCIONA MESMO Q EU ESTEJA ENTRANDO EM UMA PASTA Q CONTENHA ESPACO NO NOME
+// void	cd(char **argv);
 
 // ./commands/pwd.c
 void	pwd(void);
@@ -73,10 +79,11 @@ void	pwd(void);
 // ./commands/unset.c
 
 // ./commands/env.c
+void	env(char **env);
 
 // ./commands/exit.c
 void	free_split(char **argv);    // TEMPORARIO
-void	exit_shell(char **argv, char *str);
+void	exit_shell(char **argv, char *str, char **env);
 
 // ./commands/exec_program.c
 void    exec_program(char **argv, char **env, char *str);
