@@ -22,17 +22,25 @@
 #include <sys/stat.h>
 
 
-typedef struct s_token
+// typedef struct s_token
+// {
+//     int command;
+//     // int arguments;
+//     int dollar_sign;
+//     int single_quotes;
+//     int double_quotes;
+//     int bigger_then;
+//     int two_greater_than;
+//     int pipe;
+// }   t_token;
+
+
+// LISTA USADA PARA ARMAZENAR OS INDERECOS DE MEMORIA DAS VARIAVEIS DE AMBIENTE MAS NAO DISPONIBILIZAR PARA SIBPROCESSOS
+typedef struct s_str
 {
-    int command;
-    // int arguments;
-    int dollar_sign;
-    int single_quotes;
-    int double_quotes;
-    int bigger_then;
-    int two_greater_than;
-    int pipe;
-}   t_token;
+	char	*str;
+	struct s_str	*next;
+}	t_str;
 
 
 // ./assistant/len.c
@@ -55,12 +63,18 @@ char    *build_path(char *str1, char *str2);
 
 // ./assistant/copy.c
 char	*copy_str(char *str);
-char	**copy_str_str(char	**env);
+char	**copy_str_str(char	**ptr);
+
+// ./assistant/search.c
+int	compare(char *s1, char *s2);
 
 // ./argument management/environment_variable.c
 int	search_dollar_sign(char *str);
 char	*expand_variable(char *str, char *new_str);
 char	*environment_variable(char *arg);
+
+// ./argument management/list_operations.c
+void	insert_last(t_str **no, char *str);
 
 // ./commands/echo.c
 // int	search_operator(char *str, char *operator) // TEMPORARIO // NAO USANDO POR ENQUANTO
@@ -94,7 +108,7 @@ void    exec_program(char **argv, char **env, char *str);
 // ./minishell.c
 char    *tester_path(char **path, char *file);
 char	*expand_variable(char *free_str, char *new_str);
-void	analyze(char **argv, t_token *info);
+void	analyze(char **argv);
 int	compare(char *s1, char *s2);    // TEMPORARIO
 
 

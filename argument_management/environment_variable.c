@@ -58,7 +58,6 @@ char	*environment_variable(char *arg)
 {
 	if (search_dollar_sign(arg))
 	{
-		// info->dollar_sign++;
 		arg = expand_variable(arg, getenv(&arg[strlen_char(arg, '$') + 1]));
 		return (arg);
 	}

@@ -1,5 +1,7 @@
 #include "../minishell.h"
 
+/// @brief LIBERA A MEMORIA DE UM PONTEIRO PARA PONTEIRO
+/// @param ptr PONTEIRO PARA PONTEIRO A SER LIBERADO
 void	free_split(char **argv)
 {
 	int	i;

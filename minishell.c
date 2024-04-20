@@ -12,45 +12,21 @@
 
 #include "minishell.h"
 
+// void	init_count(t_token *info)
+// {
+// 	info->command = 0;
+// 	// info->arguments = 0;
+// 	info->dollar_sign = 0;
+// 	info->single_quotes = 0;
+// 	info->double_quotes = 0;
+// 	info->bigger_then = 0;
+// 	info->two_greater_than = 0;
+// 	info->pipe = 0;
+// }
 
-/// @brief PROCURA UMA ESTRING NO COMECO DE OUTRA LEVANADO EM CONSIDERACAO O FINAL DA COMPARACAO
-/// @param s1 STRING A SER COMPARADA
-/// @param s2 STRING A SER COMPARADA
-/// @return SE AO FINAL DA COMPARACAO TENHA ' ' '	' OU '\0' RETORNA 1 EXEMPLO: "ls", "ls -all" ou "pwd", "pwd"
-/// @return CASO NO FINAL DA COMPARACAO TENHA ALGO DIFERENTE RETORNA 0 EXEMPLO: "ls", "ls-all" ou "pwd", "pwdx"
-int	compare(char *s1, char *s2)	// TRANSFERIR PARA PASTA assistant
+
+void	analyze(char **argv)
 {
-	int			i;
-
-	if (s2 == NULL)
-		return (0);
-	i = 0;
-	while ((s1[i] || s2[i]) && s2[i] != ' ' && s2[i] != '	')
-	{
-		if (s1[i] != s2[i])
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-
-void	init_count(t_token *info)
-{
-	info->command = 0;
-	// info->arguments = 0;
-	info->dollar_sign = 0;
-	info->single_quotes = 0;
-	info->double_quotes = 0;
-	info->bigger_then = 0;
-	info->two_greater_than = 0;
-	info->pipe = 0;
-}
-
-
-void	analyze(char **argv, t_token *info)
-{
-(void)info;
 	int	i;
 
 	i = 1; // TEM Q COMECAR A VERIFICAR APARTIR DO SEGUNDO ARGUMENTO PQ O PRIMEIRO E O COMANDO
@@ -72,11 +48,19 @@ int	main(int argc, char **argv, char **argenv)
 {
 	char	*str;
 	char	**args;
-	t_token	info;
+	t_str	*env_list;
 
 	(void)argc;
 	(void)argv;
 	argenv = copy_str_str(argenv);
+
+
+
+insert_last(&env_list, "teste");
+insert_last(&env_list, "aaaaa");
+printf("%s\n", env_list->str);
+printf("%s\n", env_list->next->str);
+
 	while (1)
 	{
 		str = readline("minishell: ");
@@ -85,8 +69,8 @@ int	main(int argc, char **argv, char **argenv)
 
 
 		// AKI EU TENHO Q COMECAR A ANALIZAR OS ARGUMENTOS PASSADOS E VERIFICAR $ > >> |
-		init_count(&info);
-		analyze(args, &info);
+		// init_count(&info);
+		analyze(args);
 
 
 		if (compare("echo", str))
@@ -96,7 +80,9 @@ int	main(int argc, char **argv, char **argenv)
 		else if (compare("pwd", str))
 			pwd();
 		else if (compare("export", str))
-		{}
+		{
+			// argenv[0][6] = 'W';
+		}
 		else if (compare("unset", str))
 		{
 			// unset(argenv);

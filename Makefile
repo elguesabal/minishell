@@ -11,7 +11,6 @@
 # **************************************************************************** #
 
 
-
 ASSISTANT = ./assistant/
 COMMANDS = ./commands/
 ARGUMENTS = ./argument_management/
@@ -22,7 +21,9 @@ FILE =	minishell.c\
 	$(ASSISTANT)skip_str.c\
 	$(ASSISTANT)build_path.c\
 	$(ASSISTANT)copy.c\
+	$(ASSISTANT)search.c\
 	$(ARGUMENTS)environment_variable.c\
+	$(ARGUMENTS)list_operations.c\
 	$(COMMANDS)echo.c\
 	$(COMMANDS)cd.c\
 	$(COMMANDS)pwd.c\

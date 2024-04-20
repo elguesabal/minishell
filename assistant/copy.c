@@ -1,5 +1,8 @@
 #include "../minishell.h"
 
+/// @brief ALOCA MEMORIA PARA COPIAR E RETORNAR A STRING RECEBIDA
+/// @param str STRING A SER COPIADA
+/// @return RETORNA UMA STRING IDENTICA A str EM OUTRO ENDERECO DE MEMORIA
 char	*copy_str(char *str)
 {
 	char	*str2;
@@ -21,21 +24,24 @@ char	*copy_str(char *str)
 	return (str2);
 }
 
-char	**copy_str_str(char	**env)
+/// @brief ALOCA MEMORIA PARA COPIAR E RETORNAR O ARRAY DE STRING RECEBIDO
+/// @param ptr STRING A SER COPIADA
+/// @return RETORNA UM ARRAY DE STRING IDENTICA A ptr EM OUTRO ENDERECO DE MEMORIA
+char	**copy_str_str(char	**ptr)
 {
 	char	**copy;
 	int	i;
 
-	copy = malloc((strstrlen(env) + 1) * sizeof(char *));
+	copy = malloc((strstrlen(ptr) + 1) * sizeof(char *));
 	if (copy == NULL)
 	{
 		printf("Error: a funcao malloc() retornou NULL\n");
 		return (NULL);
 	}
 	i = 0;
-	while (env[i])
+	while (ptr[i])
 	{
-		copy[i] = copy_str(env[i]);
+		copy[i] = copy_str(ptr[i]);
 		i++;
 	}
 	copy[i] = NULL;
