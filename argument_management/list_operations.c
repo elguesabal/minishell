@@ -1,15 +1,10 @@
 #include "../minishell.h"
 
-// typedef struct s_env
-// {
-// 	char	*env;
-// 	struct s_env	*next;
-// }	t_env;
-
 /// @brief INSERE UMA STRING NO FIM DA LISTA ENCADEADA
-/// @param no ENDERECO DE MEMORIA DO PASSADO COMO PARAMETRO
-/// @param str STRING QUE SERA COPIADA E ARMAZENADA NA LISTA ENCADEADA
-void	insert_last(t_str **no, char *str)
+/// @param no ENDERECO DE MEMORIA DA LISTA PASSADO COMO PARAMETRO
+/// @param str STRING QUE SERA ARMAZENADA NA LISTA ENCADEADA
+/// @param subprocesses VARIAVEL Q IDENTIFICA SE A VARIAVEL DE AMBIENTE FOI DISPONIBILIZADA PARA SUBPROCESSOS ATRAVEZ DO COMANDO EXPORT 0 NAO ESTA DISPONIVEL PARA SUBPROCESSOS E 1 ESTA DISPONIVEL
+void	insert_last(t_str **no, char *str, int subprocesses)
 {
 	t_str	*new;
 	t_str	*assist;
@@ -17,7 +12,8 @@ void	insert_last(t_str **no, char *str)
 	new = malloc(sizeof(t_str));
 	if (!new)
 		return ;
-	new->str = copy_str(str);
+	new->str = str;
+	new->subprocesses = subprocesses;
 	new->next = NULL;
 	if (!*no)
 		*no = new;
@@ -30,7 +26,41 @@ void	insert_last(t_str **no, char *str)
 	}
 }
 
-void	creat_list(t_env **no, char **array) // COPIAR CADA ELEMENTO DO ARRAY PARA A LISTA ENCADEADA
+/// @brief COPIA UM ARREY DE STRING PARA A LISTA ENCADEADA
+/// @param no ENDERECO DE MEMORIA DA LISTA PASSADO COMO PARAMETRO
+/// @param array_str ARRAY DE STRING A SER COPIADA PARA A LISTA
+void	creat_list(t_str **no, char **array_str)
 {
+	while (*array_str)
+	{
+		insert_last(no, copy_str(*array_str), 0);
+		array_str++;
+	}
+}
 
+/// @brief CRIA UM E RETORNA UM ENDERECO DE UM ARRAY DE STRING REAPROVEITANDO OS INDERECOS DA LISTA ENCADEADA PASSADA COMO ARGUMENTO
+/// @param no ENDERECO DE MEMORIA DO NO Q REAPROVEITARA AS STRINGS
+/// @return RETORNA UM ARRAY DE STRINGS COM O MESMO INDERECO DE MEMORIA DE STRINGS DENTRO DA LISTA ENCADEADA
+char	**array_to_list(t_str **no)
+{
+	char	**array;
+	t_str	*assist;
+	int	i;
+
+	array = malloc((listlen(*no) + 1) * sizeof(char *));
+	if (!array)
+	{
+		printf("Error\na funcao malloc() retornou NULL\n");
+		return (NULL);
+	}
+	assist = *no;
+	i = 0;
+	while (assist)
+	{
+		array[i] = assist->str;
+		i++;
+		assist = assist->next;
+	}
+	array[i] = NULL;
+	return (array);
 }

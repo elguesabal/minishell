@@ -41,3 +41,22 @@ int	strlen_char(char *str, char c) // VOU CONFIAR NA VRIFICACAO DA FUNCAO search
 	}
 	return (-1);
 }
+
+
+/// @brief CONTA E RETORNA O TAMNHO DA LISTA ENCADEADA
+/// @param no LISTA QUE SERA CONTADO OS ELEMENTOS
+/// @return RETORNA O TAMNHO DA LISTA
+int	listlen(t_str *no)
+{
+	t_str	*assist;
+	int	i;
+
+	assist = no;
+	i = 0;
+	while (assist)
+	{
+		assist = assist->next;
+		i++;
+	}
+	return (i);
+}

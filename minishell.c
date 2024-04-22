@@ -52,14 +52,26 @@ int	main(int argc, char **argv, char **argenv)
 
 	(void)argc;
 	(void)argv;
-	argenv = copy_str_str(argenv);
 
+	env_list = NULL;
+	creat_list(&env_list, argenv);
+	// argenv = copy_str_str(argenv); // FUNCAO copy_str_str() SEM USO
+	argenv = array_to_list(&env_list); // array_to_list() SUBSTITUI A FUNCAO copy_str_str()
 
+// t_str	*assist = env_list;
+// while (assist)
+// {
+// 	printf("aaaa: %s\n", assist->str);
+// 	assist = assist->next;
+// }
 
-insert_last(&env_list, "teste");
-insert_last(&env_list, "aaaaa");
-printf("%s\n", env_list->str);
-printf("%s\n", env_list->next->str);
+// int	i = 0;
+// while (argenv[i])
+// {
+// 	printf("%s\n", argenv[i]);
+// 	i++;
+// }
+
 
 	while (1)
 	{
@@ -81,7 +93,7 @@ printf("%s\n", env_list->next->str);
 			pwd();
 		else if (compare("export", str))
 		{
-			// argenv[0][6] = 'W';
+			export(args, argenv, &env_list);
 		}
 		else if (compare("unset", str))
 		{
@@ -98,6 +110,14 @@ printf("%s\n", env_list->next->str);
 	}
 	// return (0); // SE O PROGRAMA SAI TERMINA SEMPRE COM A FUNCAO exit() E NECESSARIO O RETURN?
 }
+
+
+
+
+
+
+
+
 
 
 

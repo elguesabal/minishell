@@ -27,6 +27,7 @@ FILE =	minishell.c\
 	$(COMMANDS)echo.c\
 	$(COMMANDS)cd.c\
 	$(COMMANDS)pwd.c\
+	$(COMMANDS)export.c\
 	$(COMMANDS)env.c\
 	$(COMMANDS)exit.c\
 	$(COMMANDS)exec_program.c

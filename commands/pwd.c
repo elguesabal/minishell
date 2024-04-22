@@ -11,5 +11,5 @@ void	pwd(void)
 		free(pwd);
 	}
 	else
-		printf("Error\npwd nao funcionou\n");
+		printf("Error\na funcao getcwp() retornou NULL\n");
 }

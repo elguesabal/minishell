@@ -40,6 +40,7 @@ typedef struct s_str
 {
 	char	*str;
 	struct s_str	*next;
+	int	subprocesses;
 }	t_str;
 
 
@@ -47,6 +48,7 @@ typedef struct s_str
 size_t	ft_strlen(const char *str);
 int strstrlen(char **array_ptr);
 int	strlen_char(char *str, char c);
+int	listlen(t_str *no);
 
 // ./assistant/ft_strtrim
 char	*ft_strtrim(char const *s1, char const *set);
@@ -63,7 +65,7 @@ char    *build_path(char *str1, char *str2);
 
 // ./assistant/copy.c
 char	*copy_str(char *str);
-char	**copy_str_str(char	**ptr);
+// char	**copy_str_str(char	**ptr);
 
 // ./assistant/search.c
 int	compare(char *s1, char *s2);
@@ -74,7 +76,9 @@ char	*expand_variable(char *str, char *new_str);
 char	*environment_variable(char *arg);
 
 // ./argument management/list_operations.c
-void	insert_last(t_str **no, char *str);
+void	insert_last(t_str **no, char *str, int subprocesses);
+void	creat_list(t_str **no, char **array_str);
+char	**array_to_list(t_str **no);
 
 // ./commands/echo.c
 // int	search_operator(char *str, char *operator) // TEMPORARIO // NAO USANDO POR ENQUANTO
@@ -89,6 +93,9 @@ void	cd(char *command); // DESSE MODO O COMANDO FUNCIONA MESMO Q EU ESTEJA ENTRA
 void	pwd(void);
 
 // ./commands/export.c
+int	compare_variable(char *s1, char *s2);
+char	*search_variable_list(t_str **no, char *str);
+void    export(char **argv, char **env, t_str **env_list);
 
 // ./commands/unset.c
 
