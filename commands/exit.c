@@ -15,7 +15,7 @@ void	free_split(char **argv)
 	free(argv);
 }
 
-void	exit_shell(char **argv, char *str, char **env)
+void	exit_shell(char **argv, char *str, char **env, t_str **env_list)
 {
 	if (str)
 	{
@@ -27,10 +27,12 @@ void	exit_shell(char **argv, char *str, char **env)
 		free_split(argv);
 		argv = NULL;
 	}
-	if (env)
-	{
-		free_split(env);
-		env = NULL;
-	}
+	// if (env)	// O ARRAY DE PONTEIRO **env E COMPOSTO APENAS POR STRINGS Q TEM O MESMO ENDERECO DE **env_list
+	// {
+	// 	free_split(env);
+	// 	env = NULL;
+	// }
+	free(env); // ENTAO NESSE CASO EU SO USO free() NO PONTEIRO Q REUNE AS STRINGS
+	free_list(env_list);
 	exit(0);
 }

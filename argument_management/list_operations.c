@@ -4,7 +4,7 @@
 /// @param no ENDERECO DE MEMORIA DA LISTA PASSADO COMO PARAMETRO
 /// @param str STRING QUE SERA ARMAZENADA NA LISTA ENCADEADA
 /// @param subprocesses VARIAVEL Q IDENTIFICA SE A VARIAVEL DE AMBIENTE FOI DISPONIBILIZADA PARA SUBPROCESSOS ATRAVEZ DO COMANDO EXPORT 0 NAO ESTA DISPONIVEL PARA SUBPROCESSOS E 1 ESTA DISPONIVEL
-void	insert_last(t_str **no, char *str, int subprocesses)
+void	insert_last(t_str **no, char *str)
 {
 	t_str	*new;
 	t_str	*assist;
@@ -13,7 +13,6 @@ void	insert_last(t_str **no, char *str, int subprocesses)
 	if (!new)
 		return ;
 	new->str = str;
-	new->subprocesses = subprocesses;
 	new->next = NULL;
 	if (!*no)
 		*no = new;
@@ -33,7 +32,7 @@ void	creat_list(t_str **no, char **array_str)
 {
 	while (*array_str)
 	{
-		insert_last(no, copy_str(*array_str), 0);
+		insert_last(no, copy_str(*array_str));
 		array_str++;
 	}
 }
@@ -63,4 +62,18 @@ char	**array_to_list(t_str **no)
 	}
 	array[i] = NULL;
 	return (array);
+}
+
+void	free_list(t_str **no)
+{
+	t_str	*assist;
+
+	assist = *no;
+	while (assist)
+	{
+		*no = (*no)->next;
+		free(assist->str);
+		free(assist);
+		assist = *no;
+	}
 }

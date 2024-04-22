@@ -42,28 +42,52 @@ char	*search_variable_list(t_str **no, char *str)
 	return (NULL);
 }
 
-// char	**export_variable(char **env, char *str)
-// {
-
-// CONTAR O TAMANHO DO ANTIGO PONTEIRO PARA PONTEIRO
-// CRIAR UM NOVO PONTEIRO PARA ARMAZENAR TODAS AS VARIAVEIS DE AMBIENTE
-// DAR FREE NO PONTEIRO QUE GUARDA TODAS AS STRINGS
-// SALVAR TODOS AS ANTIGAS VARIAVEIS + A NOVA
-// RETORNAR ESSE NOVO ENDERECO
-
-// }
-
-void	export(char **argv, char **env, t_str **env_list)
+/// @brief CRIA UM NOVO PONTEIRO PARA PONTEIRO REUTILIZANDO AS ANTIGAS STRINGS E ADICIONANDO UMA NOVA AO FINAL
+/// @param env ARRAY COM TODAS AS VARIAVEIS DE AMBIENTE MENO A NOVA
+/// @param str NOVA VARIAVEL DE AMBIENTE A SER INCLUIDA EM env
+/// @return RETORNA UM NOVO ENDERECO DE MEMORIA COM TODOS AS VARIAVEIS DE AMBIENTE
+char	**export_variable(char **env, char *str)
 {
-(void)env;
+	char	**new_env;
+	int	i;
 
-	char	*return_env;
-
-	return_env = search_variable_list(env_list, argv[1]);
-// printf("aaaaaa: %s\n", return_env);
-	if (return_env)
+	new_env = malloc((strstrlen(env) + 2) * sizeof(char *));
+	if (!new_env)
 	{
-// printf("aaaaaa: %s\n", return_env);
-		export_variable();
+		printf("Error\na funcao malloc() retornou NULL\n");
+		return (env);
 	}
+	i = 0;
+	while (env[i])
+	{
+		new_env[i] = env[i];
+		i++;
+	}
+	free(env);
+	new_env[i] = str;
+	new_env[i + 1] = NULL;
+	return (new_env);
+}
+
+/// @brief COMPARTILHA O ENDERECO DE MEMORIA CITADO EM **argv Q ESTA ARMAZENADO EM **env_list ASSIM QUANDO OUVER ALGUM SUBPROCESSO SERA PASSADO **env COMO ARGUMENTO
+/// @param argv ARGUMENTOS PASSADOS NO readline()
+/// @param env PONTEIRO PARA PONTEIRO QUE ESTA COM AS VARIAVEIS DISPONIVEIS PARA SUBPROCESSOS
+/// @param env_list LISTA ENCADEADA Q CONTEM TODAS AS VARIAVEIS DE AMBIENTE
+/// @return RETORNA UM NOVO ENDERECO DE MEMORIA COM TODOS AS VARIAVEIS DE AMBIENTE CASO ENCONTRADO A VARIAVEL CITADA EM argv
+/// @return RETORNA O ENDERECO DE MEMORIA ANTIGO CASO A VARIAVEL NAO SEJA ENCONTRADA NA LISTA ENCADEADA
+char	**export(char **argv, char **env, t_str **env_list)
+{
+	char	*return_env;
+	int	i;
+
+	i = 1;
+	while (argv[i])
+	{
+		return_env = search_variable_list(env_list, argv[i]);
+		if (return_env)
+			return (export_variable(env, return_env)); // SO EXPORTA A PRIMEIRA VARIAVEL ENCONTRADA
+			// env = export_variable(env, return_env); // SO EXPORTA A PRIMEIRA VARIAVEL ENCONTRADA
+		i++;
+	}
+	return (env);
 }

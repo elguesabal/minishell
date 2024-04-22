@@ -58,6 +58,24 @@ int	main(int argc, char **argv, char **argenv)
 	// argenv = copy_str_str(argenv); // FUNCAO copy_str_str() SEM USO
 	argenv = array_to_list(&env_list); // array_to_list() SUBSTITUI A FUNCAO copy_str_str()
 
+
+char *teste1 = malloc(sizeof(char) * 5);
+teste1[0] = 'A';
+teste1[1] = '=';
+teste1[2] = 'w';
+teste1[3] = 'w';
+teste1[4] = '\0';
+insert_last(&env_list, teste1);
+
+char *teste2 = malloc(sizeof(char) * 5);
+teste2[0] = 'B';
+teste2[1] = '=';
+teste2[2] = 'z';
+teste2[3] = 'z';
+teste2[4] = '\0';
+insert_last(&env_list, teste2);
+
+
 // t_str	*assist = env_list;
 // while (assist)
 // {
@@ -75,6 +93,7 @@ int	main(int argc, char **argv, char **argenv)
 
 	while (1)
 	{
+// printf("teste: %s\n", argenv[25]);
 		str = readline("minishell: ");
 // printf("teste :%d\n", (*str == '\0')); // CASO PRESSIONE ENTER SEM DIGITAR NADA NO SHELL *str == 0
 		args = ft_split(str, ' ');
@@ -92,9 +111,7 @@ int	main(int argc, char **argv, char **argenv)
 		else if (compare("pwd", str))
 			pwd();
 		else if (compare("export", str))
-		{
-			export(args, argenv, &env_list);
-		}
+			argenv = export(args, argenv, &env_list);
 		else if (compare("unset", str))
 		{
 			// unset(argenv);
@@ -102,9 +119,9 @@ int	main(int argc, char **argv, char **argenv)
 		else if (compare("env", str))
 			env(argenv);
 		else if (compare("exit", str))
-			exit_shell(args, str, argenv);
+			exit_shell(args, str, argenv, &env_list);
 		else
-			exec_program(args, argenv, str);
+			exec_program(args, argenv, str, &env_list);
 		free(str);
 		free_split(args);
 	}

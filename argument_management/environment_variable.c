@@ -58,7 +58,7 @@ char	*environment_variable(char *arg)
 {
 	if (search_dollar_sign(arg))
 	{
-		arg = expand_variable(arg, getenv(&arg[strlen_char(arg, '$') + 1]));
+		arg = expand_variable(arg, getenv(&arg[strlen_char(arg, '$') + 1])); // AKI NAO ESTOU USANDO USANDO O ARRAY DE PONTEIRO **env POR ISSO NAO CONSIGO PRINTAR COM O COMANDO echo
 		return (arg);
 	}
 	return (arg);

@@ -40,7 +40,6 @@ typedef struct s_str
 {
 	char	*str;
 	struct s_str	*next;
-	int	subprocesses;
 }	t_str;
 
 
@@ -76,9 +75,10 @@ char	*expand_variable(char *str, char *new_str);
 char	*environment_variable(char *arg);
 
 // ./argument management/list_operations.c
-void	insert_last(t_str **no, char *str, int subprocesses);
+void	insert_last(t_str **no, char *str);
 void	creat_list(t_str **no, char **array_str);
 char	**array_to_list(t_str **no);
+void	free_list(t_str **no);
 
 // ./commands/echo.c
 // int	search_operator(char *str, char *operator) // TEMPORARIO // NAO USANDO POR ENQUANTO
@@ -95,7 +95,8 @@ void	pwd(void);
 // ./commands/export.c
 int	compare_variable(char *s1, char *s2);
 char	*search_variable_list(t_str **no, char *str);
-void    export(char **argv, char **env, t_str **env_list);
+char	**export_variable(char **env, char *str);
+char	**export(char **argv, char **env, t_str **env_list);
 
 // ./commands/unset.c
 
@@ -104,10 +105,10 @@ void	env(char **env);
 
 // ./commands/exit.c
 void	free_split(char **argv);    // TEMPORARIO
-void	exit_shell(char **argv, char *str, char **env);
+void	exit_shell(char **argv, char *str, char **env, t_str **env_list);
 
 // ./commands/exec_program.c
-void    exec_program(char **argv, char **env, char *str);
+void    exec_program(char **argv, char **env, char *str, t_str **env_list);
 
 
 
