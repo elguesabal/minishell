@@ -19,47 +19,58 @@ int	search_dollar_sign(char *str)
 /// @param str STRING Q VAI TER A MEMORIA LIBERADA
 /// @param new_str UMA STRING Q VAI SER COPIADA NA NOVA MEMORIA ALOCADA (UTIL PRA QUANDO QUERO UM COPIAR INFORMACOES DE VARIAVEIS DE AMBIENTE E NAO ME PREOCUPAR COM FREE NO SPLIT)
 /// @return ENDERO COM A COPIA DE new_str
-char	*expand_variable(char *str, char *new_str)
-{
-	char	*copy_new;
-	int	i;
+// char	*expand_variable(char *str, char *new_str) // SEM USO PQ ESTOU USANDO A FUNCAO copy_str()
+// {
+// 	char	*copy_new;
+// 	int	i;
 
-	if (new_str == NULL)
-	{
-		copy_new = malloc(sizeof(char)); // NAO VERIFICADO
-		copy_new = '\0';
-		return (copy_new);
-	}
-	copy_new = malloc((strlen_char(str, '$') + ft_strlen(new_str) + 1) * sizeof(char));
-	if (copy_new == NULL)
-	{
-		printf("Error: a funcao malloc() retornou NULL\n");
-		free(str);
-		return (NULL);
-	}
-	i = 0;
-	while (str[i] && str[i] != '$')
-	{
-		copy_new[i] = str[i];
-		i++;
-	}
-	free(str);
-	while (*new_str)
-	{
-		copy_new[i] = *new_str;
-		new_str++;
-		i++;
-	}
-	copy_new[i] = '\0';
-	return (copy_new);
-}
+// 	if (new_str == NULL)
+// 	{
+// 		copy_new = malloc(sizeof(char)); // NAO VERIFICADO
+// 		copy_new = '\0';
+// 		return (copy_new);
+// 	}
+// 	copy_new = malloc((strlen_char(str, '$') + ft_strlen(new_str) + 1) * sizeof(char));
+// 	if (copy_new == NULL)
+// 	{
+// 		printf("Error: a funcao malloc() retornou NULL\n");
+// 		free(str);
+// 		return (NULL);
+// 	}
+// 	i = 0;
+// 	while (str[i] && str[i] != '$')
+// 	{
+// 		copy_new[i] = str[i];
+// 		i++;
+// 	}
+// 	free(str);
+// 	while (*new_str)
+// 	{
+// 		copy_new[i] = *new_str;
+// 		new_str++;
+// 		i++;
+// 	}
+// 	copy_new[i] = '\0';
+// 	return (copy_new);
+// }
 
-char	*environment_variable(char *arg)
+char	*environment_variable(char *arg, t_str **env_list)
 {
+	char	*env;
+	char	*copy_free;
+
 	if (search_dollar_sign(arg))
 	{
-		arg = expand_variable(arg, getenv(&arg[strlen_char(arg, '$') + 1])); // AKI NAO ESTOU USANDO USANDO O ARRAY DE PONTEIRO **env POR ISSO NAO CONSIGO PRINTAR COM O COMANDO echo
-		return (arg);
+		env = skip_c(search_variable_list(env_list, arg + 1), '=');
+		copy_free = arg;
+		if (env)
+			arg = copy_str(env + 1);
+		else
+		{
+			arg = malloc(sizeof(char));
+			*arg = '\0';
+		}
+		free(copy_free);
 	}
 	return (arg);
 }

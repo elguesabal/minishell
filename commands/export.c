@@ -17,6 +17,7 @@ int	compare_variable(char *s1, char *s2)
 			return (0);
 		i++;
 	}
+	// if (s1[i] == '=' && (s2[i] == '\0' || s2[i] == '='))
 	if (s1[i] == '=' && s2[i] == '\0')
 		return (1);
 	else
@@ -77,16 +78,16 @@ char	**export_variable(char **env, char *str)
 /// @return RETORNA O ENDERECO DE MEMORIA ANTIGO CASO A VARIAVEL NAO SEJA ENCONTRADA NA LISTA ENCADEADA
 char	**export(char **argv, char **env, t_str **env_list)
 {
-	char	*return_env;
 	int	i;
+	char	*return_env;
 
 	i = 1;
 	while (argv[i])
 	{
 		return_env = search_variable_list(env_list, argv[i]);
 		if (return_env)
-			return (export_variable(env, return_env)); // SO EXPORTA A PRIMEIRA VARIAVEL ENCONTRADA
-			// env = export_variable(env, return_env); // SO EXPORTA A PRIMEIRA VARIAVEL ENCONTRADA
+			env = export_variable(env, return_env); // EXPORTA TODAS AS VARIAVEIS ENCONTRADAS NOS ARGUMENTOS
+			// return (export_variable(env, return_env)); // SO EXPORTA A PRIMEIRA VARIAVEL ENCONTRADA
 		i++;
 	}
 	return (env);

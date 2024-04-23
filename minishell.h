@@ -6,7 +6,7 @@
 /*   By: joseanto <joseanto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 18:10:16 by joseanto          #+#    #+#             */
-/*   Updated: 2024/04/19 19:21:50 by joseanto         ###   ########.fr       */
+/*   Updated: 2024/04/23 18:39:01 by joseanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ char	**ft_split(char const *s, char c);
 // ./assistant/skip_str.c
 char	*skip_char(char *str);
 char	*skip_space(char *str);
+char	*skip_c(char *str, char c);
 
 // ./assistant/concatenate.c
 char    *build_path(char *str1, char *str2);
@@ -71,8 +72,8 @@ int	compare(char *s1, char *s2);
 
 // ./argument management/environment_variable.c
 int	search_dollar_sign(char *str);
-char	*expand_variable(char *str, char *new_str);
-char	*environment_variable(char *arg);
+// char	*expand_variable(char *str, char *new_str); // SEM USO PQ ESTOU USANDO A FUNCAO copy_str()
+char	*environment_variable(char *arg, t_str **env_list);
 
 // ./argument management/list_operations.c
 void	insert_last(t_str **no, char *str);
@@ -99,6 +100,7 @@ char	**export_variable(char **env, char *str);
 char	**export(char **argv, char **env, t_str **env_list);
 
 // ./commands/unset.c
+char	**unset(char **argv, t_str **env_list, char **env);
 
 // ./commands/env.c
 void	env(char **env);
@@ -116,7 +118,7 @@ void    exec_program(char **argv, char **env, char *str, t_str **env_list);
 // ./minishell.c
 char    *tester_path(char **path, char *file);
 char	*expand_variable(char *free_str, char *new_str);
-void	analyze(char **argv);
+void	analyze(char **argv, t_str **env_list);
 int	compare(char *s1, char *s2);    // TEMPORARIO
 
 

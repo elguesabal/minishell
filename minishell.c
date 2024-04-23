@@ -6,7 +6,7 @@
 /*   By: joseanto <joseanto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 18:23:25 by joseanto          #+#    #+#             */
-/*   Updated: 2024/04/19 19:50:16 by joseanto         ###   ########.fr       */
+/*   Updated: 2024/04/23 18:38:14 by joseanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,19 @@
 // }
 
 
-void	analyze(char **argv)
+void	analyze(char **argv, t_str **env_list)
 {
 	int	i;
 
 	i = 1; // TEM Q COMECAR A VERIFICAR APARTIR DO SEGUNDO ARGUMENTO PQ O PRIMEIRO E O COMANDO
 	while (argv[i])
 	{
-		// if (search_dollar_sign(argv[i]))
-		// {
-		// 	info->dollar_sign++;
-		// 	argv[i] = expand_variable(argv[i], getenv(&argv[i][strlen_char(argv[i], '$') + 1]));
-		// }
-		argv[i] = environment_variable(argv[i]);
+		argv[i] = environment_variable(argv[i], env_list); // $
+		// >
+		// >>
+		// |
+		// <
+		// <<
 
 		i++;
 	}
@@ -57,6 +57,7 @@ int	main(int argc, char **argv, char **argenv)
 	creat_list(&env_list, argenv);
 	// argenv = copy_str_str(argenv); // FUNCAO copy_str_str() SEM USO
 	argenv = array_to_list(&env_list); // array_to_list() SUBSTITUI A FUNCAO copy_str_str()
+
 
 
 char *teste1 = malloc(sizeof(char) * 5);
@@ -98,10 +99,9 @@ insert_last(&env_list, teste2);
 // printf("teste :%d\n", (*str == '\0')); // CASO PRESSIONE ENTER SEM DIGITAR NADA NO SHELL *str == 0
 		args = ft_split(str, ' ');
 
-
 		// AKI EU TENHO Q COMECAR A ANALIZAR OS ARGUMENTOS PASSADOS E VERIFICAR $ > >> |
 		// init_count(&info);
-		analyze(args);
+		analyze(args, &env_list);
 
 
 		if (compare("echo", str))
@@ -113,9 +113,7 @@ insert_last(&env_list, teste2);
 		else if (compare("export", str))
 			argenv = export(args, argenv, &env_list);
 		else if (compare("unset", str))
-		{
-			// unset(argenv);
-		}
+			unset(args, &env_list, argenv);
 		else if (compare("env", str))
 			env(argenv);
 		else if (compare("exit", str))

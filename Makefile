@@ -6,7 +6,7 @@
 #    By: joseanto <joseanto@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/26 09:55:22 by joseanto          #+#    #+#              #
-#    Updated: 2024/04/19 19:16:24 by joseanto         ###   ########.fr        #
+#    Updated: 2024/04/23 18:38:42 by joseanto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ FILE =	minishell.c\
 	$(COMMANDS)cd.c\
 	$(COMMANDS)pwd.c\
 	$(COMMANDS)export.c\
+	$(COMMANDS)unset.c\
 	$(COMMANDS)env.c\
 	$(COMMANDS)exit.c\
 	$(COMMANDS)exec_program.c
