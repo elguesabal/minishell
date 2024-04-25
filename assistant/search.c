@@ -20,3 +20,26 @@ int	compare(char *s1, char *s2)
 	}
 	return (1);
 }
+
+/// @brief PROCURA UMA ESTRING NO COMECO DE OUTRA LEVANADO EM CONSIDERACAO O FINAL DA COMPARACAO
+/// @param s1 STRING A SER COMPARADA
+/// @param s2 STRING A SER COMPARADA
+/// @return SE AO FINAL DA COMPARACAO TENHA '\0' em s1 e '=' em s2 RETORNA 1 EXEMPLO: "PWD", "PWD=/home/jose/programacao/minishell"
+int	compare_variable(char *s1, char *s2)
+{
+	int			i;
+
+	if (s2 == NULL)
+		return (0);
+	i = 0;
+	while (s1[i] && s2[i])
+	{
+		if (s1[i] != s2[i])
+			return (0);
+		i++;
+	}
+	if (s1[i] == '=' && s2[i] == '\0')
+		return (1);
+	else
+		return (0);
+}

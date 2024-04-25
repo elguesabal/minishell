@@ -69,6 +69,7 @@ char	*copy_str(char *str);
 
 // ./assistant/search.c
 int	compare(char *s1, char *s2);
+int	compare_variable(char *s1, char *s2);
 
 // ./argument management/environment_variable.c
 int	search_dollar_sign(char *str);
@@ -94,13 +95,14 @@ void	cd(char *command); // DESSE MODO O COMANDO FUNCIONA MESMO Q EU ESTEJA ENTRA
 void	pwd(void);
 
 // ./commands/export.c
-int	compare_variable(char *s1, char *s2);
 char	*search_variable_list(t_str **no, char *str);
 char	**export_variable(char **env, char *str);
 char	**export(char **argv, char **env, t_str **env_list);
 
 // ./commands/unset.c
-char	**unset(char **argv, t_str **env_list, char **env);
+void	remove_variable_array(char **env, char *str);
+void	remove_variable_list(t_str **no, char *str);
+void 	unset(char **argv, t_str **env_list, char **env);
 
 // ./commands/env.c
 void	env(char **env);
