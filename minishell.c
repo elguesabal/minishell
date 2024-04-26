@@ -12,18 +12,6 @@
 
 #include "minishell.h"
 
-// void	init_count(t_token *info)
-// {
-// 	info->command = 0;
-// 	// info->arguments = 0;
-// 	info->dollar_sign = 0;
-// 	info->single_quotes = 0;
-// 	info->double_quotes = 0;
-// 	info->bigger_then = 0;
-// 	info->two_greater_than = 0;
-// 	info->pipe = 0;
-// }
-
 
 void	analyze(char **argv, t_str **env_list)
 {
@@ -60,21 +48,21 @@ int	main(int argc, char **argv, char **argenv)
 
 
 
-char *teste1 = malloc(sizeof(char) * 5);
-teste1[0] = 'A';
-teste1[1] = '=';
-teste1[2] = 'w';
-teste1[3] = 'w';
-teste1[4] = '\0';
-insert_last(&env_list, teste1);
+// char *teste1 = malloc(sizeof(char) * 5); // ESTOU IMPLEMENTANDO DECLARACAO DE VARIAVEIS ENTAO NAO SE FAZ TAO NECESSARIO ESTE CODIGO
+// teste1[0] = 'A';
+// teste1[1] = '=';
+// teste1[2] = 'w';
+// teste1[3] = 'w';
+// teste1[4] = '\0';
+// insert_last(&env_list, teste1);
 
-char *teste2 = malloc(sizeof(char) * 5);
-teste2[0] = 'B';
-teste2[1] = '=';
-teste2[2] = 'z';
-teste2[3] = 'z';
-teste2[4] = '\0';
-insert_last(&env_list, teste2);
+// char *teste2 = malloc(sizeof(char) * 5);
+// teste2[0] = 'B';
+// teste2[1] = '=';
+// teste2[2] = 'z';
+// teste2[3] = 'z';
+// teste2[4] = '\0';
+// insert_last(&env_list, teste2);
 
 
 // t_str	*assist = env_list;
@@ -100,18 +88,19 @@ insert_last(&env_list, teste2);
 		args = ft_split(str, ' ');
 
 		// AKI EU TENHO Q COMECAR A ANALIZAR OS ARGUMENTOS PASSADOS E VERIFICAR $ > >> |
-		// init_count(&info);
 		analyze(args, &env_list);
 
 
-		if (compare("echo", str))
+		if (declaration_variable(args[0]))
+			add_variable(args, &env_list); // FUNCAO Q ADICIONA VARIAVEL DE AMBIENTE // TEM Q VERIFICAR SE A VARIAVEL JA EXISTE E CASO SIM REDECLARAR
+		else if (compare("echo", str))
 			echo(args);
 		else if (compare("cd", str))
 			cd(str);
 		else if (compare("pwd", str))
 			pwd();
 		else if (compare("export", str))
-			argenv = export(args, argenv, &env_list);
+			argenv = export(args, argenv, &env_list); // TBM E POSSIVEL ADICIONAR VARIAVEL DE AMBIENTE COM EXPORT EXEMPLO: export teste=abc
 		else if (compare("unset", str))
 			unset(args, &env_list, argenv);
 		else if (compare("env", str))

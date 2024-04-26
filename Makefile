@@ -24,6 +24,7 @@ FILE =	minishell.c\
 	$(ASSISTANT)search.c\
 	$(ARGUMENTS)environment_variable.c\
 	$(ARGUMENTS)list_operations.c\
+	$(COMMANDS)add_variable.c\
 	$(COMMANDS)echo.c\
 	$(COMMANDS)cd.c\
 	$(COMMANDS)pwd.c\

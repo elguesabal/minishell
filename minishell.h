@@ -22,18 +22,6 @@
 #include <sys/stat.h>
 
 
-// typedef struct s_token
-// {
-//     int command;
-//     // int arguments;
-//     int dollar_sign;
-//     int single_quotes;
-//     int double_quotes;
-//     int bigger_then;
-//     int two_greater_than;
-//     int pipe;
-// }   t_token;
-
 
 // LISTA USADA PARA ARMAZENAR OS INDERECOS DE MEMORIA DAS VARIAVEIS DE AMBIENTE MAS NAO DISPONIBILIZAR PARA SIBPROCESSOS
 typedef struct s_str
@@ -41,6 +29,7 @@ typedef struct s_str
 	char	*str;
 	struct s_str	*next;
 }	t_str;
+
 
 
 // ./assistant/len.c
@@ -82,6 +71,10 @@ void	creat_list(t_str **no, char **array_str);
 char	**array_to_list(t_str **no);
 void	free_list(t_str **no);
 
+// ./commands/add_variable.c
+int	declaration_variable(char *str);
+void	add_variable(char **argv, t_str **env_list);
+
 // ./commands/echo.c
 // int	search_operator(char *str, char *operator) // TEMPORARIO // NAO USANDO POR ENQUANTO
 // int	search_operator(char **argv, char *operator); // TEMPORARIO // NAO USANDO POR ENQUANTO
@@ -121,7 +114,6 @@ void    exec_program(char **argv, char **env, char *str, t_str **env_list);
 char    *tester_path(char **path, char *file);
 char	*expand_variable(char *free_str, char *new_str);
 void	analyze(char **argv, t_str **env_list);
-int	compare(char *s1, char *s2);    // TEMPORARIO
 
 
 
