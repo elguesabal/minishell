@@ -88,7 +88,7 @@ void	cd(char *command); // DESSE MODO O COMANDO FUNCIONA MESMO Q EU ESTEJA ENTRA
 void	pwd(void);
 
 // ./commands/export.c
-char	*search_variable_list(t_str **no, char *str);
+t_str	*search_variable_list(t_str **no, char *str);
 char	**export_variable(char **env, char *str);
 char	**export(char **argv, char **env, t_str **env_list);
 

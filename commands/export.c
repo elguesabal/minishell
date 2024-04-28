@@ -3,9 +3,9 @@
 /// @brief PROCURA UMA ESTRING (VARIAVEL DE AMBIENTE) DENTRO DE UMA LISTA ENCADEADA
 /// @param no LISTA A SER PERCORRIDA
 /// @param s2 STRING A SER COMPARADA
-/// @return RETORNA A STRING CASO ENCONTRE A VARIAVEL
+/// @return RETORNA O NO CASO ENCONTRE A VARIAVEL
 /// @return SE NAO ENCONTRAR A VARIAVEL RETORNA NULL
-char	*search_variable_list(t_str **no, char *str)
+t_str	*search_variable_list(t_str **no, char *str)
 {
 	t_str	*assist;
 
@@ -13,7 +13,7 @@ char	*search_variable_list(t_str **no, char *str)
 	while (assist)
 	{
 		if (compare_variable(assist->str, str))
-			return (assist->str);
+			return (assist);
 		assist = assist->next;
 	}
 	return (NULL);
@@ -55,14 +55,14 @@ char	**export_variable(char **env, char *str)
 char	**export(char **argv, char **env, t_str **env_list)
 {
 	int	i;
-	char	*return_env;
+	t_str	*return_env;
 
 	i = 1;
 	while (argv[i])
 	{
 		return_env = search_variable_list(env_list, argv[i]);
 		if (return_env)
-			env = export_variable(env, return_env); // EXPORTA TODAS AS VARIAVEIS ENCONTRADAS NOS ARGUMENTOS
+			env = export_variable(env, return_env->str); // EXPORTA TODAS AS VARIAVEIS ENCONTRADAS NOS ARGUMENTOS
 			// return (export_variable(env, return_env)); // SO EXPORTA A PRIMEIRA VARIAVEL ENCONTRADA
 		i++;
 	}

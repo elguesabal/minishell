@@ -57,12 +57,17 @@ int	search_dollar_sign(char *str)
 char	*environment_variable(char *arg, t_str **env_list)
 {
 	char	*env;
-	char	*copy_free;
+	char	*arg_free;
+	t_str	*no;
 
 	if (search_dollar_sign(arg))
 	{
-		env = skip_c(search_variable_list(env_list, arg + 1), '=');
-		copy_free = arg;
+		no = search_variable_list(env_list, arg + 1);
+		if (no == NULL)
+			env = NULL;
+		else
+			env = skip_c(no->str, '=');
+		arg_free = arg;
 		if (env)
 			arg = copy_str(env + 1);
 		else
@@ -70,7 +75,7 @@ char	*environment_variable(char *arg, t_str **env_list)
 			arg = malloc(sizeof(char));
 			*arg = '\0';
 		}
-		free(copy_free);
+		free(arg_free);
 	}
 	return (arg);
 }

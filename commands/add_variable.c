@@ -21,11 +21,19 @@ int	declaration_variable(char *str)
 void	add_variable(char **argv, t_str **env_list)
 {
 	int	i;
+	t_str	*variable;
 
 	i = 0;
 	while (argv[i])
 	{
-		insert_last(env_list, copy_str(argv[i]));
+		variable = search_variable_list(env_list, argv[i]); // search_variable_list() ESPERA COMO SEGUNDO ARGUMENTO APENAS O NOME DA VARIAVEL
+printf("teste: %s", variable->str);
+		if (variable) // PROCURA SE A VARIAVEL JA EXISTE E CASO SIM REDECLARAR ELA COM SEU NOVO VALOR
+		{
+printf("variavel: %s\n", variable->str);
+		}
+		else
+			insert_last(env_list, copy_str(argv[i]));
 		i++;
 	}
 }
