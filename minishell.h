@@ -6,7 +6,7 @@
 /*   By: joseanto <joseanto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 18:10:16 by joseanto          #+#    #+#             */
-/*   Updated: 2024/04/23 18:39:01 by joseanto         ###   ########.fr       */
+/*   Updated: 2024/04/29 12:15:50 by joseanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ void	free_list(t_str **no);
 
 // ./commands/add_variable.c
 int	declaration_variable(char *str);
-void	add_variable(char **argv, t_str **env_list);
+char	*copy_name_variable(char *str);
+void	add_variable(char **argv, char **env, t_str **env_list);
 
 // ./commands/echo.c
 // int	search_operator(char *str, char *operator) // TEMPORARIO // NAO USANDO POR ENQUANTO
@@ -89,8 +90,9 @@ void	pwd(void);
 
 // ./commands/export.c
 t_str	*search_variable_list(t_str **no, char *str);
-char	**export_variable(char **env, char *str);
-char	**export(char **argv, char **env, t_str **env_list);
+int	search_variable_array(char **env, char *str);
+void	export_variable(char ***env, char *str);
+void	export(char **argv, char ***env, t_str **env_list);
 
 // ./commands/unset.c
 void	remove_variable_array(char **env, char *str);

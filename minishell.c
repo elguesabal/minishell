@@ -6,7 +6,7 @@
 /*   By: joseanto <joseanto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 18:23:25 by joseanto          #+#    #+#             */
-/*   Updated: 2024/04/25 10:11:44 by joseanto         ###   ########.fr       */
+/*   Updated: 2024/04/29 15:14:28 by joseanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	main(int argc, char **argv, char **argenv)
 
 
 		if (declaration_variable(args[0]))
-			add_variable(args, &env_list); // FUNCAO Q ADICIONA VARIAVEL DE AMBIENTE // TEM Q VERIFICAR SE A VARIAVEL JA EXISTE E CASO SIM REDECLARAR
+			add_variable(args, argenv, &env_list); // FUNCAO Q ADICIONA VARIAVEL DE AMBIENTE // TEM Q VERIFICAR SE A VARIAVEL JA EXISTE E CASO SIM REDECLARAR
 		else if (compare("echo", str))
 			echo(args);
 		else if (compare("cd", str))
@@ -100,7 +100,7 @@ int	main(int argc, char **argv, char **argenv)
 		else if (compare("pwd", str))
 			pwd();
 		else if (compare("export", str))
-			argenv = export(args, argenv, &env_list); // TBM E POSSIVEL ADICIONAR VARIAVEL DE AMBIENTE COM EXPORT EXEMPLO: export teste=abc
+			export(args, &argenv, &env_list); // TBM E POSSIVEL ADICIONAR VARIAVEL DE AMBIENTE COM EXPORT EXEMPLO: export teste=abc
 		else if (compare("unset", str))
 			unset(args, &env_list, argenv);
 		else if (compare("env", str))
