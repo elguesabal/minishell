@@ -49,9 +49,6 @@ char	*skip_char(char *str);
 char	*skip_space(char *str);
 char	*skip_c(char *str, char c);
 
-// ./assistant/concatenate.c
-char    *build_path(char *str1, char *str2);
-
 // ./assistant/copy.c
 char	*copy_str(char *str);
 // char	**copy_str_str(char	**ptr);
@@ -60,21 +57,24 @@ char	*copy_str(char *str);
 int	compare(char *s1, char *s2);
 int	compare_variable(char *s1, char *s2);
 
-// ./argument management/environment_variable.c
-int	search_dollar_sign(char *str);
-// char	*expand_variable(char *str, char *new_str); // SEM USO PQ ESTOU USANDO A FUNCAO copy_str()
-char	*environment_variable(char *arg, t_str **env_list);
-
-// ./argument management/list_operations.c
+// ./assistant/list_operations.c
 void	insert_last(t_str **no, char *str);
 void	creat_list(t_str **no, char **array_str);
 char	**array_to_list(t_str **no);
 void	free_list(t_str **no);
 
+// ./argument management/environment_variable.c
+int	search_dollar_sign(char *str);
+// char	*expand_variable(char *str, char *new_str); // SEM USO PQ ESTOU USANDO A FUNCAO copy_str()
+char	*environment_variable(char *arg, t_str **env_list);
+
 // ./commands/add_variable.c
 int	declaration_variable(char *str);
 char	*copy_name_variable(char *str);
 void	add_variable(char **argv, char **env, t_str **env_list);
+
+// ./commands/executable.c
+// int	is_executable(char *str) // TALVEZ EU COLOQUE ESSA TAREFA DENTRO DE exec_program() // POR ENQUANTO ESTA SENDO FEITO ISSO LA
 
 // ./commands/echo.c
 // int	search_operator(char *str, char *operator) // TEMPORARIO // NAO USANDO POR ENQUANTO
@@ -82,7 +82,8 @@ void	add_variable(char **argv, char **env, t_str **env_list);
 void	echo(char **argv);
 
 // ./commands/cd.c
-void	cd(char *command); // DESSE MODO O COMANDO FUNCIONA MESMO Q EU ESTEJA ENTRANDO EM UMA PASTA Q CONTENHA ESPACO NO NOME
+char	*new_pwd(char *pwd);
+void	cd(char *command, char **env, t_str **env_list); // DESSE MODO O COMANDO FUNCIONA MESMO Q EU ESTEJA ENTRANDO EM UMA PASTA Q CONTENHA ESPACO NO NOME
 // void	cd(char **argv);
 
 // ./commands/pwd.c
@@ -107,14 +108,14 @@ void	free_split(char **argv);    // TEMPORARIO
 void	exit_shell(char **argv, char *str, char **env, t_str **env_list);
 
 // ./commands/exec_program.c
+char    *build_path(char *str1, char *str2);
+char    *tester_path(char **path, char *file);
 void    exec_program(char **argv, char **env, char *str, t_str **env_list);
 
 
 
 
 // ./minishell.c
-char    *tester_path(char **path, char *file);
-char	*expand_variable(char *free_str, char *new_str);
 void	analyze(char **argv, t_str **env_list);
 
 

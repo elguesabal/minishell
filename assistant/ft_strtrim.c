@@ -65,11 +65,3 @@ char	*ft_strtrim(char const *s1, char const *set)
 	str[i] = '\0';
 	return (str);
 }
-
-// #include <stdio.h>
-
-// int	main(void)
-// {
-// 	printf("return: %s\n", ft_strtrim("ehjjtestehje", "ejh"));
-// 	return (0);
-// }

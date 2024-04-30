@@ -20,6 +20,8 @@ void	analyze(char **argv, t_str **env_list)
 	i = 1; // TEM Q COMECAR A VERIFICAR APARTIR DO SEGUNDO ARGUMENTO PQ O PRIMEIRO E O COMANDO
 	while (argv[i])
 	{
+		/* '' */
+		/* "" */
 		/* $ */ argv[i] = environment_variable(argv[i], env_list);
 		/* > */
 		/* >> */
@@ -93,14 +95,18 @@ int	main(int argc, char **argv, char **argenv)
 
 		if (declaration_variable(args[0]))
 			add_variable(args, argenv, &env_list); // FUNCAO Q ADICIONA VARIAVEL DE AMBIENTE // TEM Q VERIFICAR SE A VARIAVEL JA EXISTE E CASO SIM REDECLARAR
+		// else if (/* executable() */) // TALVEZ EU COLOQUE ESSA TAREFA DENTRO DE exec_program() // POR ENQUANTO ESTA SENDO FEITO ISSO LA
+		// {
+		// 	printf("executa o programa\n");
+		// }
 		else if (compare("echo", str))
 			echo(args);
 		else if (compare("cd", str))
-			cd(str);
+			cd(str, argenv, &env_list);
 		else if (compare("pwd", str))
 			pwd();
 		else if (compare("export", str))
-			export(args, &argenv, &env_list); // TBM E POSSIVEL ADICIONAR VARIAVEL DE AMBIENTE COM EXPORT EXEMPLO: export teste=abc
+			export(args, &argenv, &env_list);
 		else if (compare("unset", str))
 			unset(args, &env_list, argenv);
 		else if (compare("env", str))

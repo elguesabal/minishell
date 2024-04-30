@@ -19,11 +19,10 @@ FILE =	minishell.c\
 	$(ASSISTANT)ft_strtrim.c\
 	$(ASSISTANT)ft_split.c\
 	$(ASSISTANT)skip_str.c\
-	$(ASSISTANT)build_path.c\
 	$(ASSISTANT)copy.c\
 	$(ASSISTANT)search.c\
+	$(ASSISTANT)list_operations.c\
 	$(ARGUMENTS)environment_variable.c\
-	$(ARGUMENTS)list_operations.c\
 	$(COMMANDS)add_variable.c\
 	$(COMMANDS)echo.c\
 	$(COMMANDS)cd.c\
