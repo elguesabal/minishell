@@ -40,6 +40,7 @@ char    *build_path(char *str1, char *str2)
 /// @brief PROCURA O ARQUIVOS DO ARGUMENTO *file EM TODOS OS CAMINHOS DO ARGUMENTO **path
 /// @param path CAMINHOS A SEREM TESTADOS
 /// @param file AQUIVO A SER PROCURADO DENTRO DOS CAMINHOS
+/// @return RETORNA UMA COPIA DE file CASO stat(file, &info) == 0
 /// @return RETORNA O CAMIHNO ABSOLUTO CONSTRUIDO PELA FUNCAO build_path() CASO A FUNCAO stat() AFIRME Q O CAMINHO E ARQUIVO SAO VALIDOS
 /// @return CASO A FUNCAO stat() RETORN -1 EM TODAS AS TENTATIVAS A FUNCAO tester_path() RETORNA UM ENDERECO DE MEMORIA CONTENDO '\0'
 char    *tester_path(char **path, char *file)
@@ -47,6 +48,8 @@ char    *tester_path(char **path, char *file)
     char    *path_file;
 	struct stat info;
 
+	if (stat(file, &info) == 0)
+		return (copy_str(file));
 	while (*path)
 	{
 		path_file = build_path(*path, file);
@@ -71,6 +74,7 @@ void    exec_program(char **argv, char **env, char *str, t_str **env_list)
 	char	**path;
 	// char	*env_path; // EU USAVA ESSA VARIAVEL PRA RECEBER A VARIAVEL PATH
     char    *path_file;
+	struct stat	info;
 
     pid = fork();
     if (pid == -1)
@@ -83,23 +87,40 @@ void    exec_program(char **argv, char **env, char *str, t_str **env_list)
 // path = ft_split(env_path, ':');
 // free(env_path); // ESTA DANDO ESSE ERRO munmap_chunk(): invalid pointer // O ERRO ACONTECE PQ EU TENTO DESALOCAR MEMORIA Q NAO FOI ALOCADA POR MIM
 
-		if (execve(argv[0], argv, env) == 0) // TESTA O CAMINHO ABSOLUTO OU RELATIVO ENVIADO NO ARGUMENTO
-		{
-			// AKI NADA DEVE SER FEITO PQ ESTA EXECUTANDO OUTRO PROGRAMA
-		}
-		else
-		{
-			path = ft_split(getenv("PATH"), ':');
-			path_file = tester_path(path, *argv);
-			free_split(path);
+		// if ((stat(argv[0], &info) == -1 || access(argv[0], X_OK) == -1) && execve(argv[0], argv, env) == -1) // TESTA O CAMINHO ABSOLUTO OU RELATIVO ENVIADO NO ARGUMENTO
+// 		if (1) // TESTA O CAMINHO ABSOLUTO OU RELATIVO ENVIADO NO ARGUMENTO
+// 		{
+// 			// AKI NADA DEVE SER FEITO PQ ESTA EXECUTANDO OUTRO PROGRAMA
+// (void)info;
+// printf("testeeeee: %d\n", stat(argv[0], &info));
+// printf("testeeeee: %d\n", access(argv[0], X_OK));
+// // if (stat(argv[0], &info) == 0)
+// // {
+// // printf("caiu aki\n");
+// // }
+// 		}
+// 		else
+// 		{
+		path = ft_split(getenv("PATH"), ':');
+		path_file = tester_path(path, *argv);
+		free_split(path);
 
-			if (execve(path_file, argv, env) == -1) // O ERRO DESCRITO ACIMA ACONTECIA PQ EU ESTAVA PASSANDO NULL AI A FUNCAO NAO LIDA BEM E OCORRE ACESSO DE MEMORIA INDEVIDO
-			{ // PRECISA DE UM IF VERIFICANDO execve() RETORNOU -1? CASO ISSO NAO ACONTECESSE NENHUMA LINHA A SEGUIR SERIA EXECUTADA KKKK
-				printf("%s: comando não encontrado\n", argv[0]);
-				free(path_file);
-				exit_shell(argv, str, env, env_list); // MATAR O PROCESSO PRA NAO DUPLICAR
-			}
+		if (execve(path_file, argv, env) == -1) // O ERRO DESCRITO ACIMA ACONTECIA PQ EU ESTAVA PASSANDO NULL AI A FUNCAO NAO LIDA BEM E OCORRE ACESSO DE MEMORIA INDEVIDO
+		{ // PRECISA DE UM IF VERIFICANDO execve() RETORNOU -1? CASO ISSO NAO ACONTECESSE NENHUMA LINHA A SEGUIR SERIA EXECUTADA KKKK
+			if (path_file[0] != '\0' && access(path_file, X_OK) == -1)
+				printf("-minishell: %s: Permissão negada\n", path_file);
+			else if (stat(path_file, &info) == 0 && S_ISDIR(info.st_mode))
+				printf("-minishell: %s: É um diretório\n", path_file);
+			else if (*argv[0] == '.' && stat(path_file, &info) == -1)
+				printf("-minishell: %s: Arquivo ou diretório inexistente\n", *argv);
+			else if (path_file[0] == '\0' && *argv[0] != '.')
+				printf("%s: comando não encontrado\n", *argv);
+			else
+				printf("nao previ isso kkkkk\n"); // AKI EU VOU PROCURANDO FALHAS
+			free(path_file);
+			exit_shell(argv, str, env, env_list); // MATAR O PROCESSO PRA NAO DUPLICAR
 		}
+		// }
 		// free(path_file); // SE execve(path_file, argv, env) != -1 ESSA LINHA NUNCA VAI ACONTECER KKKKKK
     }
     else if (pid > 0)
