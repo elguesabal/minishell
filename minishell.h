@@ -6,7 +6,7 @@
 /*   By: joseanto <joseanto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 18:10:16 by joseanto          #+#    #+#             */
-/*   Updated: 2024/04/29 12:15:50 by joseanto         ###   ########.fr       */
+/*   Updated: 2024/05/02 08:23:18 by joseanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,13 @@ int	search_dollar_sign(char *str);
 // char	*expand_variable(char *str, char *new_str); // SEM USO PQ ESTOU USANDO A FUNCAO copy_str()
 char	*environment_variable(char *arg, t_str **env_list);
 
+// ./argument management/argument_management.c
+void	argument_management(char **argv, t_str **env_list);
+
 // ./commands/add_variable.c
 int	declaration_variable(char *str);
 char	*copy_name_variable(char *str);
 void	add_variable(char **argv, char **env, t_str **env_list);
-
-// ./commands/executable.c
-// int	is_executable(char *str) // TALVEZ EU COLOQUE ESSA TAREFA DENTRO DE exec_program() // POR ENQUANTO ESTA SENDO FEITO ISSO LA
 
 // ./commands/echo.c
 // int	search_operator(char *str, char *operator) // TEMPORARIO // NAO USANDO POR ENQUANTO
@@ -116,7 +116,7 @@ void    exec_program(char **argv, char **env, char *str, t_str **env_list);
 
 
 // ./minishell.c
-void	analyze(char **argv, t_str **env_list);
+void	swap_space(char *str);
 
 
 

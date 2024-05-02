@@ -36,3 +36,15 @@ char	*skip_c(char *str, char c)
 		i++;
 	return (&str[i]);
 }
+
+/// @brief TROCA TODOS AS TABULACAO POR ESPACOES
+/// @param str STRING QUE SERA PERCORRIDA
+void	swap_space(char *str)
+{
+	while (*str)
+	{
+		if (*str == '	')
+			*str = ' ';
+		str++;
+	}
+}

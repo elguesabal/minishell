@@ -6,32 +6,12 @@
 /*   By: joseanto <joseanto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 18:23:25 by joseanto          #+#    #+#             */
-/*   Updated: 2024/04/29 15:14:28 by joseanto         ###   ########.fr       */
+/*   Updated: 2024/05/02 08:44:10 by joseanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-void	analyze(char **argv, t_str **env_list)
-{
-	int	i;
-
-	i = 1; // TEM Q COMECAR A VERIFICAR APARTIR DO SEGUNDO ARGUMENTO PQ O PRIMEIRO E O COMANDO
-	while (argv[i])
-	{
-		/* '' */
-		/* "" */
-		/* $ */ argv[i] = environment_variable(argv[i], env_list);
-		/* > */
-		/* >> */
-		/* | */
-		/* < */
-		/* << */
-
-		i++;
-	}
-}
 
 
 int	main(int argc, char **argv, char **argenv)
@@ -45,60 +25,23 @@ int	main(int argc, char **argv, char **argenv)
 
 	env_list = NULL;
 	creat_list(&env_list, argenv);
-	// argenv = copy_str_str(argenv); // FUNCAO copy_str_str() SEM USO
-	argenv = array_to_list(&env_list); // array_to_list() SUBSTITUI A FUNCAO copy_str_str()
-
-
-
-// char *teste1 = malloc(sizeof(char) * 5); // ESTOU IMPLEMENTANDO DECLARACAO DE VARIAVEIS ENTAO NAO SE FAZ TAO NECESSARIO ESTE CODIGO
-// teste1[0] = 'A';
-// teste1[1] = '=';
-// teste1[2] = 'w';
-// teste1[3] = 'w';
-// teste1[4] = '\0';
-// insert_last(&env_list, teste1);
-
-// char *teste2 = malloc(sizeof(char) * 5);
-// teste2[0] = 'B';
-// teste2[1] = '=';
-// teste2[2] = 'z';
-// teste2[3] = 'z';
-// teste2[4] = '\0';
-// insert_last(&env_list, teste2);
-
-
-// t_str	*assist = env_list;
-// while (assist)
-// {
-// 	printf("aaaa: %s\n", assist->str);
-// 	assist = assist->next;
-// }
-
-// int	i = 0;
-// while (argenv[i])
-// {
-// 	printf("%s\n", argenv[i]);
-// 	i++;
-// }
-
+	argenv = array_to_list(&env_list);
 
 	while (1)
 	{
-// printf("teste: %s\n", argenv[25]);
 		str = readline("minishell: ");
 // printf("teste :%d\n", (*str == '\0')); // CASO PRESSIONE ENTER SEM DIGITAR NADA NO SHELL *str == 0
+
+// iuiih();
+		swap_space(str);
+		// if (aspas)
+			// swap_tab();
 		args = ft_split(str, ' ');
 
-		// AKI EU TENHO Q COMECAR A ANALIZAR OS ARGUMENTOS PASSADOS E VERIFICAR $ > >> |
-		analyze(args, &env_list);
-
+		argument_management(args, &env_list);
 
 		if (declaration_variable(args[0]))
-			add_variable(args, argenv, &env_list); // FUNCAO Q ADICIONA VARIAVEL DE AMBIENTE // TEM Q VERIFICAR SE A VARIAVEL JA EXISTE E CASO SIM REDECLARAR
-		// else if (/* executable() */) // TALVEZ EU COLOQUE ESSA TAREFA DENTRO DE exec_program() // POR ENQUANTO ESTA SENDO FEITO ISSO LA
-		// {
-		// 	printf("executa o programa\n");
-		// }
+			add_variable(args, argenv, &env_list);
 		else if (compare("echo", str))
 			echo(args);
 		else if (compare("cd", str))
