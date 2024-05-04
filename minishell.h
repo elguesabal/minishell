@@ -71,7 +71,7 @@ void	free_list(t_str **no);
 
 // ./argument management/environment_variable.c
 int	search_dollar_sign(char *str);
-// char	*expand_variable(char *str, char *new_str); // SEM USO PQ ESTOU USANDO A FUNCAO copy_str()
+char	*expand_variable(char *str, char *new_str); // SEM USO PQ ESTOU USANDO A FUNCAO copy_str()
 char	*environment_variable(char *arg, t_str **env_list);
 
 // ./argument management/argument_management.c
