@@ -12,6 +12,75 @@
 
 #include "minishell.h"
 
+// TABELA ASCII
+// " == 34
+// ' == 39
+
+// void	define_quotes(char *str, t_quotes *quotes)
+// {
+// (void)quotes;
+
+// 	int	i;
+// 	int	single_quotes;
+// 	int	double_quotes;
+
+// 	single_quotes = 0;
+// 	double_quotes = 0;
+
+// 	i = 0;
+// 	while(str[i])
+// 	{
+// 		if (str[i] == 39)
+// 		{
+// 			if (str[i] == 39 && single_quotes = 1)
+// 				single_quotes++;
+// 			single_quotes++;
+// 		}
+// 		i++;
+// 	}
+
+// 	if (single_quotes == 2)
+// 		quotes.single_quotes = 1;
+// 	else
+// 		quotes.single_quotes = 0;
+
+// 	if (double_quotes == 2)
+// 		quotes.double_quotes = 1;
+// 	else
+// 		quotes.double_quotes = 0;
+// }
+
+
+
+
+
+// 				IDEAIA DE COMO FAZER INTERPRETACAO DE ASPAS (NAO INTERPRETAR METACARACTERES DENTRO DAS ASPAS)
+
+// a tabela ascii vai de 0 a 127, alguns caracteres talvez nao tenham possibilidade de uso em um shell, dito isso, talvez possa usar alguns desses
+// para nao interpretar propositalmente os metacaracteres (tbm estou verificando a possibildade de utrapassar os valores de 0 a 127 do UTF-8)
+
+// se caso definirmos um "codigo" para cada metacaracterer, poderiamos substitui-los antes de ser interpretado por nossa minishell
+// EXEMPLO: imagine que eu troque o $ por 500 ($ na tabela ascii vale 36)
+
+// int caracter = '$'; /* OU */ int caracter = 36;
+
+// printf("%c", caracter); // PRINT: $
+// caracter = 500;
+// printf("%c", caracter); // PRINT: �
+
+// ou seja, uma variavel do tipo char pode assumir um caracter alem da tabela ascii, sendo assim eu poderia definir um consenso:
+// $ -> 500
+// > -> 501
+// >> -> nada pq seria a juncao de char string[3] = { 501, 501, NULL };
+// | -> 502
+// < -> 503
+// << nada pq seria a juncao de char string[3] = { 503, 503, NULL };
+
+// se fizer uma substituicao dos metacaracteres por valores inexistente a funcao argument_management() nao vai identificar algo a ser feito
+// dps de passado por essa funcao so retornar ao estado original e limpar com a funcao ft_trim()
+
+
+
 
 
 int	main(int argc, char **argv, char **argenv)
@@ -19,6 +88,7 @@ int	main(int argc, char **argv, char **argenv)
 	char	*str;
 	char	**args;
 	t_str	*env_list;
+	// t_quotes	quotes;
 
 	(void)argc;
 	(void)argv;
@@ -29,13 +99,12 @@ int	main(int argc, char **argv, char **argenv)
 
 	while (1)
 	{
-		str = readline("minishell: ");
-// printf("teste :%d\n", (*str == '\0')); // CASO PRESSIONE ENTER SEM DIGITAR NADA NO SHELL *str == 0
+		str = readline("minishell: "); // printf("teste :%d\n", (*str == '\0')); // CASO PRESSIONE ENTER SEM DIGITAR NADA NO SHELL *str == 0
 
-// iuiih();
+// define_quotes(str, &quotes);
 		swap_space(str);
-		// if (aspas)
-			// swap_tab();
+// if (aspas)
+	// swap_tab();
 		args = ft_split(str, ' ');
 
 		argument_management(args, &env_list);

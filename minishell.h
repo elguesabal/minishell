@@ -30,6 +30,12 @@ typedef struct s_str
 	struct s_str	*next;
 }	t_str;
 
+// typedef struct s_quotes
+// {
+// 	int	*single_quotes;
+// 	int	*double_quotes;
+// }	t_quotes;
+
 
 
 // ./assistant/len.c
