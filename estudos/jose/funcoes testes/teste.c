@@ -111,8 +111,57 @@
 
 
 
+// int	main(void)
+// {
+// 	printf("teste: %c\n", 1000000);
+// 	return (0);
+// }
+
+
+
+// int main() {
+//     // Definindo o valor decimal do caractere desejado além de 127
+//     int codigo_ascii = 169; // Por exemplo, vamos usar o símbolo de direitos autorais
+    
+//     // Usando printf para imprimir o caractere
+//     printf("Caractere além de 127: %c\n", codigo_ascii);
+    
+//     return 0;
+// }
+
+
+
+// int	main(void)
+// {
+// 	int i = 0;
+// 	char c;
+
+// 	while (i < 1000)
+// 	{
+// 		c = i;
+// 		printf("i: %d -> %c\n", i, i);
+// 		i++;
+// 	}
+// 	return (0);
+// }
+
+
+
+
 int	main(void)
 {
-	printf("teste: %c\n", 1000000);
+	char c1;
+	char c2;
+
+	c1 = 97;
+	printf("c1: %c\n", c1);
+
+	int	i = 353;
+	c2 = i;
+	printf("c2: %c\n", c2);
+
+	if (c1 == c2)
+		printf("true\n");
+
 	return (0);
 }

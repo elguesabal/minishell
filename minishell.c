@@ -107,6 +107,13 @@ int	main(int argc, char **argv, char **argenv)
 	// swap_tab();
 		args = ft_split(str, ' ');
 
+
+int i = 0;
+while (args[i])
+	i++;
+printf("i -> %d\n", i);
+
+
 		argument_management(args, &env_list);
 
 		if (declaration_variable(args[0]))
