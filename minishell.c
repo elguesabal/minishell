@@ -88,7 +88,6 @@ int	main(int argc, char **argv, char **argenv)
 	char	*str;
 	char	**args;
 	t_str	*env_list;
-	// t_quotes	quotes;
 
 	(void)argc;
 	(void)argv;
@@ -101,17 +100,18 @@ int	main(int argc, char **argv, char **argenv)
 	{
 		str = readline("minishell: "); // printf("teste :%d\n", (*str == '\0')); // CASO PRESSIONE ENTER SEM DIGITAR NADA NO SHELL *str == 0
 
-// define_quotes(str, &quotes);
-		swap_space(str);
-// if (aspas)
-	// swap_tab();
+		quotes(str);
+		str = remove_quotes(str);
 		args = ft_split(str, ' ');
 
 
-int i = 0;
-while (args[i])
-	i++;
-printf("i -> %d\n", i);
+// int i = 0;
+// while (args[i])
+// {
+// 	printf("%s\n", args[i]);
+// 	i++;
+// }
+// printf("i -> %d\n", i);
 
 
 		argument_management(args, &env_list);

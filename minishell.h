@@ -69,13 +69,20 @@ void	creat_list(t_str **no, char **array_str);
 char	**array_to_list(t_str **no);
 void	free_list(t_str **no);
 
+// ./argument management/argument_management.c
+void	argument_management(char **argv, t_str **env_list);
+
 // ./argument management/environment_variable.c
 int	search_dollar_sign(char *str);
 char	*expand_variable(char *str, char *new_str); // SEM USO PQ ESTOU USANDO A FUNCAO copy_str()
 char	*environment_variable(char *arg, t_str **env_list);
 
-// ./argument management/argument_management.c
-void	argument_management(char **argv, t_str **env_list);
+// ./argument management/quotes.c
+// void	swap_space(char *str);
+int closing_quotes(char *str, char quotes);
+void    swap_caracter(char *c, int single_quotes, int double_quotes);
+void	quotes(char *str);
+char	*remove_quotes(char *str);
 
 // ./commands/add_variable.c
 int	declaration_variable(char *str);
@@ -122,7 +129,6 @@ void    exec_program(char **argv, char **env, char *str, t_str **env_list);
 
 
 // ./minishell.c
-void	swap_space(char *str);
 
 
 

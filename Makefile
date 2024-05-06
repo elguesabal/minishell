@@ -24,6 +24,7 @@ FILE =	minishell.c\
 	$(ASSISTANT)list_operations.c\
 	$(ARGUMENTS)environment_variable.c\
 	$(ARGUMENTS)argument_management.c\
+	$(ARGUMENTS)quotes.c\
 	$(COMMANDS)add_variable.c\
 	$(COMMANDS)echo.c\
 	$(COMMANDS)cd.c\
