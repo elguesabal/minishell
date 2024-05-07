@@ -147,21 +147,29 @@
 
 
 
+// int	main(void)
+// {
+// 	char c1;
+// 	char c2;
+
+// 	c1 = 97;
+// 	printf("c1: %c\n", c1);
+
+// 	int	i = 353;
+// 	c2 = i;
+// 	printf("c2: %c\n", c2);
+
+// 	if (c1 == c2)
+// 		printf("true\n");
+
+// 	return (0);
+// }
+
+
 
 int	main(void)
 {
-	char c1;
-	char c2;
-
-	c1 = 97;
-	printf("c1: %c\n", c1);
-
-	int	i = 353;
-	c2 = i;
-	printf("c2: %c\n", c2);
-
-	if (c1 == c2)
-		printf("true\n");
-
+	char	c = -2;
+	printf("%c\n", c);
 	return (0);
 }

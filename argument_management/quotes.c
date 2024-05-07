@@ -40,37 +40,34 @@ void    swap_caracter(char *c, int single_quotes, int double_quotes)
     // " == 34
     // ' == 39
 
-    // ' -> 200
-    // " -> 201
-    // $ -> 202
-    // > -> 203
+    // ' -> 200 -> -1
+    // " -> 201 -> -2
+    // $ -> 202 -> -3
+    // > -> 203 -> -4
     // >> -> 
-    // | -> 204
-    // < -> 205
+    // | -> 204 -> -5
+    // < -> 205 -> -6
     // << -> 
+	// SPACE -> -7
+	// TAB -> -8
 
     if (*c == '	' && single_quotes == 0 && double_quotes == 0)
         *c = ' ';
     else if (*c == ' ' && (single_quotes == 1 || double_quotes == 1))
         *c = '	';
     else if (*c == 39 && double_quotes == 0 && single_quotes != 0)
-        *c = 200;
+        *c = -1;
     else if (*c == 34 && single_quotes == 0 && double_quotes != 0)
-        *c = 201;
+        *c = -2;
     else if (*c == '$' && single_quotes == 1)
-        *c = 202;
+        *c = -3;
     else if (*c == '>' && (single_quotes == 1 || double_quotes == 1))
-		*c = 203;
+		*c = -4;
 	else if (*c == '|' && (single_quotes == 1 || double_quotes == 1))
-		*c = 204;
+		*c = -5;
 	else if (*c == '<' && (single_quotes == 1 || double_quotes == 1))
-		*c = 205;
+		*c = -6;
 }
-
-// void	revert_caracter(char *str)
-// {
-
-// }
 
 /// @brief FUNCAO RESPONSAVEL POR GERENCIAR ABERTURA DE ASPAS, GARANTIR A EXISTENCIA DE FECHAMENTO, NAO INTERPRETAR ASPAS DENTRO DE ASPAS E CHAMAR A FUNCAO swap_caracter()
 /// @param str STRING QUE SERA PERCORRIDA
@@ -103,44 +100,103 @@ void	quotes(char *str)
 	}
 }
 
-char	*remove_quotes(char *str)
+/// @brief REMOVE AS ASPAS COM VALORES ALTERNATIVOS ' == -1 E " == -2
+/// @param str STRING QUE SERA REMOVIDA AS ASPAS
+/// @return RETORNA UM NOVO ENDERECO DE MEMORIA COM A MESMA STRING MAS SEM AS ASPAS MODIFICADAS (USA free() NO ANTIGO ENDERECO)
+/// @return RETORNA O PROPRIO ENDERECO DE str CASO NAO TENHA ASPAS MODIFICADA
+// char	*remove_quotes(char *str)
+// {
+//     // ' -> 200 -> -1
+//     // " -> 201 -> -2
+
+// 	int	i;
+// 	int	j;
+// 	int	quotes;
+// 	char	*new_str;
+
+// 	if (str == NULL)
+// 		return (NULL);
+// 	quotes = 0;
+// 	i = 0;
+// 	while (str[i])
+// 	{
+// 		if (str[i] == -1 || str[i] == -2)
+// 			quotes++;
+// 		i++;
+// 	}
+// 	if (quotes == 0)
+// 		return (str);
+// 	new_str = malloc((ft_strlen(str) + 1 - quotes) * sizeof(char));
+// 	if (new_str == NULL)
+// 		return (str);
+// 	i = 0;
+// 	j = 0;
+// 	while (str[i])
+// 	{
+// 		if (str[i] != -1 && str[i] != -2)
+// 		{
+// 			new_str[j] = str[i];
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// 	new_str[j] = '\0';
+// 	free(str);
+// 	return (new_str);
+// }
+
+/// @brief REMOVE AS ASPAS COM VALORES ALTERNATIVOS ' == -1 E " == -2 REUTILIZANDO O ANTIGO ENDERECO DE MEMORIA E COLOCANDO '\0' NO FIM DA STRING EXEMPLO: "teste"\0 -> teste\0"\0
+/// @param str STRING QUE SERA REMOVIDA AS ASPAS
+void	remove_quotes(char *str) // ALTERNATIVA DE char *remove_quotes(char *str) (NAO ESTRAPOLA AS 25 LINHAS E NAO ALLOCA NOVA MEMORIA)
 {
-    // ' -> 200
-    // " -> 201
-printf("chegou aki: %d\n", str[5]);
+	int	quotes;
+
+	quotes = 0;
+	while (*str)
+	{
+		if (*str != -1 && *str != -2)
+			*(str - quotes) = *str;
+		else
+			quotes++;
+		str++;
+	}
+	*(str - quotes) = '\0';
+}
+
+/// @brief REVERTE AS MUDIFICACOES FEITAS NAS STRINGS POR swap_caracter() EXEMPLO: char c == -3 VAI RECEBER $
+/// @param args STRINGS A SEREM REVERTIDAS
+void	revert_caracter(char **args)
+{
+    // ' -> 200 -> -1
+    // " -> 201 -> -2
+    // $ -> 202 -> -3
+    // > -> 203 -> -4
+    // >> -> 
+    // | -> 204 -> -5
+    // < -> 205 -> -6
+    // << -> 
+	// SPACE -> -7
+	// TAB -> -8
 
 	int	i;
-	int	quotes;
-	int	single_quotes;
-	int	double_quotes;
-	char	*new_str;
+	int	j;
 
-	if (str == NULL)
-		return (NULL);
-	single_quotes = 200;
-	double_quotes = 201;
-	quotes = 0;
 	i = 0;
-	while (str[i])
+	while (args[i])
 	{
-		if (str[i] == single_quotes || str[i] == double_quotes)
-			quotes++;
+		j = 0;
+		while (args[i][j])
+		{
+			if (args[i][j] == -3)
+				args[i][j] = '$';
+			else if (args[i][j] == -4)
+				args[i][j] = '>';
+			else if (args[i][j] == -5)
+				args[i][j] = '|';
+			else if (args[i][j] == -6)
+				args[i][j] = '<';
+			j++;
+		}
 		i++;
 	}
-	if (quotes == 0)
-		return (str);
-printf("chegou aki\n");
-	new_str = malloc((ft_strlen(str) + 1 - quotes) * sizeof(char));
-	if (new_str == NULL)
-		return (str);
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] != single_quotes && str[i] != double_quotes)
-			new_str[i] = str[i];
-		i++;
-	}
-	new_str[i] = '\0';
-	free(str);
-	return (new_str);
 }

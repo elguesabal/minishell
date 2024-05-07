@@ -82,7 +82,9 @@ char	*environment_variable(char *arg, t_str **env_list);
 int closing_quotes(char *str, char quotes);
 void    swap_caracter(char *c, int single_quotes, int double_quotes);
 void	quotes(char *str);
-char	*remove_quotes(char *str);
+// char	*remove_quotes(char *str);
+void	remove_quotes(char *str);
+void	revert_caracter(char **args);
 
 // ./commands/add_variable.c
 int	declaration_variable(char *str);

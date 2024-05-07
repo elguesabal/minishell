@@ -12,7 +12,8 @@ int	compare(char *s1, char *s2)
 	if (s2 == NULL)
 		return (0);
 	i = 0;
-	while ((s1[i] || s2[i]) && s2[i] != ' ' && s2[i] != '	')
+	// while ((s1[i] || s2[i]) && s2[i] != ' ' && s2[i] != '	') // CONDICAO USADA ANTES DA FUNCAO compare() RECEBER args[0] (ANTES RECEBIA str)
+	while (s1[i] || s2[i])
 	{
 		if (s1[i] != s2[i])
 			return (0);

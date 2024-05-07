@@ -80,7 +80,24 @@
 // dps de passado por essa funcao so retornar ao estado original e limpar com a funcao ft_trim()
 
 
+void	teste(char **args) // FUNCAO USADA PARA TESTAR SEM TAB E COM SPACE ANTES DE GERENCIAR OS ARGUMENTOS
+{
+	int	i;
+	int	j;
 
+	i = 0;
+	while (args[i])
+	{
+		j = 0;
+		while (args[i][j])
+		{
+			if (args[i][j] == '	')
+				args[i][j] = ' ';
+			j++;
+		}
+		i++;
+	}
+}
 
 
 int	main(int argc, char **argv, char **argenv)
@@ -101,7 +118,7 @@ int	main(int argc, char **argv, char **argenv)
 		str = readline("minishell: "); // printf("teste :%d\n", (*str == '\0')); // CASO PRESSIONE ENTER SEM DIGITAR NADA NO SHELL *str == 0
 
 		quotes(str);
-		str = remove_quotes(str);
+		remove_quotes(str);
 		args = ft_split(str, ' ');
 
 
@@ -113,24 +130,32 @@ int	main(int argc, char **argv, char **argenv)
 // }
 // printf("i -> %d\n", i);
 
-
+teste(args);
 		argument_management(args, &env_list);
+		revert_caracter(args);
+
+// int i = 0;
+// while (args[i])
+// {
+// 	printf("%s\n", args[i]);
+// 	i++;
+// }
 
 		if (declaration_variable(args[0]))
 			add_variable(args, argenv, &env_list);
-		else if (compare("echo", str))
+		else if (compare("echo", args[0]))
 			echo(args);
-		else if (compare("cd", str))
+		else if (compare("cd", args[0]))
 			cd(str, argenv, &env_list);
-		else if (compare("pwd", str))
+		else if (compare("pwd", args[0]))
 			pwd();
-		else if (compare("export", str))
+		else if (compare("export", args[0]))
 			export(args, &argenv, &env_list);
-		else if (compare("unset", str))
+		else if (compare("unset", args[0]))
 			unset(args, &env_list, argenv);
-		else if (compare("env", str))
+		else if (compare("env", args[0]))
 			env(argenv);
-		else if (compare("exit", str))
+		else if (compare("exit", args[0]))
 			exit_shell(args, str, argenv, &env_list);
 		else
 			exec_program(args, argenv, str, &env_list);

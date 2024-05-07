@@ -19,7 +19,7 @@ int	search_dollar_sign(char *str)
 /// @param str STRING Q VAI TER A MEMORIA LIBERADA
 /// @param new_str UMA STRING Q VAI SER COPIADA NA NOVA MEMORIA ALOCADA (UTIL PRA QUANDO QUERO UM COPIAR INFORMACOES DE VARIAVEIS DE AMBIENTE E NAO ME PREOCUPAR COM FREE NO SPLIT)
 /// @return ENDERECO COM A COPIA DE new_str
-char	*expand_variable(char *str, char *new_str) // SEM USO PQ ESTOU USANDO A FUNCAO copy_str()
+char	*expand_variable(char *str, char *new_str) // SEM USO PQ ESTOU USANDO A FUNCAO copy_str() // VOLTEI ATRAS KKK
 {
 	char	*copy_new;
 	int	i;
