@@ -92,6 +92,8 @@ void	export(char **argv, char ***env, t_str **env_list) // ESTA FUNCAO NAO RETOR
 			free(argv[i]);
 			argv[i] = name_variable;
 		}
+		else
+			printf("-minishell: export: `%s': não é um identificador válido\n", argv[i]);
 		return_env = search_variable_list(env_list, argv[i]); // SE declaration_variable() RETORNAR 1 SIGNIFICA Q A STRING TEM O SEU CONTEUDO "=..." E A FUNCAO search_variable_list ESPERA SO O NOME DA VARIAVEL
 		if (return_env && !search_variable_array(*env, return_env->str))
 			export_variable(env, return_env->str);

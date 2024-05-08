@@ -1,12 +1,23 @@
 #include "../minishell.h"
 
+int	metacaracterer(char *str)
+{
+	while (*str && *str != '=')
+	{
+		if (*str <= '/' || (*str >= ':' && *str <= '@') || (*str >= '[' && *str <= '^') || *str == '`' || *str >= '{')
+			return (1);
+		str++;
+	}
+	return (0);
+}
+
 /// @brief TESTA O PRIMEIRO ARGUMENTO PARA VER E UMA DECLARACAO DE AMBIENTE
 /// @param str STRING A SER TESTADA
 /// @return RETORNA 1 CASO O ARGUMENTO NAO COMECE COM NUMERO OU '=' E NO MEIO DELE TENHA '='
 /// @return RETORNA 0 CASO O NAO ATENDA OS REQUISITOS ACIMA
 int	declaration_variable(char *str)
 {
-	if (str == NULL || *str == '=' || (*str >= '0' && *str <= '9'))
+	if (str == NULL || (*str >= '0' && *str <= '9') || metacaracterer(str))
 		return (0);
 	while (*str)
 	{

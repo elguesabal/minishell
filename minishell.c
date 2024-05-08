@@ -102,6 +102,8 @@ void	teste(char **args) // FUNCAO USADA PARA TESTAR SEM TAB E COM SPACE ANTES DE
 
 int	main(int argc, char **argv, char **argenv)
 {
+// printf("numero ascii acento: %d\n", '´');
+
 	char	*str;
 	char	**args;
 	t_str	*env_list;
@@ -116,7 +118,7 @@ int	main(int argc, char **argv, char **argenv)
 	while (1)
 	{
 		str = readline("minishell: "); // printf("teste :%d\n", (*str == '\0')); // CASO PRESSIONE ENTER SEM DIGITAR NADA NO SHELL *str == 0
-
+// printf("teste: %d\n", *str);
 		quotes(str);
 		remove_quotes(str);
 		args = ft_split(str, ' ');

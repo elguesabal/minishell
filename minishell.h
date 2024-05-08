@@ -87,6 +87,7 @@ void	remove_quotes(char *str);
 void	revert_caracter(char **args);
 
 // ./commands/add_variable.c
+int	metacaracterer(char *str);
 int	declaration_variable(char *str);
 char	*copy_name_variable(char *str);
 void	add_variable(char **argv, char **env, t_str **env_list);
