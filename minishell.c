@@ -114,6 +114,7 @@ int	main(int argc, char **argv, char **argenv)
 	env_list = NULL;
 	creat_list(&env_list, argenv);
 	argenv = array_to_list(&env_list);
+	insert_last(&env_list, copy_str("?=0"));
 
 	while (1)
 	{
@@ -146,7 +147,7 @@ teste(args);
 		if (declaration_variable(args[0]))
 			add_variable(args, argenv, &env_list);
 		else if (compare("echo", args[0]))
-			echo(args);
+			echo(args, &env_list);
 		else if (compare("cd", args[0]))
 			cd(str, argenv, &env_list);
 		else if (compare("pwd", args[0]))
@@ -163,6 +164,7 @@ teste(args);
 			exec_program(args, argenv, str, &env_list);
 		free(str);
 		free_split(args);
+// variable_status(100, &env_list); // AINDA NAO SEI AO CERTO QUAL STATUS COLOCAR
 	}
 	// return (0); // SE O PROGRAMA SAI TERMINA SEMPRE COM A FUNCAO exit() E NECESSARIO O RETURN?
 }

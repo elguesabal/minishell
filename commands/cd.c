@@ -31,11 +31,11 @@ void    cd(char *command, char **env, t_str **env_list) // DESSE MODO O COMANDO 
 	command = skip_char(command);
 	command = skip_space(command);
 	if (stat(command, &info) == 0 && S_ISDIR(info.st_mode) && access(command, X_OK) == -1) // A MACRO S_ISDIR() ESTA APRESENTANDO PROBLEMA NO VALGRIND: Conditional jump or move depends on uninitialised value(s)
-		printf("-minishel: cd: %s: Permissão negada\n", command);
+		error_message("-minishel: cd: %s: Permissão negada\n", command, 123, env_list); // AINDA NAO SEI AO CERTO QUAL STATUS COLOCAR
 	else if (stat(command, &info) == 0 && !S_ISDIR(info.st_mode)) // A MACRO S_ISDIR() ESTA APRESENTANDO PROBLEMA NO VALGRIND: Conditional jump or move depends on uninitialised value(s)
-		printf("-minishell: cd: %s: Não é um diretório\n", command);
+		error_message("-minishell: cd: %s: Não é um diretório\n", command, 666, env_list); // AINDA NAO SEI AO CERTO QUAL STATUS COLOCAR
 	else if (chdir(command) == -1)
-		printf("-minishell: cd: %s: Arquivo ou diretório inexistente\n", command);
+		error_message("-minishell: cd: %s: Arquivo ou diretório inexistente\n", command, 999, env_list); // AINDA NAO SEI AO CERTO QUAL STATUS COLOCAR
 	argv[0] = new_pwd(getcwd(NULL, 0));
 	argv[1] = NULL;
 	add_variable(argv, env, env_list);

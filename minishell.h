@@ -69,6 +69,12 @@ void	creat_list(t_str **no, char **array_str);
 char	**array_to_list(t_str **no);
 void	free_list(t_str **no);
 
+// ./assistant/ft_itoa.c
+char	*ft_itoa(int n);
+
+// ./assistant/error_message.c
+void	error_message(char *message, char *arg, int status, t_str **env_list);
+
 // ./argument management/argument_management.c
 void	argument_management(char **argv, t_str **env_list);
 
@@ -90,12 +96,14 @@ void	revert_caracter(char **args);
 int	metacaracterer(char *str);
 int	declaration_variable(char *str);
 char	*copy_name_variable(char *str);
+void	swap_variable_array(char *old_variable, char *new_variable, char **env);
 void	add_variable(char **argv, char **env, t_str **env_list);
+void	variable_status(int status, t_str **env_list);
 
 // ./commands/echo.c
 // int	search_operator(char *str, char *operator) // TEMPORARIO // NAO USANDO POR ENQUANTO
 // int	search_operator(char **argv, char *operator); // TEMPORARIO // NAO USANDO POR ENQUANTO
-void	echo(char **argv);
+void	echo(char **argv, t_str **env_list);
 
 // ./commands/cd.c
 char	*new_pwd(char *pwd);

@@ -1,5 +1,9 @@
 #include "../minishell.h"
 
+/// @brief IDENTIFICA SE HA METACARACTERES NAO PERMITIDOS EM NOMES DE VARIAVEIS DE AMBIENTE
+/// @param str STRING A SER ANALIZADA
+/// @return RETORNA 1 CASO O ARGUMENTO NAO ENCONTRE NENHUM METACARACTERE PROIBIDO
+/// @return RETORNA 0 CASO O NAO ATENDA OS REQUISITOS ACIMA
 int	metacaracterer(char *str)
 {
 	while (*str && *str != '=')
@@ -53,7 +57,6 @@ char	*copy_name_variable(char *str)
 	return (name);
 }
 
-
 /// @brief COMPARA O ENDERECO DE MEMORIA old_variable COM TODOS OS ENDERECOS DE env CASO ENCONTRE O ENDERECO DE old_variable DENTRO DE env A FUNCAO TROCA O ANTIGO ENDERECO POR new_variable
 /// @param old_variable ANTIGO ENDERECO DE MEMORIA A SER SUBSTITUIDO
 /// @param new_variable NOVO ENDERECO DE MEMORIA A SUBSTITUIR
@@ -101,4 +104,33 @@ void	add_variable(char **argv, char **env, t_str **env_list)
 			insert_last(env_list, copy_str(argv[i]));
 		i++;
 	}
+}
+
+/// @brief ATUALIZA A VARIAVEL "?" COM O INTEIRO status
+/// @param status NUMERO DO STATUS RETORNADO DE OUTRO PROCESSO OU COMANDO
+/// @param env_list LISTA LINCADA QUE ESTA A VARIAVEL "?"
+void	variable_status(int status, t_str **env_list)
+{
+	char	*num;
+	char	*new_variable;
+	int	i;
+	t_str	*no;
+
+	num = ft_itoa(status);
+	new_variable = malloc((ft_strlen(num) + 3) * sizeof(char));
+	if (new_variable == NULL)
+		return ;
+	new_variable[0] = '?';
+	new_variable[1] = '=';
+	i = 0;
+	while (num[i])
+	{
+		new_variable[i + 2] = num[i];
+		i++;
+	}
+	new_variable[i + 2] = '\0';
+	free(num);
+	no = search_variable_list(env_list, "?");
+	free(no->str);
+	no->str = new_variable;
 }

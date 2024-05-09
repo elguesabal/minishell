@@ -75,6 +75,7 @@ void    exec_program(char **argv, char **env, char *str, t_str **env_list)
 	// char	*env_path; // EU USAVA ESSA VARIAVEL PRA RECEBER A VARIAVEL PATH
     char    *path_file;
 	struct stat	info;
+	int	status;
 
     pid = fork();
     if (pid == -1)
@@ -108,13 +109,13 @@ void    exec_program(char **argv, char **env, char *str, t_str **env_list)
 		if (execve(path_file, argv, env) == -1) // O ERRO DESCRITO ACIMA ACONTECIA PQ EU ESTAVA PASSANDO NULL AI A FUNCAO NAO LIDA BEM E OCORRE ACESSO DE MEMORIA INDEVIDO
 		{ // PRECISA DE UM IF VERIFICANDO execve() RETORNOU -1? CASO ISSO NAO ACONTECESSE NENHUMA LINHA A SEGUIR SERIA EXECUTADA KKKK
 			if (path_file[0] != '\0' && access(path_file, X_OK) == -1)
-				printf("-minishell: %s: Permissão negada\n", path_file);
+				error_message("-minishell: %s: Permissão negada\n", path_file, 321, env_list); // AINDA NAO SEI AO CERTO QUAL STATUS COLOCAR
 			else if (stat(path_file, &info) == 0 && S_ISDIR(info.st_mode))
-				printf("-minishell: %s: É um diretório\n", path_file);
+				error_message("-minishell: %s: É um diretório\n", path_file, 321, env_list); // AINDA NAO SEI AO CERTO QUAL STATUS COLOCAR
 			else if (*argv[0] == '.' && stat(path_file, &info) == -1)
-				printf("-minishell: %s: Arquivo ou diretório inexistente\n", *argv);
+				error_message("-minishell: %s: Arquivo ou diretório inexistente\n", *argv, 321, env_list); // AINDA NAO SEI AO CERTO QUAL STATUS COLOCAR
 			else if (path_file[0] == '\0' && *argv[0] != '.')
-				printf("%s: comando não encontrado\n", *argv);
+				error_message("%s: comando não encontradoaaaaaaaaaaaaaaaa\n", *argv, 321, env_list); // AINDA NAO SEI AO CERTO QUAL STATUS COLOCAR
 			else
 				printf("nao previ isso kkkkk\n"); // AKI EU VOU PROCURANDO FALHAS
 			free(path_file);
@@ -125,7 +126,8 @@ void    exec_program(char **argv, char **env, char *str, t_str **env_list)
     }
     else if (pid > 0)
     {
-        if (waitpid(pid, NULL, 0) == -1)
+        if (waitpid(pid, &status, 0) == -1)
             printf("Error: a funcao waitpid() retornou -1\n");
+		variable_status(status, env_list); // AINDA NAO SEI AO CERTO QUAL STATUS COLOCAR
     }
 }

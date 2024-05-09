@@ -36,7 +36,7 @@
 // }
 
 
-void	echo(char **argv)
+void	echo(char **argv, t_str **env_list)
 {
 	char	flag;
 	int	i;
@@ -56,4 +56,5 @@ void	echo(char **argv)
 		i++;
 	}
 	printf("%c", flag);
+	variable_status(0, env_list); // AINDA NAO SEI AO CERTO QUAL STATUS COLOCAR
 }

@@ -22,6 +22,8 @@ FILE =	minishell.c\
 	$(ASSISTANT)copy.c\
 	$(ASSISTANT)search.c\
 	$(ASSISTANT)list_operations.c\
+	$(ASSISTANT)ft_itoa.c\
+	$(ASSISTANT)error_message.c\
 	$(ARGUMENTS)environment_variable.c\
 	$(ARGUMENTS)argument_management.c\
 	$(ARGUMENTS)quotes.c\
