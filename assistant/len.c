@@ -60,3 +60,21 @@ int	listlen(t_str *no)
 	}
 	return (i);
 }
+
+int	len_all_variable(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '$')
+		{
+			// i += TAMANHO DA VARIAVEL
+			while (str[i] && (*str <= '/' || (*str >= ':' && *str <= '@') || (*str >= '[' && *str <= '^') || *str == '`' || *str >= '{'))
+				str++;
+		}
+		i++;
+	}
+	return (i);
+}

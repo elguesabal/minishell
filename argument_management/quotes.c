@@ -12,6 +12,25 @@
 // 	}
 // }
 
+void	swap_tab(char **args) // FUNCAO USADA PARA TESTAR SEM TAB E COM SPACE ANTES DE GERENCIAR OS ARGUMENTOS // AGR CANONIZADA
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (args[i])
+	{
+		j = 0;
+		while (args[i][j])
+		{
+			if (args[i][j] == '	')
+				args[i][j] = ' ';
+			j++;
+		}
+		i++;
+	}
+}
+
 /// @brief VERIFICA SE AS ASPAS ABERTAS NO ENDERECO PASSADO ESTAO SENDO FECHADAS MAIS A FRENTE
 /// @param str STRING ANALIZADA
 /// @param quotes ASPAS QUE VAO SER PROCURADAS A FRENTE

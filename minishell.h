@@ -72,6 +72,9 @@ void	free_list(t_str **no);
 // ./assistant/ft_itoa.c
 char	*ft_itoa(int n);
 
+// ./assistant/ft_atoi.c
+int	ft_atoi(const char *str);
+
 // ./assistant/error_message.c
 void	error_message(char *message, char *arg, int status, t_str **env_list);
 
@@ -85,6 +88,7 @@ char	*environment_variable(char *arg, t_str **env_list);
 
 // ./argument management/quotes.c
 // void	swap_space(char *str);
+void	swap_tab(char **args);
 int closing_quotes(char *str, char quotes);
 void    swap_caracter(char *c, int single_quotes, int double_quotes);
 void	quotes(char *str);

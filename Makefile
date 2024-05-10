@@ -23,6 +23,7 @@ FILE =	minishell.c\
 	$(ASSISTANT)search.c\
 	$(ASSISTANT)list_operations.c\
 	$(ASSISTANT)ft_itoa.c\
+	$(ASSISTANT)ft_atoi.c\
 	$(ASSISTANT)error_message.c\
 	$(ARGUMENTS)environment_variable.c\
 	$(ARGUMENTS)argument_management.c\

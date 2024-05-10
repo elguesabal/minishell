@@ -80,24 +80,7 @@
 // dps de passado por essa funcao so retornar ao estado original e limpar com a funcao ft_trim()
 
 
-void	teste(char **args) // FUNCAO USADA PARA TESTAR SEM TAB E COM SPACE ANTES DE GERENCIAR OS ARGUMENTOS
-{
-	int	i;
-	int	j;
 
-	i = 0;
-	while (args[i])
-	{
-		j = 0;
-		while (args[i][j])
-		{
-			if (args[i][j] == '	')
-				args[i][j] = ' ';
-			j++;
-		}
-		i++;
-	}
-}
 
 
 int	main(int argc, char **argv, char **argenv)
@@ -133,7 +116,7 @@ int	main(int argc, char **argv, char **argenv)
 // }
 // printf("i -> %d\n", i);
 
-teste(args);
+		swap_tab(args);
 		argument_management(args, &env_list);
 		revert_caracter(args);
 
