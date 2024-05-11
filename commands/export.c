@@ -16,6 +16,7 @@ t_str	*search_variable_list(t_str **no, char *str)
 			return (assist);
 		assist = assist->next;
 	}
+// printf("retornou NULL tbm; str: %s\n", str);
 	return (NULL);
 }
 

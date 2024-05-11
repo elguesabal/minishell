@@ -61,20 +61,44 @@ int	listlen(t_str *no)
 	return (i);
 }
 
-int	len_all_variable(char *str)
+int	len_all_variable(char *str, t_str **env_list)
 {
-	int	i;
+	// int	i;
+	int	len;
+	t_str	*no;
 
-	i = 0;
-	while (str[i])
+	// i = 0;
+	len = 0;
+	while (*str)
 	{
-		if (str[i] == '$')
+		if (*str == '$')
 		{
 			// i += TAMANHO DA VARIAVEL
-			while (str[i] && (*str <= '/' || (*str >= ':' && *str <= '@') || (*str >= '[' && *str <= '^') || *str == '`' || *str >= '{'))
-				str++;
+			no = search_variable_list(env_list, str + 1); // $PWD -> PWD=/nfs/homes/joseanto/minishell
+			if (no)
+			{
+				len += ft_strlen(no->str) - strlen_char(no->str, '=') - 1; // ESTOU INCREMENTANDO NA CONTAGEM POREM TBM USO i PARA MARCAR O INDICE
+// printf("variavel: %s -> ft_strlen(no->str): %ld -> strlen_char(str, '='): %d\n", no->str, ft_strlen(no->str), strlen_char(no->str, '='));
+// (void)no;
+// if (no == NULL)
+// 	printf("NULL\n");
+// printf("len_all_variable: %s\n", no->str);
+
+				// while (*str && ((*str >= '0' && *str <= '9') || (*str >= 'A' && *str <= 'Z') || (*str >= 'a' && *str <= 'z') || *str == '_')) // ALTERNATIVA BURRA PARA str += strlen_char(no->str, '=');
+				// 	str++;
+
+				str += strlen_char(no->str, '=');
+			}
+			else
+			{
+				while (*str && *str != ' ')
+					str++;
+			}
 		}
-		i++;
+		else
+			len++;
+		str++;
 	}
-	return (i);
+// printf("len: %d\n", len);
+	return (len);
 }

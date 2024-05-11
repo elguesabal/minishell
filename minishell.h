@@ -43,6 +43,7 @@ size_t	ft_strlen(const char *str);
 int strstrlen(char **array_ptr);
 int	strlen_char(char *str, char c);
 int	listlen(t_str *no);
+int	len_all_variable(char *str, t_str **env_list);
 
 // ./assistant/ft_strtrim
 char	*ft_strtrim(char const *s1, char const *set);

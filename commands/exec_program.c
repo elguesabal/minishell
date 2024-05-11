@@ -124,7 +124,7 @@ void    exec_program(char **argv, char **env, char *str, t_str **env_list)
 		// }
 		// free(path_file); // SE execve(path_file, argv, env) != -1 ESSA LINHA NUNCA VAI ACONTECER KKKKKK
     }
-    else if (pid > 0)
+    else if (pid > 0) // WIFSIGNALED() E WTERMSIG() MACROS PARA SAIDAS DE SINAIS SINAIS
     {
         if (waitpid(pid, &status, 0) == -1)
             printf("Error: a funcao waitpid() retornou -1\n");

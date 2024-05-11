@@ -32,7 +32,8 @@ char	*skip_c(char *str, char c)
 	if (str == NULL)
 		return (NULL);
 	i = 0;
-	while (str[i] != c)
+	// while (str[i] != c) // ERA ASSIM SE DER ERRO VOLTAR AKI
+	while (str[i] && str[i] != c)
 		i++;
 	return (&str[i]);
 }

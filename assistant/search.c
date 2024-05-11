@@ -39,7 +39,7 @@ int	compare_variable(char *s1, char *s2) // "teste$PWD teste" -> teste/home/jose
 			return (0);
 		i++;
 	}
-	if ((s1[i] == '=' && s2[i] == '\0') || (s1[i] == '=' && s2[i] == '	')) // if (s1[i] == '=' && s2[i] == '\0') // TENTANTO ARRUMAR O ERRO DE NAO CONSEGUIR INTERPRETAR NADA DPS DO NOME DA VARIAVEL NO MESMO ARGUMENTO
+	if ((s1[i] == '=' && s2[i] == '\0') || (s1[i] == '=' && s2[i] == ' ')) // if (s1[i] == '=' && s2[i] == '\0') // TENTANTO ARRUMAR O ERRO DE NAO CONSEGUIR INTERPRETAR NADA DPS DO NOME DA VARIAVEL NO MESMO ARGUMENTO
 		return (1);
 	else
 		return (0);

@@ -145,6 +145,7 @@ int	main(int argc, char **argv, char **argenv)
 			exit_shell(args, str, argenv, &env_list);
 		else
 			exec_program(args, argenv, str, &env_list);
+// printf("len: %d\n", len_all_variable(str, &env_list));
 		free(str);
 		free_split(args);
 // variable_status(100, &env_list); // AINDA NAO SEI AO CERTO QUAL STATUS COLOCAR
