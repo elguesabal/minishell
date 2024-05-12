@@ -87,11 +87,11 @@ int	len_all_variable(char *str, t_str **env_list)
 				// while (*str && ((*str >= '0' && *str <= '9') || (*str >= 'A' && *str <= 'Z') || (*str >= 'a' && *str <= 'z') || *str == '_')) // ALTERNATIVA BURRA PARA str += strlen_char(no->str, '=');
 				// 	str++;
 
-				str += strlen_char(no->str, '=');
+				str += strlen_char(no->str, '='); // QUE MERDA EU TAVA FAZENDO AKI?? PIOR Q EU FIZ ESSA MEGA CAGADA E O CODIGO TAVA FUNCIONANDO KKKKKKKK ZERO LOGICA
 			}
 			else
 			{
-				while (*str && *str != ' ')
+				while (*str && *str != ' ' && *str != '	' && *str != '$')
 					str++;
 			}
 		}
@@ -99,6 +99,7 @@ int	len_all_variable(char *str, t_str **env_list)
 			len++;
 		str++;
 	}
+// printf("aki nao deu bo: %d\n", len);
 // printf("len: %d\n", len);
 	return (len);
 }
