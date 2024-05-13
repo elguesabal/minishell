@@ -148,8 +148,16 @@ int	main(int argc, char **argv, char **argenv)
 
 // printf("len: %d\n", len_all_variable(str, &env_list));
 // printf("str: %s\n", str);
-// printf("testeeee: %s\n", new_expand_variable(str, &env_list));
+// printf("new_expand_variable(): %s\n", new_expand_variable(str, &env_list));
+// printf("ft_strlen(): %ld\n", ft_strlen(new_expand_variable(str, &env_list)));
 // printf("variavel: %s\n", search_variable_list(&env_list, str)->str);
+
+// t_str *assist = env_list;
+// while (assist)
+// {
+// 	printf("compare_variable(): %d\n", compare_variable(assist->str, str + 1));
+// 	assist = assist->next;
+// }
 
 		free(str);
 		free_split(args);
