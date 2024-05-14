@@ -9,10 +9,10 @@ void	argument_management(char **argv, t_str **env_list)
 	{
 		/* '' */
 		/* "" */
-		/* $ */ argv[i] = new_environment_variable(argv[i], env_list);
+		/* $ */ argv[i] = environment_variable(argv[i], env_list);
 		/* > */
 		/* >> */
-		/* | */
+		/* | */ // VC AGR FDP
 		/* < */
 		/* << */
 

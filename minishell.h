@@ -86,8 +86,9 @@ void	argument_management(char **argv, t_str **env_list);
 int	search_dollar_sign(char *str);
 // char	*expand_variable(char *str, char *new_str); // SEM USO PQ ESTOU USANDO A FUNCAO copy_str()
 // char	*environment_variable(char *arg, t_str **env_list);
-char	*new_expand_variable(char *str, t_str **env_list); // SEM USO PQ ESTOU USANDO A FUNCAO copy_str() // VOLTEI ATRAS KKK
-char	*new_environment_variable(char *arg, t_str **env_list);
+char	*malloc_variable(char *str, t_str **env_list);
+char	*expand_variable(char *str, t_str **env_list); // SEM USO PQ ESTOU USANDO A FUNCAO copy_str() // VOLTEI ATRAS KKK
+char	*environment_variable(char *arg, t_str **env_list);
 
 // ./argument management/quotes.c
 // void	swap_space(char *str);
