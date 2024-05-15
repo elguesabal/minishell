@@ -61,6 +61,10 @@ int	listlen(t_str *no)
 	return (i);
 }
 
+/// @brief CALCULA O TAMANHO CORRETO PARA QUE str EXPANDA SUAS VARAIVEIS DE AMBIENTE
+/// @param str STRING COM VARIAVEIS DE AMBIENTE NAO EXPANDIDAS
+/// @param env_list LISTA ENCADEADA QUE CONTEM TODAS AS VARIAVEIS DE AMBIENTE
+/// @return TAMANHO CORRETO QUE str DEVE ASSSUMIR PARA RECEBER str COM TODAS AS VARIAVEIS EXPANDIDAS
 int	len_all_variable(char *str, t_str **env_list)
 {
 	// int	i;

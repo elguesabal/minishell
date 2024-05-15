@@ -167,9 +167,21 @@
 
 
 
-int	main(void)
+// int	main(void)
+// {
+// 	char	c = -2;
+// 	printf("%c\n", c);
+// 	return (0);
+// }
+
+
+
+int	main(int argc, char **argv)
 {
-	char	c = -2;
-	printf("%c\n", c);
+	while (*argv)
+	{
+		printf("%s\n", *argv);
+		*argv++;
+	}
 	return (0);
 }

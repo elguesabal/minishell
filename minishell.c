@@ -12,47 +12,6 @@
 
 #include "minishell.h"
 
-// TABELA ASCII
-// " == 34
-// ' == 39
-
-// void	define_quotes(char *str, t_quotes *quotes)
-// {
-// (void)quotes;
-
-// 	int	i;
-// 	int	single_quotes;
-// 	int	double_quotes;
-
-// 	single_quotes = 0;
-// 	double_quotes = 0;
-
-// 	i = 0;
-// 	while(str[i])
-// 	{
-// 		if (str[i] == 39)
-// 		{
-// 			if (str[i] == 39 && single_quotes = 1)
-// 				single_quotes++;
-// 			single_quotes++;
-// 		}
-// 		i++;
-// 	}
-
-// 	if (single_quotes == 2)
-// 		quotes.single_quotes = 1;
-// 	else
-// 		quotes.single_quotes = 0;
-
-// 	if (double_quotes == 2)
-// 		quotes.double_quotes = 1;
-// 	else
-// 		quotes.double_quotes = 0;
-// }
-
-
-
-
 
 // 				IDEAIA DE COMO FAZER INTERPRETACAO DE ASPAS (NAO INTERPRETAR METACARACTERES DENTRO DAS ASPAS)
 
@@ -85,8 +44,6 @@
 
 int	main(int argc, char **argv, char **argenv)
 {
-// printf("numero ascii acento: %d\n", '´');
-
 	char	*str;
 	char	**args;
 	t_str	*env_list;
@@ -102,30 +59,13 @@ int	main(int argc, char **argv, char **argenv)
 	while (1)
 	{
 		str = readline("minishell: "); // printf("teste :%d\n", (*str == '\0')); // CASO PRESSIONE ENTER SEM DIGITAR NADA NO SHELL *str == 0
-// printf("teste: %d\n", *str);
+
 		quotes(str);
 		remove_quotes(str);
 		args = ft_split(str, ' ');
-
-
-// int i = 0;
-// while (args[i])
-// {
-// 	printf("%s\n", args[i]);
-// 	i++;
-// }
-// printf("i -> %d\n", i);
-
 		swap_tab(args);
 		argument_management(args, &env_list);
 		revert_caracter(args);
-
-// int i = 0;
-// while (args[i])
-// {
-// 	printf("%s\n", args[i]);
-// 	i++;
-// }
 
 		if (declaration_variable(args[0]))
 			add_variable(args, argenv, &env_list);
@@ -146,22 +86,8 @@ int	main(int argc, char **argv, char **argenv)
 		else
 			exec_program(args, argenv, str, &env_list);
 
-// printf("len: %d\n", len_all_variable(str, &env_list));
-// printf("str: %s\n", str);
-// printf("new_expand_variable(): %s\n", new_expand_variable(str, &env_list));
-// printf("ft_strlen(): %ld\n", ft_strlen(new_expand_variable(str, &env_list)));
-// printf("variavel: %s\n", search_variable_list(&env_list, str)->str);
-
-// t_str *assist = env_list;
-// while (assist)
-// {
-// 	printf("compare_variable(): %d\n", compare_variable(assist->str, str + 1));
-// 	assist = assist->next;
-// }
-
 		free(str);
 		free_split(args);
-// variable_status(100, &env_list); // AINDA NAO SEI AO CERTO QUAL STATUS COLOCAR
 	}
 	// return (0); // SE O PROGRAMA SAI TERMINA SEMPRE COM A FUNCAO exit() E NECESSARIO O RETURN?
 }
