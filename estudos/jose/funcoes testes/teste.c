@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 // size_t	ft_strlen(const char *str)
 // {
@@ -176,12 +177,41 @@
 
 
 
-int	main(int argc, char **argv)
+// int	main(int argc, char **argv)
+// {
+// 	while (*argv)
+// 	{
+// 		printf("%s\n", *argv);
+// 		*argv++;
+// 	}
+// 	return (0);
+// }
+
+
+
+// int main() {
+//     char buffer[1024];
+
+//     // Lê a entrada padrão (stdin) linha por linha
+//     while (fgets(buffer, sizeof(buffer), stdin)) {
+//         printf("Read from pipe: %s", buffer);
+//     }
+
+//     return 0;
+// }
+
+
+
+int	main(void)
 {
-	while (*argv)
-	{
-		printf("%s\n", *argv);
-		*argv++;
-	}
+	char	buffer[100];
+	int	i;
+
+	// while (read(STDIN_FILENO, &buffer, 1) > 0)
+		// i++;
+
+	read(STDIN_FILENO, &buffer, 10);
+	printf("teste: %s\n", buffer);
+
 	return (0);
 }
