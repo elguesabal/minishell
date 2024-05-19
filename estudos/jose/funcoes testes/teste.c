@@ -235,63 +235,150 @@
 
 
 
-int	main(void) // SERA Q O PROCESSO PAI NAO PODE PARTICIPAR DESSA BRINCADEIRA DE PIPE?
-{
-	pid_t	pid;
-	int	pipe_fd[2];
-	char	buffer[100];
-	// int	i;
+// int	main(void) // SERA Q O PROCESSO PAI NAO PODE PARTICIPAR DESSA BRINCADEIRA DE PIPE?
+// {
+// 	pid_t	pid;
+// 	int	pipe_fd[2];
+// 	char	buffer[100];
+// 	// int	i;
 
-	if (pipe(pipe_fd) == -1)
-		return (printf("Error: pipe\n"));
+// 	if (pipe(pipe_fd) == -1)
+// 		return (printf("Error: pipe\n"));
 
-	pid = fork();
+// 	pid = fork();
 
-	if (pid == -1)
-		return (printf("Error: pid\n"));
+// 	if (pid == -1)
+// 		return (printf("Error: pid\n"));
 
-	if (pid > 0) // PROCESSO PAI
-	{
-// printf("pipe_fd[0] -> %d\n", pipe_fd[0]);
-dup2(STDIN_FILENO, 10);
-		dup2(pipe_fd[0], STDOUT_FILENO);
-		printf("vampeta");
-dup2(10, STDIN_FILENO);
-// printf("return -> %ld\n", write(pipe_fd[0], "vampeta", 7));
-if (write(pipe_fd[0], "vampeta", 7) < 1)
-	write(10, "Error\n", 6);
-// write(10, "teste\n", 6);
-// read(pipe_fd[0], buffer, 7);
-// printf("buffer: %s\n", buffer);
-		// close(pipe_fd[0]);
-		// close(pipe_fd[1]);
-		waitpid(pid, NULL, 0);
-		return (0);
-		// return (printf("pai: pipe_fd[0] -> %d\tpipe_fd[1] -> %d\n", pipe_fd[0], pipe_fd[1]));
-	}
-	else if (pid == 0) // PROCESSO FILHO
-	{
-		// i = 0;
-		// while (read(pipe_fd[0], &buffer[i], 1) != -1)
-		// 	i++;
-		// buffer[i] = '\0';
-// printf("pipe_fd[0] -> %d\n", pipe_fd[0]);
-		// read(pipe_fd[0], buffer, 99);
-		// printf("buffer: %s\n", buffer);
-		// close(pipe_fd[0]);
-		// close(pipe_fd[1]);
-		return (0);
-		// return (printf("filho: pipe_fd[0] -> %d\tpipe_fd[1] -> %d\n", pipe_fd[0], pipe_fd[1]));
-	}
+// 	if (pid > 0) // PROCESSO PAI
+// 	{
+// // printf("pipe_fd[0] -> %d\n", pipe_fd[0]);
+// dup2(STDIN_FILENO, 10);
+// 		dup2(pipe_fd[0], STDOUT_FILENO);
+// 		printf("vampeta");
+// dup2(10, STDIN_FILENO);
+// // printf("return -> %ld\n", write(pipe_fd[0], "vampeta", 7));
+// if (write(pipe_fd[0], "vampeta", 7) < 1)
+// 	write(10, "Error\n", 6);
+// // write(10, "teste\n", 6);
+// // read(pipe_fd[0], buffer, 7);
+// // printf("buffer: %s\n", buffer);
+// 		// close(pipe_fd[0]);
+// 		// close(pipe_fd[1]);
+// 		waitpid(pid, NULL, 0);
+// 		return (0);
+// 		// return (printf("pai: pipe_fd[0] -> %d\tpipe_fd[1] -> %d\n", pipe_fd[0], pipe_fd[1]));
+// 	}
+// 	else if (pid == 0) // PROCESSO FILHO
+// 	{
+// 		// i = 0;
+// 		// while (read(pipe_fd[0], &buffer[i], 1) != -1)
+// 		// 	i++;
+// 		// buffer[i] = '\0';
+// // printf("pipe_fd[0] -> %d\n", pipe_fd[0]);
+// 		// read(pipe_fd[0], buffer, 99);
+// 		// printf("buffer: %s\n", buffer);
+// 		// close(pipe_fd[0]);
+// 		// close(pipe_fd[1]);
+// 		return (0);
+// 		// return (printf("filho: pipe_fd[0] -> %d\tpipe_fd[1] -> %d\n", pipe_fd[0], pipe_fd[1]));
+// 	}
 
-	return (0);
-}
+// 	return (0);
+// }
 
 
 
 // int	main(void)
 // {
-// 	dup2(STDOUT_FILENO, STDIN_FILENO);
-// 	while(1)
-// 	{}
+// 	pid_t	pid1, pid2;
+// 	int	pipe_fd[2];
+
+// 	pipe(pipe_fd);
+
+// 	pid1 = fork();
+// 	if (pid1 == 0)
+// 	{
+// 		close(pipe_fd[0]);
+// 		dup2(pipe_fd[1], STDOUT_FILENO);
+// 		printf("vampeta\n");
+// 		close(pipe_fd[1]);
+// 		return (0);
+// 	}
+
+// 	pid2 = fork();
+// 	if (pid2 == 0)
+// 	{
+// 		char	buffer[10];
+// 		int	n_read;
+
+// 		n_read = read(pipe_fd[0], buffer, 9);
+// 		buffer[n_read] = '\0';
+// 		printf("n_read: %d -> %s", n_read, buffer);
+
+// 		close(pipe_fd[0]);
+// 		close(pipe_fd[1]);
+// 		return (0);
+// 	}
+
+// 	close(pipe_fd[0]);
+// 	close(pipe_fd[1]);
+// 	waitpid(pid1, NULL, 0);
+// 	waitpid(pid2, NULL, 0);
+// 	return (0);
 // }
+
+
+
+// int	main(void)
+// {
+// 	pid_t	pid;
+// 	int	pipe_fd[2];
+
+// 	pipe(pipe_fd);
+
+// 	pid = fork();
+
+// 	if (pid > 0)
+// 	{
+// 		close(pipe_fd[0]);
+// 		dup2(pipe_fd[1], STDOUT_FILENO);
+
+// 		// printf("vampeta\n"); // ESSA DISGRACA DE printf() TODA BUGADA
+// 		// fflush(stdout);
+// 		write(STDOUT_FILENO, "vampeta\n", 8);
+// 		close(pipe_fd[1]);
+// 	}
+// 	else if (pid == 0)
+// 	{
+// 		char	buffer[10];
+// 		int	n_read;
+
+// 		n_read = read(pipe_fd[0], buffer, 10);
+// 		buffer[n_read] = '\0';
+// 		printf("n_read: %d -> %s", n_read, buffer);
+
+// 		close(pipe_fd[0]);
+// 		close(pipe_fd[1]);
+// 		return (0);
+// 	}
+
+// 	waitpid(pid, NULL, 0);
+
+// 	return (0);
+// }
+
+
+
+// int	main(void)
+// {
+// 	int	fd;
+
+// 	fd = open("texto.txt", O_WRONLY);
+// 	dup2(fd, STDOUT_FILENO);
+
+// 	printf("foi?\n");
+
+// 	return (0);
+// }
+

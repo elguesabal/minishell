@@ -100,6 +100,9 @@ void	quotes(char *str);
 void	remove_quotes(char *str);
 void	revert_caracter(char **args);
 
+// ./argument management/pipe.c
+void	command_pipe(char **argv);
+
 // ./commands/add_variable.c
 int	metacaracterer(char *str);
 int	declaration_variable(char *str);

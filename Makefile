@@ -28,6 +28,7 @@ FILE =	minishell.c\
 	$(ARGUMENTS)environment_variable.c\
 	$(ARGUMENTS)argument_management.c\
 	$(ARGUMENTS)quotes.c\
+	$(ARGUMENTS)pipe.c\
 	$(COMMANDS)add_variable.c\
 	$(COMMANDS)echo.c\
 	$(COMMANDS)cd.c\
