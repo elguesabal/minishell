@@ -344,7 +344,7 @@
 // 		close(pipe_fd[0]);
 // 		dup2(pipe_fd[1], STDOUT_FILENO);
 
-// 		// printf("vampeta\n"); // ESSA DISGRACA DE printf() TODA BUGADA
+// 		// printf("vampeta\n"); // ESSA DISGRACA DE printf() TODA BUGADA // O PROBLEMA ERA EU Q ACHEI Q NAO PRECISAVA USAR A FUNCAO close()
 // 		// fflush(stdout);
 // 		write(STDOUT_FILENO, "vampeta\n", 8);
 // 		close(pipe_fd[1]);
@@ -381,4 +381,138 @@
 
 // 	return (0);
 // }
+
+
+
+int main(void) {
+    int pipe_fd[2];
+    pid_t pid1, pid2;
+
+    // Cria o pipe
+    if (pipe(pipe_fd) == -1) {
+        perror("pipe");
+        exit(EXIT_FAILURE);
+    }
+
+    // Cria o primeiro processo filho
+    pid1 = fork();
+    if (pid1 == -1) {
+        perror("fork");
+        exit(EXIT_FAILURE);
+    }
+
+    if (pid1 == 0) {
+        // Primeiro processo filho executa 'ls'
+        
+        // Fecha o descritor de leitura do pipe
+        close(pipe_fd[0]);
+        
+        // Redireciona stdout para o descritor de escrita do pipe
+        dup2(pipe_fd[1], STDOUT_FILENO);
+        
+        // Fecha o descritor de escrita original do pipe
+        close(pipe_fd[1]);
+
+        // Executa 'ls'
+        execlp("ls", "ls", NULL);
+
+        // Se execlp falhar
+        perror("execlp");
+        exit(EXIT_FAILURE);
+    }
+
+    // Cria o segundo processo filho
+    pid2 = fork();
+    if (pid2 == -1) {
+        perror("fork");
+        exit(EXIT_FAILURE);
+    }
+
+    if (pid2 == 0) {
+        // Segundo processo filho executa 'wc'
+        
+        // Fecha o descritor de escrita do pipe
+        close(pipe_fd[1]);
+        
+        // Redireciona stdin para o descritor de leitura do pipe
+        dup2(pipe_fd[0], STDIN_FILENO);
+        
+        // Fecha o descritor de leitura original do pipe
+        close(pipe_fd[0]);
+
+        // Executa 'wc'
+        execlp("wc", "wc", "-l", NULL);
+
+        // Se execlp falhar
+        perror("execlp");
+        exit(EXIT_FAILURE);
+    }
+
+    // Processo pai fecha ambos os descritores do pipe
+    close(pipe_fd[0]);
+    close(pipe_fd[1]);
+
+    // Espera ambos os processos filhos terminarem
+    waitpid(pid1, NULL, 0);
+    waitpid(pid2, NULL, 0);
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+int main(int argc, char **argv) // bash
+{
+	// STDIN_FILENO  == 0
+	// STDOUT_FILENO == 1
+
+	int	fd[2];
+	pipe(fd);
+
+	// fd[0] -> STDIN_FILENO
+	// fd[1] -> STDOUT_FILENO
+
+	dup2(fd[1], STDOUT_FILENO);
+
+	int main(void) // 1.out
+	{
+		printf("teste");
+		return (0);
+	}
+
+	dup2(fd[0], STDIN_FILENO);
+
+	int main(void) // 2.out
+	{
+		char	buffer;
+		int	i = 0;
+
+		while(read(STDIN_FILENO, &buffer, 1) != 0)
+		{
+			if (buffer == '\n')
+				i++;
+		}
+
+		printf("%d\n", i);
+		return (0);
+	}
+
+	close(fd[0]);
+	close(fd[1]);
+	waitpid();
+	waitpid();
+
+    return (0);
+}
+
+
+
+
+
 

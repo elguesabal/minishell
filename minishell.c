@@ -67,8 +67,10 @@ int	main(int argc, char **argv, char **argenv)
 		argument_management(args, &env_list);
 		revert_caracter(args);
 
-		if (args[0][0] == '1')
-			command_pipe(args);
+		if (search_pipe(args))
+		{
+printf("chegou aki\n");
+		}
 		else if (declaration_variable(args[0]))
 			add_variable(args, argenv, &env_list);
 		else if (compare("echo", args[0]))

@@ -18,4 +18,9 @@ void	argument_management(char **argv, t_str **env_list)
 
 		i++;
 	}
+
+	if (search_pipe(argv))
+		command_pipe(argv);
+
+
 }
