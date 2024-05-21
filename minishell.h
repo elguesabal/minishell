@@ -102,6 +102,7 @@ void	revert_caracter(char **args);
 
 // ./argument management/pipe.c
 int	search_pipe(char **argv);
+int	count_pipe(char **argv);
 void	command_pipe(char **argv);
 
 // ./commands/add_variable.c

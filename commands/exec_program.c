@@ -106,7 +106,29 @@ void    exec_program(char **argv, char **env, char *str, t_str **env_list)
 		path_file = tester_path(path, *argv);
 		free_split(path);
 
-		if (execve(path_file, argv, env) == -1) // O ERRO DESCRITO ACIMA ACONTECIA PQ EU ESTAVA PASSANDO NULL AI A FUNCAO NAO LIDA BEM E OCORRE ACESSO DE MEMORIA INDEVIDO
+
+									// ERROR
+// printf("env[0]: %s -> %p\n", env[0], env[0]); --> // env[0]: LESSOPEN=| /usr/bin/lesspipe %s -> 0x4b1b040
+
+// ==5505== Syscall param execve(envp[i]) points to unaddressable byte(s)
+// ==5505==    at 0x49A908B: execve (syscall-template.S:120)
+// ==5505==    by 0x10C237: exec_program (in /home/jose/programacao/minishell/minishell)
+// ==5505==    by 0x109636: main (in /home/jose/programacao/minishell/minishell)
+// ==5505==  Address 0x4b1b040 is 0 bytes inside a block of size 32 free'd
+// ==5505==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+// ==5505==    by 0x10B4D2: variable_status (in /home/jose/programacao/minishell/minishell)
+// ==5505==    by 0x10C43F: exec_program (in /home/jose/programacao/minishell/minishell)
+// ==5505==    by 0x109636: main (in /home/jose/programacao/minishell/minishell)
+// ==5505==  Block was alloc'd at
+// ==5505==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+// ==5505==    by 0x109FEC: copy_str (in /home/jose/programacao/minishell/minishell)
+// ==5505==    by 0x10A2A1: creat_list (in /home/jose/programacao/minishell/minishell)
+// ==5505==    by 0x1093C9: main (in /home/jose/programacao/minishell/minishell)
+									// ERROR
+				// QUANDO EU PASSO env AKI ME GERA ESSE ERRO NO VALGRIND (NAO ME PERGUNTA O PQ MAS PARECE Q ESSA VARAIVEL TROCA DE ENDERECO DE MEMORIA SOZINHA) // ENGRACADO Q ELA NAO DA ERRO QUANDO EXECUTO env
+								  // |
+								  // ↓	// TEMPORARIAMENTE IGNORANDO env[0]
+		if (execve(path_file, argv, &env[1]) == -1)
 		{ // PRECISA DE UM IF VERIFICANDO execve() RETORNOU -1? CASO ISSO NAO ACONTECESSE NENHUMA LINHA A SEGUIR SERIA EXECUTADA KKKK
 			if (path_file[0] != '\0' && access(path_file, X_OK) == -1)
 				error_message("-minishell: %s: Permissão negada\n", path_file, 11, env_list); // AINDA NAO SEI AO CERTO QUAL STATUS COLOCAR

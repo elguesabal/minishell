@@ -384,132 +384,230 @@
 
 
 
-int main(void) {
-    int pipe_fd[2];
-    pid_t pid1, pid2;
+// int main(void) {
+//     int pipe_fd[2];
+//     pid_t pid1, pid2;
 
-    // Cria o pipe
-    if (pipe(pipe_fd) == -1) {
-        perror("pipe");
-        exit(EXIT_FAILURE);
-    }
+//     // Cria o pipe
+//     if (pipe(pipe_fd) == -1) {
+//         perror("pipe");
+//         exit(EXIT_FAILURE);
+//     }
 
-    // Cria o primeiro processo filho
-    pid1 = fork();
-    if (pid1 == -1) {
-        perror("fork");
-        exit(EXIT_FAILURE);
-    }
+//     // Cria o primeiro processo filho
+//     pid1 = fork();
+//     if (pid1 == -1) {
+//         perror("fork");
+//         exit(EXIT_FAILURE);
+//     }
 
-    if (pid1 == 0) {
-        // Primeiro processo filho executa 'ls'
+//     if (pid1 == 0) {
+//         // Primeiro processo filho executa 'ls'
         
-        // Fecha o descritor de leitura do pipe
-        close(pipe_fd[0]);
+//         // Fecha o descritor de leitura do pipe
+//         close(pipe_fd[0]);
         
-        // Redireciona stdout para o descritor de escrita do pipe
-        dup2(pipe_fd[1], STDOUT_FILENO);
+//         // Redireciona stdout para o descritor de escrita do pipe
+//         dup2(pipe_fd[1], STDOUT_FILENO);
         
-        // Fecha o descritor de escrita original do pipe
-        close(pipe_fd[1]);
+//         // Fecha o descritor de escrita original do pipe
+//         close(pipe_fd[1]);
 
-        // Executa 'ls'
-        execlp("ls", "ls", NULL);
+//         // Executa 'ls'
+//         execlp("ls", "ls", NULL);
 
-        // Se execlp falhar
-        perror("execlp");
-        exit(EXIT_FAILURE);
-    }
+//         // Se execlp falhar
+//         perror("execlp");
+//         exit(EXIT_FAILURE);
+//     }
 
-    // Cria o segundo processo filho
-    pid2 = fork();
-    if (pid2 == -1) {
-        perror("fork");
-        exit(EXIT_FAILURE);
-    }
+//     // Cria o segundo processo filho
+//     pid2 = fork();
+//     if (pid2 == -1) {
+//         perror("fork");
+//         exit(EXIT_FAILURE);
+//     }
 
-    if (pid2 == 0) {
-        // Segundo processo filho executa 'wc'
+//     if (pid2 == 0) {
+//         // Segundo processo filho executa 'wc'
         
-        // Fecha o descritor de escrita do pipe
-        close(pipe_fd[1]);
+//         // Fecha o descritor de escrita do pipe
+//         close(pipe_fd[1]);
         
-        // Redireciona stdin para o descritor de leitura do pipe
-        dup2(pipe_fd[0], STDIN_FILENO);
+//         // Redireciona stdin para o descritor de leitura do pipe
+//         dup2(pipe_fd[0], STDIN_FILENO);
         
-        // Fecha o descritor de leitura original do pipe
-        close(pipe_fd[0]);
+//         // Fecha o descritor de leitura original do pipe
+//         close(pipe_fd[0]);
 
-        // Executa 'wc'
-        execlp("wc", "wc", "-l", NULL);
+//         // Executa 'wc'
+//         execlp("wc", "wc", "-l", NULL);
 
-        // Se execlp falhar
-        perror("execlp");
-        exit(EXIT_FAILURE);
-    }
+//         // Se execlp falhar
+//         perror("execlp");
+//         exit(EXIT_FAILURE);
+//     }
 
-    // Processo pai fecha ambos os descritores do pipe
-    close(pipe_fd[0]);
-    close(pipe_fd[1]);
+//     // Processo pai fecha ambos os descritores do pipe
+//     close(pipe_fd[0]);
+//     close(pipe_fd[1]);
 
-    // Espera ambos os processos filhos terminarem
-    waitpid(pid1, NULL, 0);
-    waitpid(pid2, NULL, 0);
+//     // Espera ambos os processos filhos terminarem
+//     waitpid(pid1, NULL, 0);
+//     waitpid(pid2, NULL, 0);
 
-    return 0;
-}
-
-
+//     return 0;
+// }
 
 
 
-
-
-
-
-int main(int argc, char **argv) // bash
+int	main(int argc, char **argv)
 {
-	// STDIN_FILENO  == 0
-	// STDOUT_FILENO == 1
+	pid_t	pid1;
+	pid_t	pid2;
+	pid_t	pid3;
+	int	pipe_fd[2];
 
-	int	fd[2];
-	pipe(fd);
+	pipe(pipe_fd);
 
-	// fd[0] -> STDIN_FILENO
-	// fd[1] -> STDOUT_FILENO
-
-	dup2(fd[1], STDOUT_FILENO);
-
-	int main(void) // 1.out
+	pid1 = fork();	// PROGRAMA 1
+	if (pid1 == 0)
 	{
-		printf("teste");
-		return (0);
+// printf("pid1\n");
+		dup2(pipe_fd[0], STDIN_FILENO);
+		close(pipe_fd[0]);
+		dup2(pipe_fd[1], STDOUT_FILENO);
+		close(pipe_fd[1]);
+
+												// PROCESSAMENTO DE DADOS
+		write(STDOUT_FILENO, "teste\n", 6);
+												// PROCESSAMENTO DE DADOS
+
+		exit(0);
 	}
 
-	dup2(fd[0], STDIN_FILENO);
+sleep(1);
 
-	int main(void) // 2.out
+	pid2 = fork();	// PROGRAMA 2
+	if (pid2 == 0)
 	{
-		char	buffer;
-		int	i = 0;
+// printf("pid2\n");
+		dup2(pipe_fd[0], STDIN_FILENO);
+		close(pipe_fd[0]);
+		dup2(pipe_fd[1], STDOUT_FILENO);
+		close(pipe_fd[1]);
 
-		while(read(STDIN_FILENO, &buffer, 1) != 0)
-		{
-			if (buffer == '\n')
-				i++;
-		}
+												// PROCESSAMENTO DE DADOS
+		char	buffer[20];
+		int	len = read(STDIN_FILENO, buffer, 20);
+		write(STDOUT_FILENO, buffer, len);
+												// PROCESSAMENTO DE DADOS
 
-		printf("%d\n", i);
-		return (0);
+		exit(0);
 	}
 
-	close(fd[0]);
-	close(fd[1]);
-	waitpid();
-	waitpid();
+sleep(1);
 
-    return (0);
+	pid3 = fork();	// PROGRAMA 3
+	if (pid3 == 0)
+	{
+// printf("pid3\n");
+		dup2(pipe_fd[0], STDIN_FILENO);
+		close(pipe_fd[0]);
+		// dup2(pipe_fd[1], STDOUT_FILENO);	// TENHO Q IDENTIFCAR SE NAO E O ULTIMO PROGRAMA CASO SEJA ELE DEVE USAR STDOUT SEM AUTERACOES
+		close(pipe_fd[1]);
+
+												// PROCESSAMENTO DE DADOS
+		char	buffer[20];
+		int	len = read(STDIN_FILENO, buffer, 20);
+		write(STDOUT_FILENO, buffer, len);
+												// PROCESSAMENTO DE DADOS
+
+		exit(0);
+	}
+
+
+	close(pipe_fd[0]);
+	close(pipe_fd[1]);
+	waitpid(pid1, NULL, 0);
+	waitpid(pid2, NULL, 0);
+	waitpid(pid3, NULL, 0);
+	return (0);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// int main(int argc, char **argv) // bash
+// {
+// 	// STDIN_FILENO  == 0
+// 	// STDOUT_FILENO == 1
+
+// 	int	fd[2];
+// 	pipe(fd);
+
+// 	// fd[0] -> STDIN_FILENO
+// 	// fd[1] -> STDOUT_FILENO
+
+// 	dup2(fd[1], STDOUT_FILENO);
+
+// 	int main(void) // 1.out
+// 	{
+// 		printf("teste");
+// 		return (0);
+// 	}
+
+// 	dup2(fd[0], STDIN_FILENO);
+
+// 	int main(void) // 2.out
+// 	{
+// 		char	buffer;
+// 		int	i = 0;
+
+// 		while(read(STDIN_FILENO, &buffer, 1) != 0)
+// 		{
+// 			if (buffer == '\n')
+// 				i++;
+// 		}
+
+// 		printf("%d\n", i);
+// 		return (0);
+// 	}
+
+// 	close(fd[0]);
+// 	close(fd[1]);
+// 	waitpid();
+// 	waitpid();
+
+//     return (0);
+// }
 
 
 
