@@ -79,6 +79,7 @@ void	export(char **argv, char ***env, t_str **env_list) // ESTA FUNCAO NAO RETOR
 	i = 1;
 	while (argv[i])
 	{
+// printf("argv[%d]: %s\n", i, argv[i]);
 		if (declaration_variable(argv[i])) // SE TRUE argv[i] == "ARG=VALOR"
 		{
 			arg = malloc(2 * sizeof(char *)); // ALTERNATIVA PARA A LINHA:  add_variable(&argv[i], *env, env_list); (90)
@@ -96,8 +97,12 @@ void	export(char **argv, char ***env, t_str **env_list) // ESTA FUNCAO NAO RETOR
 		else
 			error_message("-minishell: export: `%s': não é um identificador válido\n", argv[i], 912, env_list); // AINDA NAO SEI AO CERTO QUAL STATUS COLOCAR
 		return_env = search_variable_list(env_list, argv[i]); // SE declaration_variable() RETORNAR 1 SIGNIFICA Q A STRING TEM O SEU CONTEUDO "=..." E A FUNCAO search_variable_list ESPERA SO O NOME DA VARIAVEL
-		if (return_env && !search_variable_array(*env, return_env->str))
+// printf("return_env: %s\n", return_env->str);
+// printf("search_variable_array(*env, return_env->str): %d\n", search_variable_array(*env, return_env->str));
+		if (return_env && !search_variable_array(*env, return_env->str)) // O ERRO TA ENTRANDO AKI
+		{
 			export_variable(env, return_env->str);
+		}
 		i++;
 	}
 }

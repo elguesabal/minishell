@@ -461,84 +461,152 @@
 
 
 
-int	main(int argc, char **argv)
+// int	main(int argc, char **argv)
+// {
+// 	pid_t	pid1;
+// 	pid_t	pid2;
+// 	pid_t	pid3;
+// 	int	pipe_fd[2];
+
+// 	pipe(pipe_fd);
+
+// 	pid1 = fork();	// PROGRAMA 1
+// 	if (pid1 == 0)
+// 	{
+// // printf("pid1\n");
+// 		dup2(pipe_fd[0], STDIN_FILENO);
+// 		close(pipe_fd[0]);
+// 		dup2(pipe_fd[1], STDOUT_FILENO);
+// 		close(pipe_fd[1]);
+
+// 												// PROCESSAMENTO DE DADOS
+// 		write(STDOUT_FILENO, "teste\n", 6);
+// 												// PROCESSAMENTO DE DADOS
+
+// 		exit(0);
+// 	}
+
+// sleep(1);
+
+// 	pid2 = fork();	// PROGRAMA 2
+// 	if (pid2 == 0)
+// 	{
+// // printf("pid2\n");
+// 		dup2(pipe_fd[0], STDIN_FILENO);
+// 		close(pipe_fd[0]);
+// 		dup2(pipe_fd[1], STDOUT_FILENO);
+// 		close(pipe_fd[1]);
+
+// 												// PROCESSAMENTO DE DADOS
+// 		char	buffer[20];
+// 		int	len = read(STDIN_FILENO, buffer, 20);
+// 		write(STDOUT_FILENO, buffer, len);
+// 												// PROCESSAMENTO DE DADOS
+
+// 		exit(0);
+// 	}
+
+// sleep(1);
+
+// 	pid3 = fork();	// PROGRAMA 3
+// 	if (pid3 == 0)
+// 	{
+// // printf("pid3\n");
+// 		dup2(pipe_fd[0], STDIN_FILENO);
+// 		close(pipe_fd[0]);
+// 		// dup2(pipe_fd[1], STDOUT_FILENO);	// TENHO Q IDENTIFCAR SE NAO E O ULTIMO PROGRAMA CASO SEJA ELE DEVE USAR STDOUT SEM AUTERACOES
+// 		close(pipe_fd[1]);
+
+// 												// PROCESSAMENTO DE DADOS
+// 		char	buffer[20];
+// 		int	len = read(STDIN_FILENO, buffer, 20);
+// 		write(STDOUT_FILENO, buffer, len);
+// 												// PROCESSAMENTO DE DADOS
+
+// 		exit(0);
+// 	}
+
+
+// 	close(pipe_fd[0]);
+// 	close(pipe_fd[1]);
+// 	waitpid(pid1, NULL, 0);
+// 	waitpid(pid2, NULL, 0);
+// 	waitpid(pid3, NULL, 0);
+// 	return (0);
+// }
+
+
+
+// int	main(void) // 1.out
+// {
+// 	printf("teste");
+// 	return (0);
+// }
+
+int	main(void) // 2.out
 {
-	pid_t	pid1;
-	pid_t	pid2;
-	pid_t	pid3;
-	int	pipe_fd[2];
+	char	buffer[20];
+	int	len;
 
-	pipe(pipe_fd);
-
-	pid1 = fork();	// PROGRAMA 1
-	if (pid1 == 0)
-	{
-// printf("pid1\n");
-		dup2(pipe_fd[0], STDIN_FILENO);
-		close(pipe_fd[0]);
-		dup2(pipe_fd[1], STDOUT_FILENO);
-		close(pipe_fd[1]);
-
-												// PROCESSAMENTO DE DADOS
-		write(STDOUT_FILENO, "teste\n", 6);
-												// PROCESSAMENTO DE DADOS
-
-		exit(0);
-	}
-
-sleep(1);
-
-	pid2 = fork();	// PROGRAMA 2
-	if (pid2 == 0)
-	{
-// printf("pid2\n");
-		dup2(pipe_fd[0], STDIN_FILENO);
-		close(pipe_fd[0]);
-		dup2(pipe_fd[1], STDOUT_FILENO);
-		close(pipe_fd[1]);
-
-												// PROCESSAMENTO DE DADOS
-		char	buffer[20];
-		int	len = read(STDIN_FILENO, buffer, 20);
-		write(STDOUT_FILENO, buffer, len);
-												// PROCESSAMENTO DE DADOS
-
-		exit(0);
-	}
-
-sleep(1);
-
-	pid3 = fork();	// PROGRAMA 3
-	if (pid3 == 0)
-	{
-// printf("pid3\n");
-		dup2(pipe_fd[0], STDIN_FILENO);
-		close(pipe_fd[0]);
-		// dup2(pipe_fd[1], STDOUT_FILENO);	// TENHO Q IDENTIFCAR SE NAO E O ULTIMO PROGRAMA CASO SEJA ELE DEVE USAR STDOUT SEM AUTERACOES
-		close(pipe_fd[1]);
-
-												// PROCESSAMENTO DE DADOS
-		char	buffer[20];
-		int	len = read(STDIN_FILENO, buffer, 20);
-		write(STDOUT_FILENO, buffer, len);
-												// PROCESSAMENTO DE DADOS
-
-		exit(0);
-	}
-
-
-	close(pipe_fd[0]);
-	close(pipe_fd[1]);
-	waitpid(pid1, NULL, 0);
-	waitpid(pid2, NULL, 0);
-	waitpid(pid3, NULL, 0);
+	len = read(STDIN_FILENO, buffer, 20);
+	buffer[len] = '\0';
+	printf("lido: %s\n", buffer);
 	return (0);
 }
 
+// int	main(void) // 3.out
+// {
+// 	pid_t	pid1;
+// 	pid_t	pid2;
+// 	int	fd[2];
 
 
+// 	pipe(fd);
 
+// 	pid1 = fork();
+// 	if (pid1 == 0)
+// 	{
+// 		close(fd[0]);
+// 		dup2(fd[1], STDOUT_FILENO);
+// 		close(fd[1]);
 
+// 		// printf("teste");
+
+// 		// char	*argv[] = {"ls", "-all", NULL};
+// 		// execve("/bin/ls", argv, NULL);
+
+// 		char	*argv[] = {"1", NULL};
+// 		execve("./1", argv, NULL);
+
+// 		exit(0);
+// 	}
+
+// 	pid2 = fork();
+// 	if (pid2 == 0)
+// 	{
+// 		close(fd[1]);
+// 		dup2(fd[0], STDIN_FILENO);
+// 		close(fd[0]);
+
+// 		// char	buffer[20];
+// 		// int	len = read(STDIN_FILENO, buffer, 20);
+// 		// printf("lido: \"%s\"\n", buffer);
+
+// 		// char	*argv[] = {"wc", "-l", NULL};
+// 		// execve("/bin/wc", argv, NULL);
+
+// 		char	*argv[] = {"2", NULL};
+// 		execve("./2", argv, NULL);
+
+// 		exit(0);
+// 	}
+
+// 	close(fd[0]);
+// 	close(fd[1]);
+// 	waitpid(pid1, NULL, 0);
+// 	waitpid(pid2, NULL, 0);
+// 	return (0);
+// }
 
 
 

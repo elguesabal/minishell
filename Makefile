@@ -37,7 +37,8 @@ FILE =	minishell.c\
 	$(COMMANDS)unset.c\
 	$(COMMANDS)env.c\
 	$(COMMANDS)exit.c\
-	$(COMMANDS)exec_program.c
+	$(COMMANDS)exec_program.c\
+	$(COMMANDS)commands.c
 CC = cc
 FLAGS = -Wall -Wextra -Werror -o
 READLINE = -lreadline

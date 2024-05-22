@@ -149,7 +149,8 @@ char    *build_path(char *str1, char *str2);
 char    *tester_path(char **path, char *file);
 void    exec_program(char **argv, char **env, char *str, t_str **env_list);
 
-
+// ./commands/commands.c
+void	commands(char *str, char **args, char **argenv, t_str **env_list);
 
 
 // ./minishell.c
