@@ -127,8 +127,8 @@ void    exec_program(char **argv, char **env, char *str, t_str **env_list)
 									// ERROR
 				// QUANDO EU PASSO env AKI ME GERA ESSE ERRO NO VALGRIND (NAO ME PERGUNTA O PQ MAS PARECE Q ESSA VARAIVEL TROCA DE ENDERECO DE MEMORIA SOZINHA) // ENGRACADO Q ELA NAO DA ERRO QUANDO EXECUTO env
 								  // |
-								  // ↓	// TEMPORARIAMENTE IGNORANDO env[0]
-		if (execve(path_file, argv, &env[1]) == -1)
+								  // ↓	// TEMPORARIAMENTE IGNORANDO env[0] // O CULPADO ERA O variable_status()
+		if (execve(path_file, argv, env) == -1)
 		{ // PRECISA DE UM IF VERIFICANDO execve() RETORNOU -1? CASO ISSO NAO ACONTECESSE NENHUMA LINHA A SEGUIR SERIA EXECUTADA KKKK
 			if (path_file[0] != '\0' && access(path_file, X_OK) == -1)
 				error_message("-minishell: %s: Permissão negada\n", path_file, 11, env_list); // AINDA NAO SEI AO CERTO QUAL STATUS COLOCAR

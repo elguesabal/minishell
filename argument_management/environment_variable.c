@@ -91,10 +91,6 @@ int	search_dollar_sign(char *str)
 
 				// ACHO QUE TEREI Q REFAZER ESSAS DUAS FUNCOES
 
-/// @brief CRIA UM NOVO ENDERECO DE QUE CONTEM O TAMANHO CORRETO PARA QUE str EXPANDA SUAS VARAIVEIS DE AMBIENTE
-/// @param str STRING COM VARIAVEIS DE AMBIENTE NAO EXPANDIDAS
-/// @param env_list LISTA ENCADEADA QUE CONTEM TODAS AS VARIAVEIS DE AMBIENTE
-/// @return ENDERECO COM O TAMANHO CORRETO PARA RECEBER str COM TODAS AS VARIAVEIS EXPANDIDAS
 char	*malloc_variable(char *str, t_str **env_list)
 {
 	char	*copy_new;
@@ -111,10 +107,6 @@ char	*malloc_variable(char *str, t_str **env_list)
 	return (copy_new);
 }
 
-/// @brief RETORNA UM NOVO ENDERECO DE MEMORIA COPIANDO O CONTEUDO DE str E EXPANDINDO TODAS AS VARIAVEIS DE AMBIENTE
-/// @param str STRING COM VARIAVEIS DE AMBIENTE A SERES EXPANDIDAS
-/// @param env_list LISTA ENCADEADA QUE CONTEM TODAS AS VARIAVEIS DE AMBIENTE
-/// @return ENDERECO COM AS VARIAVEIS JA EXPANDIDAS
 char	*expand_variable(char *str, t_str **env_list) // SEM USO PQ ESTOU USANDO A FUNCAO copy_str() // VOLTEI ATRAS KKK
 {
 	char	*copy_new;

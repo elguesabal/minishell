@@ -67,6 +67,14 @@ int	main(int argc, char **argv, char **argenv)
 		argument_management(args, &env_list);
 		revert_caracter(args);
 
+
+// int	i = 0;
+// while (argenv[i])
+// {
+// 	printf("%s\n", argenv[i]);
+// 	i++;
+// }
+
 		if (search_pipe(args))
 		{
 printf("chegou aki\n");

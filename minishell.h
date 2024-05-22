@@ -111,6 +111,7 @@ int	declaration_variable(char *str);
 char	*copy_name_variable(char *str);
 void	swap_variable_array(char *old_variable, char *new_variable, char **env);
 void	add_variable(char **argv, char **env, t_str **env_list);
+void	update_status(t_str **no, char *str);
 void	variable_status(int status, t_str **env_list);
 
 // ./commands/echo.c

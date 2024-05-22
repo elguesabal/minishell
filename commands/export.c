@@ -49,7 +49,7 @@ void	export_variable(char ***env, char *str) // ESTA FUNCAO NAO RETORNA MAIS NAD
 	int	i;
 
 	new_env = malloc((strstrlen(*env) + 2) * sizeof(char *));
-	if (!new_env)
+	if (new_env == NULL)
 		return ;
 	i = 0;
 	while (env[0][i])
@@ -57,10 +57,27 @@ void	export_variable(char ***env, char *str) // ESTA FUNCAO NAO RETORNA MAIS NAD
 		new_env[i] = env[0][i];
 		i++;
 	}
-	free(*env);
 	new_env[i] = str;
 	new_env[i + 1] = NULL;
-	*env = new_env;
+// printf("env[0][0]: %s\n", env[0][0]);
+// printf("env[0][1]: %s\n", env[0][1]);
+// printf("env[0][2]: %s\n", env[0][2]);
+
+// printf("env[0]: %p\n", env[0]);
+// printf("env: %p\n", env);
+// printf("env: %s\n", env[0][0]);
+// printf("new_env: %p\n", new_env);
+
+// i = 0;
+// while (new_env[i])
+// {
+// 	printf("new_env[i]: %s\n", new_env[i]);
+// 	i++;
+// }
+
+	// free(env);
+	env = new_env;	// KARAI ESSA POHA TA ME VENCENDO
+// printf("teste: %p\n", env[0]);
 }
 
 /// @brief COMPARTILHA O ENDERECO DE MEMORIA CITADO EM **argv Q ESTA ARMAZENADO EM **env_list ASSIM QUANDO OUVER ALGUM SUBPROCESSO SERA PASSADO **env COMO ARGUMENTO
@@ -94,15 +111,17 @@ void	export(char **argv, char ***env, t_str **env_list) // ESTA FUNCAO NAO RETOR
 			free(argv[i]);
 			argv[i] = name_variable;
 		}
-		else
+		else if (argv[i] == NULL || (argv[i][0] >= '0' && argv[i][0] <= '9') || metacaracterer(argv[i]))
 			error_message("-minishell: export: `%s': não é um identificador válido\n", argv[i], 912, env_list); // AINDA NAO SEI AO CERTO QUAL STATUS COLOCAR
+		// else
+		// 	printf("ja existia mas nao era exportado\n");
+// printf("env: %p\n", env);
+
 		return_env = search_variable_list(env_list, argv[i]); // SE declaration_variable() RETORNAR 1 SIGNIFICA Q A STRING TEM O SEU CONTEUDO "=..." E A FUNCAO search_variable_list ESPERA SO O NOME DA VARIAVEL
-// printf("return_env: %s\n", return_env->str);
-// printf("search_variable_array(*env, return_env->str): %d\n", search_variable_array(*env, return_env->str));
-		if (return_env && !search_variable_array(*env, return_env->str)) // O ERRO TA ENTRANDO AKI
-		{
+		if (return_env && !search_variable_array(*env, return_env->str))
 			export_variable(env, return_env->str);
-		}
+// printf("return_env->str: %s\n", return_env->str);
+// printf("env: %p\n", env);
 		i++;
 	}
 }
