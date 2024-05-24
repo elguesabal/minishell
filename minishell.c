@@ -81,7 +81,7 @@ printf("chegou aki\n");
 		}
 		else
 		{
-			commands(str, args, argenv, &env_list);
+			commands(str, args, &argenv, &env_list);
 		}
 
 		free(str);

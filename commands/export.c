@@ -59,6 +59,7 @@ void	export_variable(char ***env, char *str) // ESTA FUNCAO NAO RETORNA MAIS NAD
 	}
 	new_env[i] = str;
 	new_env[i + 1] = NULL;
+
 // printf("env[0][0]: %s\n", env[0][0]);
 // printf("env[0][1]: %s\n", env[0][1]);
 // printf("env[0][2]: %s\n", env[0][2]);
@@ -75,8 +76,9 @@ void	export_variable(char ***env, char *str) // ESTA FUNCAO NAO RETORNA MAIS NAD
 // 	i++;
 // }
 
-	// free(env);
-	env = new_env;	// KARAI ESSA POHA TA ME VENCENDO
+	free(*env);
+	*env = new_env;	// KARAI ESSA POHA TA ME VENCENDO
+	// return (new_env);
 // printf("teste: %p\n", env[0]);
 }
 

@@ -158,7 +158,7 @@ void	command_pipe(char **argv)
 			close(fd[1]);
 
 
-			if (i == 0)
+			if (i == 0)	// AKI EU POSSO FAZER UMA FUNCAO Q DEPENDENDO DO VALOR DE i ELE VAI PEGANDO ARGUMENTOS APOS O NUMERO DE i DO PIPE
 			{
 				char	*teste[] = {"ls", "-all", NULL};
 				execve("/bin/ls", teste, NULL);
