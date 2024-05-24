@@ -60,3 +60,19 @@ int	compare_variable(char *s1, char *s2) // "teste$PWD teste" -> teste/home/jose
 	}
 	return (1);
 }
+
+
+/// @brief PROCURA UM CHAR DENTRO DE UMA ESTRING
+/// @param str STRING A SER ANALIZADA
+/// @param c CARACTER A SER PROCURADO
+/// @return RETORNA 1 CASO ENCONTRE O CARACTER c E 0 CASO NAO ENCONTRE
+int	search_char(char *str, char c)
+{
+	while (*str)
+	{
+		if (*str == c)
+			return (1);
+		str++;
+	}
+	return (0);
+}

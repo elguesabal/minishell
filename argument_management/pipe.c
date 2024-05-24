@@ -2,11 +2,20 @@
 
 int	search_pipe(char **argv)
 {
-	while (*argv)
+	int	i;
+	int	j;
+
+	i = 0;
+	while (argv[i])
 	{
-		if (*argv[0] == '|')
-			return (1);
-		argv++;
+		j = 0;
+		while (argv[i][j])
+		{
+			if (argv[i][j] == '|')
+				return (1);
+			j++;
+		}
+		i++;
 	}
 	return (0);
 }
@@ -27,112 +36,65 @@ int	count_pipe(char **argv)
 	return (count);
 }
 
-// void	command_pipe(char **argv)
+int	len_args_pipe(char	**args_pipe) // AKI EU AINDA NAO TENHO FINALIDADE ENTAO TO MEIO SEM RUMO SE VOU CONTAR QUANTAS STRINGS DEVERIAM TER AO TOTAL OU QUANTAS STRINGS POR PROCESSO
+{
+	int	i;
+	int	j;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (args_pipe[i])
+	{
+		j = 0;
+		while (args_pipe[i][j])
+		{
+			if (args_pipe[i][j] == '|' && args_pipe[0][i])
+				count++;
+			j++;
+		}
+		count++;
+		i++;
+	}
+	return (count);
+}
+
+// char	**args_pipe(char **argv, int process)
 // {
-// 	pid_t	pid1;
-// 	pid_t	pid2;
-// 	// pid_t	pid;
-// 	int	pipe_fd[2];
+// 	char	**args_pipe;
+// 	int	i;
 
-// 	pipe(pipe_fd);
-
-// 	pid1 = fork();
-// 	if (pid1 == 0)
+// 	i = 0;
+// 	while ()
 // 	{
-// 		close(pipe_fd[0]);
-// 		dup2(pipe_fd[1], STDOUT_FILENO);
-// 		close(pipe_fd[1]);
-// 		char *teste1[] = {argv[0], argv[1], NULL};
-// 		execve("/bin/ls", teste1, NULL);
-// 		exit(0);
+
 // 	}
 
-// 	pid2 = fork();
-// 	if (pid2 == 0)
+// 	args_pipe = malloc( * sizeof(char *));
+
+// 	i = 0;
+// 	while (args_pipe[i])
 // 	{
-// 		close(pipe_fd[1]);
-// 		dup2(pipe_fd[0], STDIN_FILENO);
-// 		close(pipe_fd[0]);
-// 		char	*teste2[] = {argv[3], argv[4], NULL};
-// 		execve("/bin/wc", teste2, NULL);
-// 		exit(0);
+// 		if (search_char(argv[i])) // VERIFICAR SE HA PIPE DENTRO DA STRING
+// 		{
+// 			if (i == 0)
+// 			{
+
+// 			}
+// 			else if (i > 0)
+// 			{
+
+// 			}
+// 		}
+// 		else
+// 		{
+// 			args_pipe[i] = copy_str(argv[i]);
+// 		}
+
+// 		i++;
 // 	}
-
-
-// // 	pid_t	*pid = malloc(count_pipe(argv) * sizeof(int));
-
-
-// // 	int	i = 0;
-// // 	while (i != 6)
-// // 	{
-// // 		if (i == 0)
-// // 			pid[0] = fork();
-// // 		else if (i == 3)
-// // 			pid[1] = fork();
-
-
-// // 		if (pid[0] == 0 || pid[1] == 0)
-// // 		{
-// // 			dup2(pipe_fd[0], STDIN_FILENO);
-// // 			close(pipe_fd[0]);
-// // 			dup2(pipe_fd[1], STDOUT_FILENO);
-// // printf("oi\n");
-// // 			close(pipe_fd[1]);
-
-// // 			char	*teste[] = {argv[i], argv[i + 1], NULL};
-// // 			char	path[8] = "/bin/";
-// // 			path[5] = argv[i][0];
-// // 			path[6] = argv[i][1];
-// // 			path[7] = '\0';
-
-// // printf("teste: %s\n", path);
-
-// // 			execve(path, teste, NULL);
-// // 			exit(0);
-// // 		}
-
-// // 		i += 3;
-// // 	}
-
-
-// 	// int	i = 0;
-// 	// while ()
-// 	// {
-// 	// 	pid_t	pid = fork();
-
-// 	// 	if (pid == 0)
-// 	// 	{
-
-// 	// 	}
-// 	// 	else if (pid > 0)
-// 	// 	{
-// 	// 		if (i == 0)
-// 	// 		{
-// 	// 			close(pipe_fd[0]);
-// 	// 			close(pipe_fd[1]);
-// 	// 		}
-// 	// 		waitpid(pid, NULL, 0);
-// 	// 	}
-// 	// 	i++;
-// 	// }
-
-
-
-// 	// // i = 0;
-// 	// // while (i != count_pipe(argv))
-// 	// // {
-// 	// // 	waitpid(pid[i], NULL, 0);
-// 	// // 	i++;
-// 	// // }
-
-
-// 	close(pipe_fd[0]);
-// 	close(pipe_fd[1]);
-// 	waitpid(pid1, NULL, 0);
-// 	waitpid(pid2, NULL, 0);
+// 	return (args_pipe);
 // }
-
-
 
 void	command_pipe(char **argv)
 {
@@ -140,6 +102,7 @@ void	command_pipe(char **argv)
 	int	fd[2];
 	int	n_pipe;
 	int	i;
+	char	**args_pipe;
 	// int	index;
 
 	pipe(fd);
@@ -157,17 +120,21 @@ void	command_pipe(char **argv)
 				dup2(fd[1], STDOUT_FILENO);
 			close(fd[1]);
 
+			// FUNCAO QUE ORGANIZA OS ARGUMENTOS ()
 
-			if (i == 0)	// AKI EU POSSO FAZER UMA FUNCAO Q DEPENDENDO DO VALOR DE i ELE VAI PEGANDO ARGUMENTOS APOS O NUMERO DE i DO PIPE
-			{
-				char	*teste[] = {"ls", "-all", NULL};
-				execve("/bin/ls", teste, NULL);
-			}
-			else if (i == 1)
-			{
-				char	*teste[] = {"wc", "-l", NULL};
-				execve("/bin/wc", teste, NULL);
-			}
+(void)args_pipe;
+printf("tamanho dos args: %d\n", len_args_pipe(argv));
+exit(0);
+			// if (i == 0)	// AKI EU POSSO FAZER UMA FUNCAO Q DEPENDENDO DO VALOR DE i ELE VAI PEGANDO ARGUMENTOS APOS O NUMERO DE i DO PIPE
+			// {
+			// 	char	*teste[] = {"ls", "-all", NULL};
+			// 	execve("/bin/ls", teste, NULL);
+			// }
+			// else if (i == 1)
+			// {
+			// 	char	*teste[] = {"wc", "-l", NULL};
+			// 	execve("/bin/wc", teste, NULL);
+			// }
 								// PROCESSAMENTO DE DADOS
 // char	*teste[] = {argv[index], argv[index + 1], NULL};
 // char	path[8] = "/bin/";

@@ -77,7 +77,8 @@ int	main(int argc, char **argv, char **argenv)
 
 		if (search_pipe(args))
 		{
-printf("chegou aki\n");
+// printf("chegou aki\n");
+printf("tamanho dos args: %d\n", len_args_pipe(argv));
 		}
 		else
 		{

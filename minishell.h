@@ -63,6 +63,7 @@ char	*copy_str(char *str);
 // ./assistant/search.c
 int	compare(char *s1, char *s2);
 int	compare_variable(char *s1, char *s2);
+int	search_char(char *str, char c);
 
 // ./assistant/list_operations.c
 void	insert_last(t_str **no, char *str);
@@ -72,7 +73,10 @@ void	free_list(t_str **no);
 
 // ./assistant/ft_itoa.c
 char	*ft_itoa(int n);
-
+/// @param str STRING QUE SERA PERCORRIDA
+/// @param c CHAR Q SERA USADO COMO REFERENCIA PARA PARAR O WHILE
+/// @return RETORNA O ENDERECO DO PRIMEIRO ELEMENTO DIFERENTE DO CHAR c
+/// @return RETORNA NULL CASO str SEJA NULL
 // ./assistant/ft_atoi.c
 int	ft_atoi(const char *str);
 
@@ -103,6 +107,8 @@ void	revert_caracter(char **args);
 // ./argument management/pipe.c
 int	search_pipe(char **argv);
 int	count_pipe(char **argv);
+int	len_args_pipe(char	**args_pipe);
+// char	**args_pipe(char **argv, int process);
 void	command_pipe(char **argv);
 
 // ./commands/add_variable.c
