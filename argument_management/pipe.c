@@ -36,29 +36,6 @@ int	count_pipe(char **argv)
 	return (count);
 }
 
-int	len_args_pipe(char	**args_pipe) // AKI EU AINDA NAO TENHO FINALIDADE ENTAO TO MEIO SEM RUMO SE VOU CONTAR QUANTAS STRINGS DEVERIAM TER AO TOTAL OU QUANTAS STRINGS POR PROCESSO
-{
-	int	i;
-	int	j;
-	int	count;
-
-	i = 0;
-	count = 0;
-	while (args_pipe[i])
-	{
-		j = 0;
-		while (args_pipe[i][j])
-		{
-			if (args_pipe[i][j] == '|' && args_pipe[0][i])
-				count++;
-			j++;
-		}
-		count++;
-		i++;
-	}
-	return (count);
-}
-
 // char	**args_pipe(char **argv, int process)
 // {
 // 	char	**args_pipe;
@@ -123,8 +100,10 @@ void	command_pipe(char **argv)
 			// FUNCAO QUE ORGANIZA OS ARGUMENTOS ()
 
 (void)args_pipe;
-printf("tamanho dos args: %d\n", len_args_pipe(argv));
+// printf("tamanho dos args: %d\n", len_args_operators(argv));
 exit(0);
+
+
 			// if (i == 0)	// AKI EU POSSO FAZER UMA FUNCAO Q DEPENDENDO DO VALOR DE i ELE VAI PEGANDO ARGUMENTOS APOS O NUMERO DE i DO PIPE
 			// {
 			// 	char	*teste[] = {"ls", "-all", NULL};

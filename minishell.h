@@ -107,9 +107,12 @@ void	revert_caracter(char **args);
 // ./argument management/pipe.c
 int	search_pipe(char **argv);
 int	count_pipe(char **argv);
-int	len_args_pipe(char	**args_pipe);
 // char	**args_pipe(char **argv, int process);
 void	command_pipe(char **argv);
+
+// ./argument management/redirection_operators.c
+int	len_args_operators(char	**args);
+void	redirection_operators(char **argv);
 
 // ./commands/add_variable.c
 int	metacaracterer(char *str);
