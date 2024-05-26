@@ -76,3 +76,27 @@ int	search_char(char *str, char c)
 	}
 	return (0);
 }
+
+/// @brief PROCURA UM OPERADOR DE REDIRECIONAMENTO DENTRO DE UMA ARRYA DE STRINGS (PROCURA POR 1 CHAR DE OPERADOR E NAO POR 2) EXEMPLO: ">>"
+/// @param argv ARRAY DE STRING A SER ANALIZADA
+/// @param operator OPERADOR PASSADO A SER PROCURADO
+/// @return RETORNA 1 CASO ENCONTRE O OPERADOR E 0 CASO NAO ENCONTRE
+int	search_operator(char **argv, char operator)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (argv[i])
+	{
+		j = 0;
+		while (argv[i][j])
+		{
+			if (argv[i][j] == operator)
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}

@@ -64,7 +64,7 @@ int	main(int argc, char **argv, char **argenv)
 		remove_quotes(str);
 		args = ft_split(str, ' ');
 		swap_tab(args);
-		argument_management(args, &env_list);
+		argument_management(&args, &env_list);
 
 //	AKI DEVE ENTRAR OS OPERADORES DE REDIRECIONAMENTO
 
@@ -78,10 +78,10 @@ int	main(int argc, char **argv, char **argenv)
 // 	i++;
 // }
 
-		if (search_pipe(args))
+		if (search_operator(args, '|') || search_operator(args, '>') || search_operator(args, '<'))
 		{
-// printf("chegou aki\n");
-printf("tamanho dos args: %d\n", len_args_operators(argv));
+printf("chegou aki\n");
+// printf("tamanho dos args: %d\n", len_args_operators(args));
 		}
 		else
 		{

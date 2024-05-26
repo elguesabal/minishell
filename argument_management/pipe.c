@@ -1,24 +1,24 @@
 #include "../minishell.h"
 
-int	search_pipe(char **argv)
-{
-	int	i;
-	int	j;
+// int	search_pipe(char **argv) // CAIU EM DESUSO POR CAUSA DA FUNCAO search_operator()
+// {
+// 	int	i;
+// 	int	j;
 
-	i = 0;
-	while (argv[i])
-	{
-		j = 0;
-		while (argv[i][j])
-		{
-			if (argv[i][j] == '|')
-				return (1);
-			j++;
-		}
-		i++;
-	}
-	return (0);
-}
+// 	i = 0;
+// 	while (argv[i])
+// 	{
+// 		j = 0;
+// 		while (argv[i][j])
+// 		{
+// 			if (argv[i][j] == '|')
+// 				return (1);
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// 	return (0);
+// }
 
 int	count_pipe(char **argv)
 {
@@ -79,7 +79,7 @@ void	command_pipe(char **argv)
 	int	fd[2];
 	int	n_pipe;
 	int	i;
-	char	**args_pipe;
+	// char	**args_pipe;
 	// int	index;
 
 	pipe(fd);
@@ -99,7 +99,7 @@ void	command_pipe(char **argv)
 
 			// FUNCAO QUE ORGANIZA OS ARGUMENTOS ()
 
-(void)args_pipe;
+// (void)args_pipe;
 // printf("tamanho dos args: %d\n", len_args_operators(argv));
 exit(0);
 

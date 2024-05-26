@@ -64,6 +64,7 @@ char	*copy_str(char *str);
 int	compare(char *s1, char *s2);
 int	compare_variable(char *s1, char *s2);
 int	search_char(char *str, char c);
+int	search_operator(char **argv, char operator);
 
 // ./assistant/list_operations.c
 void	insert_last(t_str **no, char *str);
@@ -83,8 +84,11 @@ int	ft_atoi(const char *str);
 // ./assistant/error_message.c
 void	error_message(char *message, char *arg, int status, t_str **env_list);
 
+
+
 // ./argument management/argument_management.c
-void	argument_management(char **argv, t_str **env_list);
+int	len_args_operators(char	**args);
+void	argument_management(char ***argv, t_str **env_list);
 
 // ./argument management/environment_variable.c
 int	search_dollar_sign(char *str);
@@ -104,15 +108,16 @@ void	quotes(char *str);
 void	remove_quotes(char *str);
 void	revert_caracter(char **args);
 
+// ./argument management/redirection_operators.c
+void	redirection_operators(char **argv);
+
 // ./argument management/pipe.c
-int	search_pipe(char **argv);
+// int	search_pipe(char **argv);
 int	count_pipe(char **argv);
 // char	**args_pipe(char **argv, int process);
 void	command_pipe(char **argv);
 
-// ./argument management/redirection_operators.c
-int	len_args_operators(char	**args);
-void	redirection_operators(char **argv);
+
 
 // ./commands/add_variable.c
 int	metacaracterer(char *str);
@@ -161,6 +166,7 @@ void    exec_program(char **argv, char **env, char *str, t_str **env_list);
 
 // ./commands/commands.c
 void	commands(char *str, char **args, char ***argenv, t_str **env_list);
+
 
 
 // ./minishell.c

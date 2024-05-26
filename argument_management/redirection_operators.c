@@ -23,28 +23,7 @@
 // 	return (count);
 // }
 
-int	len_args_operators(char	**args) // AKI EU AINDA NAO TENHO FINALIDADE ENTAO TO MEIO SEM RUMO SE VOU CONTAR QUANTAS STRINGS DEVERIAM TER AO TOTAL OU QUANTAS STRINGS POR PROCESSO
-{
-	int	i;
-	int	j;
-	int	count;
 
-	i = 0;
-	count = 0;
-	while (args[i])
-	{
-		j = 0;
-		while (args[i][j])
-		{
-			if (args[i][j] == '|' && args[0][i])
-				count++;
-			j++;
-		}
-		count++;
-		i++;
-	}
-	return (count);
-}
 
 void	redirection_operators(char **argv)
 {
@@ -53,8 +32,13 @@ void	redirection_operators(char **argv)
 	process = 0;
 	while (argv[process])
 	{
-		if (search_pipe(argv))
+		if (search_operator(argv, '|'))
 			command_pipe(argv);
+		// if (search_operator(argv, '>')) // ESSES AINDA VAO EXISTIR
+		// 	command_bigger_then(argv);
+		// if (search_operator(argv, '<'))
+		// 	command_less_then(argv);
+
 		process++;
 	}
 }
