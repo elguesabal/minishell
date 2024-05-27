@@ -42,6 +42,7 @@
 
 
 
+
 int	main(int argc, char **argv, char **argenv)
 {
 	char	*str;
@@ -62,6 +63,7 @@ int	main(int argc, char **argv, char **argenv)
 
 		quotes(str);
 		remove_quotes(str);
+		separate_redirection_operators(&str);
 		args = ft_split(str, ' ');
 		swap_tab(args);
 		argument_management(&args, &env_list);
@@ -72,16 +74,23 @@ int	main(int argc, char **argv, char **argenv)
 
 
 // int	i = 0;
+// while (args[i])
+// {
+// 	printf("%s\n", args[i]);
+// 	i++;
+// }
+
+// int	i = 0;
 // while (argenv[i])
 // {
 // 	printf("%s\n", argenv[i]);
 // 	i++;
 // }
 
+
 		if (search_operator(args, '|') || search_operator(args, '>') || search_operator(args, '<'))
 		{
 printf("chegou aki\n");
-// printf("tamanho dos args: %d\n", len_args_operators(args));
 		}
 		else
 		{

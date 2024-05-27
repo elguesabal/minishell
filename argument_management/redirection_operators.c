@@ -24,7 +24,6 @@
 // }
 
 
-
 void	redirection_operators(char **argv)
 {
 	int	process;

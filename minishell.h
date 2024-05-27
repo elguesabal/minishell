@@ -87,7 +87,9 @@ void	error_message(char *message, char *arg, int status, t_str **env_list);
 
 
 // ./argument management/argument_management.c
-int	len_args_operators(char	**args);
+// int	len_args_operators(char	**args); // AGR ESTOU SEPARANDO OS ARGUMENTOS ANTES DE USAR ft_split()
+int	len_separating_operators(char *str);
+void	separate_redirection_operators(char **str);
 void	argument_management(char ***argv, t_str **env_list);
 
 // ./argument management/environment_variable.c
