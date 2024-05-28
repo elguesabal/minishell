@@ -69,6 +69,11 @@ int	main(int argc, char **argv, char **argenv)
 		argument_management(&args, &env_list);
 
 //	AKI DEVE ENTRAR OS OPERADORES DE REDIRECIONAMENTO
+		if (search_operator(args, '|') || search_operator(args, '>') || search_operator(args, '<'))
+		{
+			redirection_operators(str, args, &argenv, &env_list);
+			// printf("retornado: %d\n", search_next_operator(args));
+		}
 
 		revert_caracter(args);
 
@@ -86,11 +91,12 @@ int	main(int argc, char **argv, char **argenv)
 // 	printf("%s\n", argenv[i]);
 // 	i++;
 // }
+// printf("testeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\n");
 
 
 		if (search_operator(args, '|') || search_operator(args, '>') || search_operator(args, '<'))
 		{
-printf("chegou aki\n");
+// printf("chegou aki\n");
 		}
 		else
 		{

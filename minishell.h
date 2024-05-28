@@ -65,6 +65,7 @@ int	compare(char *s1, char *s2);
 int	compare_variable(char *s1, char *s2);
 int	search_char(char *str, char c);
 int	search_operator(char **argv, char operator);
+int	search_next_operator(char **argv);
 
 // ./assistant/list_operations.c
 void	insert_last(t_str **no, char *str);
@@ -111,13 +112,13 @@ void	remove_quotes(char *str);
 void	revert_caracter(char **args);
 
 // ./argument management/redirection_operators.c
-void	redirection_operators(char **argv);
+void	redirection_operators(char *str, char **argv, char ***argenv, t_str **env_list);
 
 // ./argument management/pipe.c
 // int	search_pipe(char **argv);
 int	count_pipe(char **argv);
 // char	**args_pipe(char **argv, int process);
-void	command_pipe(char **argv);
+void	command_pipe(char *str, char **argv, char ***argenv, t_str **env_list);
 
 
 

@@ -73,7 +73,7 @@ int	count_pipe(char **argv)
 // 	return (args_pipe);
 // }
 
-void	command_pipe(char **argv)
+void	command_pipe(char *str, char **argv, char ***argenv, t_str **env_list)
 {
 	pid_t	pid[2];
 	int	fd[2];
@@ -101,7 +101,14 @@ void	command_pipe(char **argv)
 
 // (void)args_pipe;
 // printf("tamanho dos args: %d\n", len_args_operators(argv));
+(void)str;
+(void)argenv;
+(void)env_list;
 exit(0);
+
+			// commands(str, &argv[i], argenv, env_list);
+			// exit_shell(argv, str, *argenv, env_list);
+
 
 
 			// if (i == 0)	// AKI EU POSSO FAZER UMA FUNCAO Q DEPENDENDO DO VALOR DE i ELE VAI PEGANDO ARGUMENTOS APOS O NUMERO DE i DO PIPE
@@ -114,6 +121,8 @@ exit(0);
 			// 	char	*teste[] = {"wc", "-l", NULL};
 			// 	execve("/bin/wc", teste, NULL);
 			// }
+			// exit_shell(argv, str, *argenv, env_list);
+
 								// PROCESSAMENTO DE DADOS
 // char	*teste[] = {argv[index], argv[index + 1], NULL};
 // char	path[8] = "/bin/";

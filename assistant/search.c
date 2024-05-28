@@ -100,3 +100,30 @@ int	search_operator(char **argv, char operator)
 	}
 	return (0);
 }
+
+/// @brief PROCURAR POR OPERADORES E RETORNA QUAL E O PROXIMO OPERADOR
+/// @param argv ARRAY DE STRING A SER ANALIZADA
+/// @return RETORNA O NUMERO DO OPERADOR CASO ENCONTRE E 0 CASO NAO ENCONTRE
+/// @return NEXT OPERATOR -->  |   --> RETURN 1
+/// @return NEXT OPERATOR -->  >   --> RETURN 2
+/// @return NEXT OPERATOR -->  >>  --> RETURN 3
+/// @return NEXT OPERATOR -->  <   --> RETURN 4
+/// @return NEXT OPERATOR -->  <<  --> RETURN 5
+int	search_next_operator(char **argv)
+{
+	while (*argv)
+	{
+		if ((*argv)[0] == '|' && (*argv)[1] == '\0')
+			return(1);
+		else if ((*argv)[0] == '>' && (*argv)[1] == '\0')
+			return(2);
+		else if ((*argv)[0] == '>' && (*argv)[1] == '>')
+			return(3);
+		else if ((*argv)[0] == '<' && (*argv)[1] == '\0')
+			return(4);
+		else if ((*argv)[0] == '<' && (*argv)[1] == '<')
+			return(5);
+		argv++;
+	}
+	return (0);
+}
