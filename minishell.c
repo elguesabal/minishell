@@ -60,6 +60,7 @@ int	main(int argc, char **argv, char **argenv)
 	while (1)
 	{
 		str = readline("minishell: "); // printf("teste :%d\n", (*str == '\0')); // CASO PRESSIONE ENTER SEM DIGITAR NADA NO SHELL *str == 0
+// printf("testeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\n"); // PQ DPS DE RODAR wc -l < a DA FALHA DE SEGMENTACAO????
 
 		quotes(str);
 		remove_quotes(str);
@@ -105,6 +106,7 @@ int	main(int argc, char **argv, char **argenv)
 
 		free(str);
 		free_split(args);
+
 	}
 	// return (0); // SE O PROGRAMA SAI TERMINA SEMPRE COM A FUNCAO exit() E NECESSARIO O RETURN?
 }

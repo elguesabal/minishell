@@ -112,6 +112,8 @@ void	remove_quotes(char *str);
 void	revert_caracter(char **args);
 
 // ./argument management/redirection_operators.c
+int	len_arguments(char **argv);
+char	**next_process(char **argv);
 void	redirection_operators(char *str, char **argv, char ***argenv, t_str **env_list);
 
 // ./argument management/pipe.c
@@ -119,6 +121,9 @@ void	redirection_operators(char *str, char **argv, char ***argenv, t_str **env_l
 int	count_pipe(char **argv);
 // char	**args_pipe(char **argv, int process);
 void	command_pipe(char *str, char **argv, char ***argenv, t_str **env_list);
+
+// ./argument management/less_than.c
+void	less_than(char **args);
 
 
 
