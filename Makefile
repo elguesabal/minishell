@@ -29,6 +29,7 @@ FILE =	minishell.c\
 	$(ARGUMENTS)argument_management.c\
 	$(ARGUMENTS)quotes.c\
 	$(ARGUMENTS)pipe.c\
+	$(ARGUMENTS)bigger_then.c\
 	$(ARGUMENTS)less_than.c\
 	$(ARGUMENTS)redirection_operators.c\
 	$(COMMANDS)add_variable.c\

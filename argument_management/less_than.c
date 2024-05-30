@@ -1,17 +1,24 @@
 #include "../minishell.h"
 
-void	less_than(char **args)
+void	init_less_than(char **args)
 {
 	int	fd;
+// printf("args[0][0]: %s\n", args[0]);
 
-(void)args;
-	while (*args && args[0][0] == '<')
+	while (*args && args[0][0] != '<')
 		args++;
-	args += 2;
-	fd = open(args[1], O_RDONLY); // args[1]
+// printf("args[0][0]: %s\n", args[0]);
+	fd = open(args[1], O_RDONLY);
 	if (fd == -1)
-		printf("nao abriu\n");
-	// else
-		// printf("abriu\n");
-	dup2(fd, STDIN_FILENO);
+		printf("-minishel: %s: Arquivo ou diretório inexistente\n", args[1]);
+	else
+		dup2(fd, STDIN_FILENO);
+	close(fd);
+}
+
+void	finish_less_than(int new_stdin)
+{
+	dup2(new_stdin, STDIN_FILENO);
+// printf("new_stdin: %d\n", new_stdin);
+	// close(new_stdin); // E SE EU QUISER USAR ELE EM OUTRO COMANDO?
 }

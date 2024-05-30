@@ -61,8 +61,12 @@ void	redirection_operators(char *str, char **argv, char ***argenv, t_str **env_l
 	int	process;
 	int	operator;
 	char	**args_process;
+	int	new_stdin;
+	int new_stdout;
 
 (void)args_process;
+	new_stdin = dup(STDIN_FILENO);
+	new_stdout = dup(STDOUT_FILENO);
 	process = 0;
 	while (argv[process])
 	{
@@ -94,7 +98,6 @@ void	redirection_operators(char *str, char **argv, char ***argenv, t_str **env_l
 		// 	command_less_then();
 
 
-int	new_stdin = dup(STDIN_FILENO);
 // INTERPRETA O REDIRECIONADOR
 		// > REDIRECIONA
 		// | ABRE O PROCESSO
@@ -104,7 +107,7 @@ int	new_stdin = dup(STDIN_FILENO);
 		}
 		else if (operator == 2)
 		{
-			
+			init_bigger_then(&argv[process]);
 		}
 		else if (operator == 3)
 		{
@@ -112,7 +115,7 @@ int	new_stdin = dup(STDIN_FILENO);
 		}
 		else if (operator == 4)
 		{
-			less_than(&argv[process]); // TA ERRADO AKI
+			init_less_than(&argv[process]);
 		}
 		else if (operator == 5)
 		{
@@ -133,7 +136,7 @@ int	new_stdin = dup(STDIN_FILENO);
 		}
 		else if (operator == 2)
 		{
-			
+			commands(str, args_process, argenv, env_list);
 		}
 		else if (operator == 3)
 		{
@@ -162,7 +165,7 @@ int	new_stdin = dup(STDIN_FILENO);
 		}
 		else if (operator == 2)
 		{
-			
+			finish_bigger_then(new_stdout);
 		}
 		else if (operator == 3)
 		{
@@ -170,8 +173,7 @@ int	new_stdin = dup(STDIN_FILENO);
 		}
 		else if (operator == 4)
 		{
-			dup2(new_stdin, STDIN_FILENO);
-			close(new_stdin);
+			finish_less_than(new_stdin);
 		}
 		else if (operator == 5)
 		{
@@ -182,7 +184,7 @@ int	new_stdin = dup(STDIN_FILENO);
 
 		}
 
-		// free_split(args_process);
+		free_split(args_process);
 
 		while (argv[process + 1] && argv[process][0] != '|' && argv[process][0] != '>' && argv[process][0] != '<')
 		{
@@ -190,6 +192,8 @@ int	new_stdin = dup(STDIN_FILENO);
 		}
 		process++;
 	}
+	close(new_stdin);
+	close(new_stdout);
 // exit(0);
 // printf("teste\n");
 // printf("process final: %d\n", process);

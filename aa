@@ -1,0 +1,16 @@
+total 2268
+drwxrwxr-x 7 jose jose    4096 mai 30 14:55 .
+drwxrwxr-x 4 jose jose    4096 abr  6 19:03 ..
+-rw-rw-r-- 1 jose jose     126 mai 30 14:53 a
+-rw-rw-r-- 1 jose jose       0 mai 30 14:55 aa
+drwxrwxr-x 2 jose jose    4096 mai 30 14:00 argument_management
+drwxrwxr-x 2 jose jose    4096 mai 29 12:00 assistant
+drwxrwxr-x 2 jose jose    4096 mai 29 12:00 commands
+-rw-rw-r-- 1 jose jose 1568461 abr  8 16:19 en.subject.pdf
+drwxrwxr-x 3 jose jose    4096 abr  6 19:03 estudos
+drwxrwxr-x 8 jose jose    4096 mai 29 21:35 .git
+-rw-rw-r-- 1 jose jose    1906 mai 30 14:09 Makefile
+-rwxrwxr-x 1 jose jose   41144 mai 30 14:55 minishell
+-rw-rw-r-- 1 jose jose    5076 mai 29 21:26 minishell.c
+-rw-rw-r-- 1 jose jose    6318 mai 30 14:49 minishell.h
+-rw-rw-r-- 1 jose jose  652812 abr  8 16:19 pt.subject .pdf

@@ -122,8 +122,13 @@ int	count_pipe(char **argv);
 // char	**args_pipe(char **argv, int process);
 void	command_pipe(char *str, char **argv, char ***argenv, t_str **env_list);
 
+// ./argument management/bigger_then.c
+void	init_bigger_then(char **args);
+void	finish_bigger_then(int new_stdout);
+
 // ./argument management/less_than.c
-void	less_than(char **args);
+void	init_less_than(char **args);
+void	finish_less_than(int new_stdin);
 
 
 
