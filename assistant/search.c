@@ -127,3 +127,21 @@ int	search_next_operator(char **argv)
 	}
 	return (0);
 }
+
+/// @brief COMPARA SE DUAS STRINGS SAO IDENTICAS
+/// @param s1 STRING A SER COMPARADA
+/// @param s2 STRING A SER COMPARADA
+/// @return RETORNA 1 CASO IDENTICA E 0 CASO NAO
+int	compare_str(char *s1, char *s2)
+{
+	while(*s1 && *s2 && *s1 == *s2)
+	{
+		s1++;
+		s2++;
+	}
+	// if (*s1 == '\0' && *s2 == '\0')
+	// 	return (1);
+	// else
+	// 	return (0);
+	return (*s1 == '\0' && *s2 == '\0');
+}

@@ -64,7 +64,6 @@ void	redirection_operators(char *str, char **argv, char ***argenv, t_str **env_l
 	int	new_stdin;
 	int new_stdout;
 
-(void)args_process;
 	new_stdin = dup(STDIN_FILENO);
 	new_stdout = dup(STDOUT_FILENO);
 	process = 0;
@@ -111,7 +110,7 @@ void	redirection_operators(char *str, char **argv, char ***argenv, t_str **env_l
 		}
 		else if (operator == 3)
 		{
-
+			init_bigger_bigger_than(&argv[process]);
 		}
 		else if (operator == 4)
 		{
@@ -119,7 +118,7 @@ void	redirection_operators(char *str, char **argv, char ***argenv, t_str **env_l
 		}
 		else if (operator == 5)
 		{
-
+			init_smaller_smaller_than(&argv[process]); // ESQUECI DE ESPANDIR VARIAVEIS DE AMBIENTE
 		}
 		else if (operator == 0)
 		{
@@ -140,7 +139,7 @@ void	redirection_operators(char *str, char **argv, char ***argenv, t_str **env_l
 		}
 		else if (operator == 3)
 		{
-
+			commands(str, args_process, argenv, env_list);
 		}
 		else if (operator == 4)
 		{
@@ -148,7 +147,7 @@ void	redirection_operators(char *str, char **argv, char ***argenv, t_str **env_l
 		}
 		else if (operator == 5)
 		{
-
+			commands(str, args_process, argenv, env_list);
 		}
 		else if (operator == 0)
 		{
@@ -169,7 +168,7 @@ void	redirection_operators(char *str, char **argv, char ***argenv, t_str **env_l
 		}
 		else if (operator == 3)
 		{
-
+			finish_bigger_bigger_than(new_stdout);
 		}
 		else if (operator == 4)
 		{
@@ -177,7 +176,7 @@ void	redirection_operators(char *str, char **argv, char ***argenv, t_str **env_l
 		}
 		else if (operator == 5)
 		{
-
+			finish_smaller_smaller_than(new_stdin);
 		}
 		else if (operator == 0)
 		{

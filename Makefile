@@ -30,7 +30,9 @@ FILE =	minishell.c\
 	$(ARGUMENTS)quotes.c\
 	$(ARGUMENTS)pipe.c\
 	$(ARGUMENTS)bigger_then.c\
+	$(ARGUMENTS)bigger_bigger_than.c\
 	$(ARGUMENTS)less_than.c\
+	$(ARGUMENTS)smaller_smaller_than.c\
 	$(ARGUMENTS)redirection_operators.c\
 	$(COMMANDS)add_variable.c\
 	$(COMMANDS)echo.c\

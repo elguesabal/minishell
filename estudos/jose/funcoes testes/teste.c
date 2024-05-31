@@ -543,16 +543,16 @@
 // 	return (0);
 // }
 
-int	main(void) // 2.out
-{
-	char	buffer[20];
-	int	len;
+// int	main(void) // 2.out
+// {
+// 	char	buffer[20];
+// 	int	len;
 
-	len = read(STDIN_FILENO, buffer, 20);
-	buffer[len] = '\0';
-	printf("lido: %s\n", buffer);
-	return (0);
-}
+// 	len = read(STDIN_FILENO, buffer, 20);
+// 	buffer[len] = '\0';
+// 	printf("lido: %s\n", buffer);
+// 	return (0);
+// }
 
 // int	main(void) // 3.out
 // {
@@ -609,6 +609,16 @@ int	main(void) // 2.out
 // }
 
 
+
+int	main(void)
+{
+	int	fd = open("a", O_RDWR | O_CREAT | O_TRUNC);
+	write(fd, "kkkkkk", 6);
+	char	buffer[100];
+	int n = read(fd, &buffer, 100);
+	printf("lido: %d\n", n);
+	close(fd);
+}
 
 
 

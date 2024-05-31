@@ -66,6 +66,7 @@ int	compare_variable(char *s1, char *s2);
 int	search_char(char *str, char c);
 int	search_operator(char **argv, char operator);
 int	search_next_operator(char **argv);
+int	compare_str(char *s1, char *s2);
 
 // ./assistant/list_operations.c
 void	insert_last(t_str **no, char *str);
@@ -126,10 +127,17 @@ void	command_pipe(char *str, char **argv, char ***argenv, t_str **env_list);
 void	init_bigger_then(char **args);
 void	finish_bigger_then(int new_stdout);
 
+// ./argument management/bigger_then.c
+void	init_bigger_bigger_than(char **args);
+void	finish_bigger_bigger_than(int new_stdout);
+
 // ./argument management/less_than.c
 void	init_less_than(char **args);
 void	finish_less_than(int new_stdin);
 
+// ./argument management/smaller_smaller_than.c
+void	init_smaller_smaller_than(char **args);
+void	finish_smaller_smaller_than(int new_stdin);
 
 
 // ./commands/add_variable.c
