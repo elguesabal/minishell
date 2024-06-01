@@ -57,10 +57,35 @@ int	main(int argc, char **argv, char **argenv)
 	argenv = array_to_list(&env_list);
 	insert_last(&env_list, copy_str("?=0"));
 
+
+						///////////////////////////////////////////////
+void	teste1() // VARIAVEL DE STATUS COM PROBLEMA NAO SEI PQ AHHHHHHHHHHHHH
+{
+	t_str	*assist = env_list;
+	while (assist)
+	{
+		printf("assist->next: %s\n", assist->str);
+		assist = assist->next;
+	}
+}
+void	teste2()
+{
+	printf("variavel ?: %s\n", environment_variable("?", env_list));
+}
+						///////////////////////////////////////////////
+
 	while (1)
 	{
 		str = readline("minishell: "); // printf("teste :%d\n", (*str == '\0')); // CASO PRESSIONE ENTER SEM DIGITAR NADA NO SHELL *str == 0
 // printf("testeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\n"); // PQ DPS DE RODAR wc -l < a DA FALHA DE SEGMENTACAO????
+
+
+						///////////////////////////////////////////////
+if (*str == '1')
+	teste1();
+else if (*str == '2')
+	teste2();
+						///////////////////////////////////////////////
 
 		quotes(str);
 		remove_quotes(str);
@@ -69,22 +94,36 @@ int	main(int argc, char **argv, char **argenv)
 		swap_tab(args);
 		argument_management(&args, &env_list);
 
-//	AKI DEVE ENTRAR OS OPERADORES DE REDIRECIONAMENTO
-		if (search_operator(args, '|') || search_operator(args, '>') || search_operator(args, '<'))
-		{
-			redirection_operators(str, args, &argenv, &env_list);
-			// printf("retornado: %d\n", search_next_operator(args));
-		}
-
-		revert_caracter(args);
-
-
 // int	i = 0;
 // while (args[i])
 // {
 // 	printf("%s\n", args[i]);
 // 	i++;
 // }
+// printf("fim do teste\n\n");
+
+//	AKI DEVE ENTRAR OS OPERADORES DE REDIRECIONAMENTO
+		if (search_operator(args, '|') || search_operator(args, '>') || search_operator(args, '<'))
+		{
+			redirection_operators(str, args, &argenv, &env_list);
+		}
+		else
+		{
+			revert_caracter(args);
+// printf("CADE O ERRO COM A VARIAVEL DE STATUS\n");
+			commands(str, args, &argenv, &env_list);
+		}
+
+		// revert_caracter(args); // FOI DESTRIBUIDO PARA MOMENTOS ESPECIFICOS QUE SERA OU NAO INTERPRETADO OS METACARACTERES
+
+
+// i = 0;
+// while (args[i])
+// {
+// 	printf("%s\n", args[i]);
+// 	i++;
+// }
+// printf("fim do teste\n\n");
 
 // int	i = 0;
 // while (argenv[i])
@@ -92,17 +131,16 @@ int	main(int argc, char **argv, char **argenv)
 // 	printf("%s\n", argenv[i]);
 // 	i++;
 // }
-// printf("testeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\n");
 
 
-		if (search_operator(args, '|') || search_operator(args, '>') || search_operator(args, '<'))
-		{
-// printf("chegou aki\n");
-		}
-		else
-		{
-			commands(str, args, &argenv, &env_list);
-		}
+// 		if (search_operator(args, '|') || search_operator(args, '>') || search_operator(args, '<'))	// FOI JUNTADO COM O IF IDENTICO A ESSE ACIMA
+// 		{
+// // printf("chegou aki\n");
+// 		}
+// 		else
+// 		{
+// 			commands(str, args, &argenv, &env_list);
+// 		}
 
 		free(str);
 		free_split(args);

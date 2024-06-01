@@ -136,7 +136,7 @@ void	init_less_than(char **args);
 void	finish_less_than(int new_stdin);
 
 // ./argument management/smaller_smaller_than.c
-void	init_smaller_smaller_than(char **args);
+void	init_smaller_smaller_than(char **args, t_str **env_list);
 void	finish_smaller_smaller_than(int new_stdin);
 
 

@@ -97,7 +97,7 @@ void	redirection_operators(char *str, char **argv, char ***argenv, t_str **env_l
 		// 	command_less_then();
 
 
-// INTERPRETA O REDIRECIONADOR
+// INTERPRETA O REDIRECIONADOR // cat < list > teste
 		// > REDIRECIONA
 		// | ABRE O PROCESSO
 		if (operator == 1)
@@ -118,13 +118,14 @@ void	redirection_operators(char *str, char **argv, char ***argenv, t_str **env_l
 		}
 		else if (operator == 5)
 		{
-			init_smaller_smaller_than(&argv[process]); // ESQUECI DE ESPANDIR VARIAVEIS DE AMBIENTE
+			init_smaller_smaller_than(&argv[process], env_list);
 		}
 		else if (operator == 0)
 		{
 
 		}
 
+		revert_caracter(args_process); // AKI OS METACARACTERES NAO INTERPRETADOS VOLTAM AO NORMAL (APENAS OS CARACTERES DO PROCESSO ATUAL DENTRO DE args_process E O RESTANTE CONTINUA INVERTIDO)
 
 // EXECUTA O PRIMEIRO PROGRAMA
 		// SE FOR ">" JA FOI CRIADO O ARQUIVO E SALVADO (NAO FAZ NADA NESSE MOMENTO)
