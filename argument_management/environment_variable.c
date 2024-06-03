@@ -175,6 +175,7 @@ char	*environment_variable(char *arg, t_str **env_list)
 	if (search_dollar_sign(arg))
 	{
 		no = search_variable_list(env_list, arg + strlen_char(arg, '$') + 1);
+// printf("achou essa variavel: %s\n", no->str);
 		// if (no == NULL)
 		// 	env = NULL;
 		// else

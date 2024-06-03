@@ -70,7 +70,7 @@ void	teste1() // VARIAVEL DE STATUS COM PROBLEMA NAO SEI PQ AHHHHHHHHHHHHH
 }
 void	teste2()
 {
-	printf("variavel ?: %s\n", environment_variable("?", env_list));
+	printf("variavel ?: %s\n", environment_variable("?", &env_list));
 }
 						///////////////////////////////////////////////
 
