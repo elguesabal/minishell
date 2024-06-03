@@ -101,6 +101,7 @@ char	*malloc_variable(char *str, t_str **env_list)
 		copy_new = '\0';
 		return (copy_new);
 	}
+// printf("return: %d\tconteurdo: %s\n", len_all_variable(str, env_list), str);
 	copy_new = malloc((len_all_variable(str, env_list) + 1) * sizeof(char));
 	if (copy_new == NULL)
 		printf("Error: a funcao malloc() retornou NULL\n");
@@ -134,6 +135,7 @@ char	*expand_variable(char *str, t_str **env_list) // SEM USO PQ ESTOU USANDO A 
 	i = 0;
 	while (*str)
 	{
+// printf("i: %d\n", i);
 		if (*str == '$')
 		{
 			no = search_variable_list(env_list, str + 1);
@@ -148,8 +150,16 @@ char	*expand_variable(char *str, t_str **env_list) // SEM USO PQ ESTOU USANDO A 
 					i++;
 				}
 			}
-			while (*(str + 1) && ((*(str + 1) >= '0' && *(str + 1) <= '9') || (*(str + 1) >= 'A' && *(str + 1) <= 'Z') || (*(str + 1) >= 'a' && *(str + 1) <= 'z') || *(str + 1) == '_'))
+// printf("no->str: %s\n", no->str);
+// printf("str: %s\n", str);
+			if (*str == '$' && *(str + 1) == '?')
 				str++;
+			else
+			{
+				while (*(str + 1) && ((*(str + 1) >= '0' && *(str + 1) <= '9') || (*(str + 1) >= 'A' && *(str + 1) <= 'Z') || (*(str + 1) >= 'a' && *(str + 1) <= 'z') || *(str + 1) == '_'))
+					str++;
+			}
+// printf("passou por uma variavel: %s\n", str);
 		}
 		else if (++i)
 			copy_new[i - 1] = *str;
@@ -160,6 +170,7 @@ char	*expand_variable(char *str, t_str **env_list) // SEM USO PQ ESTOU USANDO A 
 		// }
 		str++;
 	}
+// printf("i: %d\n", i);
 	copy_new[i] = '\0';
 	return (copy_new); // TEM QUE USAR free() EM str FORA DA FUNCAO new_expand_variable()
 }
@@ -171,6 +182,7 @@ char	*environment_variable(char *arg, t_str **env_list)
 	// char	*env;
 	char	*arg_free;
 	t_str	*no;
+	int	i;
 
 	if (search_dollar_sign(arg))
 	{
@@ -189,8 +201,14 @@ char	*environment_variable(char *arg, t_str **env_list)
 		else
 		{
 // printf("teste\n");
-			arg = malloc(sizeof(char));
-			*arg = '\0';
+			arg = malloc((strlen_char(arg, '$') + 1) * sizeof(char));
+			i = 0;
+			while (arg_free[i] && arg_free[i] != '$')
+			{
+				arg[i] = arg_free[i];
+				i++;
+			}
+			arg[i] = '\0';
 		}
 		free(arg_free);
 	}

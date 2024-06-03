@@ -103,7 +103,8 @@ void    exec_program(char **argv, char **env, char *str, t_str **env_list)
 // 		else
 // 		{
 		path = ft_split(getenv("PATH"), ':');
-		path_file = tester_path(path, *argv);
+		path_file = tester_path(path, *argv); // CASO EU PASSE APENAS UMA VARIAVEL DE AMBIENTE INEXISTENTE PRA readline() ESSA FUNCAO ME RETORNA "/home/jose/.norminette/norminette_venv/bin/"
+// printf("path_file: %s\tOLHA O ERROOOOOO\n", path_file);
 		free_split(path);
 
 

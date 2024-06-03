@@ -12,18 +12,18 @@ t_str	*search_variable_list(t_str **no, char *str)
 	assist = *no;
 // printf("str: %s\n", str);
 // printf("str: %c\n", assist->str[0]);
-// 	if (str[0] == '?' && str[1] == '\0') // TIVE Q FAZER ESSA GAMBIARRA POR CAUSA DA EXCECAO DA VARIAVEL DE STATUS (?) // NAO FUNCIONOU
-// 	{
-// 		while (assist)
-// 		{
-// 			if (assist->str[0] == '?' && assist->str[1] == '=')
-// 			{
+	if (str[0] == '?' && str[1] == '\0') // TIVE Q FAZER ESSA GAMBIARRA POR CAUSA DA EXCECAO DA VARIAVEL DE STATUS (?) // NAO FUNCIONOU
+	{
+		while (assist)
+		{
+			if (assist->str[0] == '?' && assist->str[1] == '=')
+			{
 // printf("coringuei: %s\n", assist->str);
-// 				return (assist);
-// 			}
-// 			assist = assist->next;
-// 		}
-// 	}
+				return (assist);
+			}
+			assist = assist->next;
+		}
+	}
 	while (assist)
 	{
 		if (compare_variable(assist->str, str))

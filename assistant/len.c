@@ -79,6 +79,7 @@ int	len_all_variable(char *str, t_str **env_list)
 		{
 			// i += TAMANHO DA VARIAVEL
 			no = search_variable_list(env_list, str + 1); // $PWD -> PWD=/nfs/homes/joseanto/minishell
+// printf("return: %s\n", no->str);
 			if (no)
 			{
 				len += ft_strlen(no->str) - strlen_char(no->str, '=') - 1; // ESTOU INCREMENTANDO NA CONTAGEM POREM TBM USO i PARA MARCAR O INDICE
