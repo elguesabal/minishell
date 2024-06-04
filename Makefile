@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: joseanto <joseanto@student.42.fr>          +#+  +:+       +#+         #
+#    By: wfranco <wfranco@student.42.rio>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/26 09:55:22 by joseanto          #+#    #+#              #
-#    Updated: 2024/05/02 08:37:25 by joseanto         ###   ########.fr        #
+#    Updated: 2024/06/04 19:18:05 by wfranco          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ FILE =	minishell.c\
 	$(ARGUMENTS)less_than.c\
 	$(ARGUMENTS)smaller_smaller_than.c\
 	$(ARGUMENTS)redirection_operators.c\
+	$(ARGUMENTS)signal.c\
 	$(COMMANDS)add_variable.c\
 	$(COMMANDS)echo.c\
 	$(COMMANDS)cd.c\
