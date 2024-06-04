@@ -610,16 +610,29 @@
 
 
 
+// int	main(void)
+// {
+// 	int	fd = open("a", O_RDWR | O_CREAT | O_TRUNC);
+// 	write(fd, "kkkkkk", 6);
+// 	char	buffer[100];
+// 	int n = read(fd, &buffer, 100);
+// 	printf("lido: %d\n", n);
+// 	close(fd);
+// }
+
+
+
 int	main(void)
 {
-	int	fd = open("a", O_RDWR | O_CREAT | O_TRUNC);
-	write(fd, "kkkkkk", 6);
-	char	buffer[100];
-	int n = read(fd, &buffer, 100);
-	printf("lido: %d\n", n);
-	close(fd);
-}
+	int	fd[2];
+	char	buffer[10];
 
+	pipe(fd);
+	printf("fd[0]: %d\tfd[1]: %d\n", fd[0], fd[1]);
+	printf("n escrito: %ld\n", write(fd[1], "teste", 5));
+	printf("n lido: %ld\n", read(fd[0], buffer, 10));
+	printf("lido: '%s'\n", buffer);
+}
 
 
 

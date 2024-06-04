@@ -58,34 +58,9 @@ int	main(int argc, char **argv, char **argenv)
 	insert_last(&env_list, copy_str("?=0"));
 
 
-						///////////////////////////////////////////////
-void	teste1() // VARIAVEL DE STATUS COM PROBLEMA NAO SEI PQ AHHHHHHHHHHHHH
-{
-	t_str	*assist = env_list;
-	while (assist)
-	{
-		printf("assist->next: %s\n", assist->str);
-		assist = assist->next;
-	}
-}
-void	teste2()
-{
-	printf("variavel ?: %s\n", environment_variable("?", &env_list));
-}
-						///////////////////////////////////////////////
-
 	while (1)
 	{
 		str = readline("minishell: "); // printf("teste :%d\n", (*str == '\0')); // CASO PRESSIONE ENTER SEM DIGITAR NADA NO SHELL *str == 0
-// printf("testeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\n"); // PQ DPS DE RODAR wc -l < a DA FALHA DE SEGMENTACAO????
-
-
-						///////////////////////////////////////////////
-if (*str == '1')
-	teste1();
-else if (*str == '2')
-	teste2();
-						///////////////////////////////////////////////
 
 		quotes(str);
 		remove_quotes(str);
@@ -102,7 +77,6 @@ else if (*str == '2')
 // }
 // printf("fim do teste\n\n");
 
-//	AKI DEVE ENTRAR OS OPERADORES DE REDIRECIONAMENTO
 		if (search_operator(args, '|') || search_operator(args, '>') || search_operator(args, '<'))
 		{
 			redirection_operators(str, args, &argenv, &env_list);
@@ -110,7 +84,6 @@ else if (*str == '2')
 		else
 		{
 			revert_caracter(args);
-// printf("CADE O ERRO COM A VARIAVEL DE STATUS\n");
 			commands(str, args, &argenv, &env_list);
 		}
 

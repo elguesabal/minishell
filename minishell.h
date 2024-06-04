@@ -122,6 +122,7 @@ void	redirection_operators(char *str, char **argv, char ***argenv, t_str **env_l
 int	count_pipe(char **argv);
 // char	**args_pipe(char **argv, int process);
 void	command_pipe(char *str, char **argv, char ***argenv, t_str **env_list);
+// pid_t	init_pipe();
 
 // ./argument management/bigger_then.c
 void	init_bigger_then(char **args);

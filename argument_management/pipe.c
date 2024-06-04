@@ -81,16 +81,27 @@ void	command_pipe(char *str, char **argv, char ***argenv, t_str **env_list)
 	int	i;
 	// char	**args_pipe;
 	// int	index;
-
+// printf("parei antes de fazer o pipe()\n");
+// return ;
 	pipe(fd);
 
 	n_pipe = count_pipe(argv);
+// printf("n_pipe: %d\n", n_pipe);
+// printf("str: %s\n", str);
+// i = 0;
+// while (argv[i])
+// {
+// 	printf("argv[%d]: %s\n", i, argv[i]);
+// 	i++;
+// }
+
 	i = 0;
 	while (i <= n_pipe)
 	{
 		pid[i] = fork();
 		if (pid[i] == 0)
 		{
+// printf("i == %d\n", i);
 			dup2(fd[0], STDIN_FILENO);
 			close(fd[0]);
 			if (i != n_pipe)
@@ -104,24 +115,26 @@ void	command_pipe(char *str, char **argv, char ***argenv, t_str **env_list)
 (void)str;
 (void)argenv;
 (void)env_list;
-exit(0);
+// exit(0);
 
 			// commands(str, &argv[i], argenv, env_list);
 			// exit_shell(argv, str, *argenv, env_list);
 
 
 
-			// if (i == 0)	// AKI EU POSSO FAZER UMA FUNCAO Q DEPENDENDO DO VALOR DE i ELE VAI PEGANDO ARGUMENTOS APOS O NUMERO DE i DO PIPE
-			// {
-			// 	char	*teste[] = {"ls", "-all", NULL};
-			// 	execve("/bin/ls", teste, NULL);
-			// }
-			// else if (i == 1)
-			// {
-			// 	char	*teste[] = {"wc", "-l", NULL};
-			// 	execve("/bin/wc", teste, NULL);
-			// }
-			// exit_shell(argv, str, *argenv, env_list);
+			if (i == 0)	// AKI EU POSSO FAZER UMA FUNCAO Q DEPENDENDO DO VALOR DE i ELE VAI PEGANDO ARGUMENTOS APOS O NUMERO DE i DO PIPE
+			{
+// printf("i == 0\n");
+				char	*teste[] = {"ls", "-all", NULL};
+				execve("/bin/ls", teste, NULL);
+			}
+			else if (i == 1)
+			{
+// printf("i == 1\n");
+				char	*teste[] = {"wc", "-l", NULL};
+				execve("/bin/wc", teste, NULL);
+			}
+			exit_shell(argv, str, *argenv, env_list);
 
 								// PROCESSAMENTO DE DADOS
 // char	*teste[] = {argv[index], argv[index + 1], NULL};
@@ -146,3 +159,22 @@ exit(0);
 		i--;
 	}
 }
+
+
+// pid_t	init_pipe(int last) // AINDA PENSANDO COMO IMPLEMENTAR O PIPE
+// {
+// 	pid_t	pid;
+// 	int	fd[2];
+
+// 	pipe(fd);
+// 	pid = fork();
+// 	if (pid > 0) // FAZER O waitpid() SO NA FUNCAO DE FINISH
+// 	{
+// 		dup2(fd[0], STDIN_FILENO);
+// 		close(fd[0]);
+// 		if (last)
+// 			dup2(fd[1], STDOUT_FILENO);
+// 		close(fd[1]);
+// 	}
+// 	return (pid);
+// }
