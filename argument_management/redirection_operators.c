@@ -51,6 +51,19 @@ char	**next_process(char **argv)
 	return (args_process);
 }
 
+
+
+// int	i_fd(int reset) // ACHO Q NAO DA PRA SEGUIR ESSA LINHA DE RACIOCINIO PQ OS PROCESSOS FILHOS VAI CONTINUAR NO LOOP E SE MULTIPLICAREM COMO UMA ARVORE
+// {
+// 	static int	n = 0;
+
+// 	if (reset)
+// 		n = -2;
+// 	return (i++);
+// }
+
+
+
 void	redirection_operators(char *str, char **argv, char ***argenv, t_str **env_list)
 {
 (void)str;
@@ -122,7 +135,9 @@ void	redirection_operators(char *str, char **argv, char ***argenv, t_str **env_l
 // 	i++;
 // }
 				// command_pipe(str, args_process, argenv, env_list);
-				// pid[?] = init_pipe();
+
+
+				// pid[?] = init_pipe(); // COMO VOU CONTAR EM QUAL PID ESTOU SE JA USEI A QUANTIDADE MAXIMA DE VARIAVEIS NESSA FUNCAO? ACHO Q VOU USAR UMA FUNCAO PRA RETORNAR O PROXIMO NUMERO IGUAL NA PHILOSOPHERS // ACHO Q NAO DA PRA SEGUIR ESSA LINHA DE RACIOCINIO PQ OS PROCESSOS FILHOS VAI CONTINUAR NO LOOP E SE MULTIPLICAREM COMO UMA ARVORE
 			}
 			else if (operator == 2)
 			{
@@ -148,7 +163,6 @@ void	redirection_operators(char *str, char **argv, char ***argenv, t_str **env_l
 				process++;
 			process++;
 		}
-
 
 
 		revert_caracter(args_process); // AKI OS METACARACTERES NAO INTERPRETADOS VOLTAM AO NORMAL (APENAS OS CARACTERES DO PROCESSO ATUAL DENTRO DE args_process E O RESTANTE CONTINUA INVERTIDO)
@@ -187,7 +201,7 @@ void	redirection_operators(char *str, char **argv, char ***argenv, t_str **env_l
 // 	i++;
 // }
 // printf("operator: %d\n", operator);
-		if (operator == 1 || operator == 2 || operator == 3 || operator == 4 || operator == 5)
+		if (/*operator == 1 ||*/ operator == 2 || operator == 3 || operator == 4 || operator == 5)
 		{
 			commands(str, args_process, argenv, env_list);
 		}

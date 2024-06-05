@@ -116,6 +116,7 @@ int	main(int argc, char **argv, char **argenv)
 	while (1)
 	{
 		str = readline("minishell: "); // printf("teste :%d\n", (*str == '\0')); // CASO PRESSIONE ENTER SEM DIGITAR NADA NO SHELL *str == 0
+// printf("testando ctrl+d\n");
 		add_history(str);
 		quotes(str);
 		remove_quotes(str);
@@ -132,7 +133,7 @@ int	main(int argc, char **argv, char **argenv)
 // }
 // printf("fim do teste\n\n");
 
-		if (search_operator(args, '|') || search_operator(args, '>') || search_operator(args, '<'))
+		if (search_operator(args, '|') || search_operator(args, '>') || search_operator(args, '<')) // AKI EU DEVERIA SEPARAR ENTRE REDIRECIONADORES PARA ARQUIVO E PROGRAMAS (AI EU PODERIA USAR redirection_operators() DENTRO DE command_pipe())
 		{
 			redirection_operators(str, args, &argenv, &env_list);
 		}

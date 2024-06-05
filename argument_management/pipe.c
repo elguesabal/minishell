@@ -115,13 +115,13 @@ void	command_pipe(char *str, char **argv, char ***argenv, t_str **env_list)
 (void)str;
 (void)argenv;
 (void)env_list;
-// exit(0);
+exit(0);
 
 			// commands(str, &argv[i], argenv, env_list);
 			// exit_shell(argv, str, *argenv, env_list);
 
 
-
+				// TROCAR ESSE TRECHO DE CODIGO PELA FUNCAO redirection_operators()
 			if (i == 0)	// AKI EU POSSO FAZER UMA FUNCAO Q DEPENDENDO DO VALOR DE i ELE VAI PEGANDO ARGUMENTOS APOS O NUMERO DE i DO PIPE
 			{
 // printf("i == 0\n");
@@ -135,6 +135,7 @@ void	command_pipe(char *str, char **argv, char ***argenv, t_str **env_list)
 				execve("/bin/wc", teste, NULL);
 			}
 			exit_shell(argv, str, *argenv, env_list);
+				// TROCAR ESSE TRECHO DE CODIGO PELA FUNCAO redirection_operators()
 
 								// PROCESSAMENTO DE DADOS
 // char	*teste[] = {argv[index], argv[index + 1], NULL};
@@ -161,14 +162,14 @@ void	command_pipe(char *str, char **argv, char ***argenv, t_str **env_list)
 }
 
 
-// pid_t	init_pipe(int last) // AINDA PENSANDO COMO IMPLEMENTAR O PIPE
+// pid_t	init_pipe(int last) // AINDA PENSANDO COMO IMPLEMENTAR O PIPE // ACHO Q NAO DA PRA SEGUIR ESSA LINHA DE RACIOCINIO PQ OS PROCESSOS FILHOS VAI CONTINUAR NO LOOP E SE MULTIPLICAREM COMO UMA ARVORE
 // {
 // 	pid_t	pid;
 // 	int	fd[2];
 
 // 	pipe(fd);
 // 	pid = fork();
-// 	if (pid > 0) // FAZER O waitpid() SO NA FUNCAO DE FINISH
+// 	if (pid == 0) // FAZER O waitpid() SO NA FUNCAO DE FINISH
 // 	{
 // 		dup2(fd[0], STDIN_FILENO);
 // 		close(fd[0]);
@@ -177,4 +178,19 @@ void	command_pipe(char *str, char **argv, char ***argenv, t_str **env_list)
 // 		close(fd[1]);
 // 	}
 // 	return (pid);
+// }
+
+// void	finish_pipe(int *fd, int *pid, t_str env_list)
+// {
+// 	int	status;
+
+// 	close(fd[0]);
+// 	close(fd[1]);
+// 	while (*pid != 0)
+// 	{
+// 		waitpid(*pid, &status, 0);
+// 		pid++;
+// 	}
+// 	if (WIFEXITED(status)) // AKI EU SO DEVO SALVAR O ULTIMO STATUS MESMO
+// 	variable_status(WEXITSTATUS(status), env_list); // AINDA NAO SEI AO CERTO QUAL STATUS COLOCAR
 // }
