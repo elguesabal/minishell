@@ -622,19 +622,25 @@
 
 
 
+// int	main(void)
+// {
+// 	int	fd[2];
+// 	char	buffer[10];
+
+// 	pipe(fd);
+// 	printf("fd[0]: %d\tfd[1]: %d\n", fd[0], fd[1]);
+// 	printf("n escrito: %ld\n", write(fd[1], "teste", 5));
+// 	printf("n lido: %ld\n", read(fd[0], buffer, 10));
+// 	printf("lido: '%s'\n", buffer);
+// }
+
+
+
 int	main(void)
 {
-	int	fd[2];
-	char	buffer[10];
-
-	pipe(fd);
-	printf("fd[0]: %d\tfd[1]: %d\n", fd[0], fd[1]);
-	printf("n escrito: %ld\n", write(fd[1], "teste", 5));
-	printf("n lido: %ld\n", read(fd[0], buffer, 10));
-	printf("lido: '%s'\n", buffer);
+	printf("teste\n");
+	return (0);
 }
-
-
 
 
 

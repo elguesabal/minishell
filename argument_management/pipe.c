@@ -73,13 +73,66 @@ int	count_pipe(char **argv)
 // 	return (args_pipe);
 // }
 
+int	count_args(char **args)
+{
+	int	i;
+
+	while (args[i] && args[i][0] != '|')
+		i++;
+	return (i);
+}
+
+char	**args_pipe(char **argv, int process) // ESSA FUNCAO DEVE RETORNAR OS ARGUMRNTOS CORRETAMENTE PARA O PROXIMO PROCESSO
+{
+(void)argv;
+(void)process;
+	char	**return_arg;
+	int	i;
+	int	j;
+(void)return_arg;
+
+	i = 0;
+	while (argv[i] && i < process)
+	{
+		while (argv[i] && argv[i][0] != '|')
+		{
+			i++;
+		}
+		i++; // ATE ENCONTRAR O PIPE RELATIVO AO process
+	}
+	return_arg = malloc((count_args(&argv[i]) + 1) * sizeof(char *));
+	j = 0;
+	while (argv[i] && argv[i][0] != '|')
+	{
+		return_arg[j] = argv[i];
+		j++;
+		i++;
+	}
+	return_arg[j] = NULL;
+// printf("process: %d\n", process);
+// i = 0;
+// while (argv[i])
+// {
+// 	printf("argv[%d]: %s\n", i, argv[i]);
+// 	i++;
+// }
+// i = 0;
+// while (return_arg[i])
+// {
+// 	printf("return_arg[%d]: %s\n", i, return_arg[i]);
+// 	i++;
+// }
+	return (return_arg);
+}
+
 void	command_pipe(char *str, char **argv, char ***argenv, t_str **env_list)
 {
 	pid_t	pid[2];
 	int	fd[2];
 	int	n_pipe;
 	int	i;
-	// char	**args_pipe;
+	char	**args_process;
+
 	// int	index;
 // printf("parei antes de fazer o pipe()\n");
 // return ;
@@ -99,6 +152,16 @@ void	command_pipe(char *str, char **argv, char ***argenv, t_str **env_list)
 	while (i <= n_pipe)
 	{
 		pid[i] = fork();
+
+// printf("i: %d\n", i);
+// char	teste = i + 48;
+// if (pid[i] == 0)
+// {
+// 	write(1, &teste, 1);
+// 	write(1, "\n", 1);
+// 	// printf("processo filho %d\n", i);
+// }
+
 		if (pid[i] == 0)
 		{
 // printf("i == %d\n", i);
@@ -115,27 +178,47 @@ void	command_pipe(char *str, char **argv, char ***argenv, t_str **env_list)
 (void)str;
 (void)argenv;
 (void)env_list;
-exit(0);
+(void)args_process;
+// int	j = 0;
+// while (argv[j])
+// {
+// 	printf("argv[%d]: %s\n", j, argv[j]);
+// 	j++;
+// }
+// exit(0);
 
 			// commands(str, &argv[i], argenv, env_list);
 			// exit_shell(argv, str, *argenv, env_list);
 
 
 				// TROCAR ESSE TRECHO DE CODIGO PELA FUNCAO redirection_operators()
-			if (i == 0)	// AKI EU POSSO FAZER UMA FUNCAO Q DEPENDENDO DO VALOR DE i ELE VAI PEGANDO ARGUMENTOS APOS O NUMERO DE i DO PIPE
-			{
-// printf("i == 0\n");
-				char	*teste[] = {"ls", "-all", NULL};
-				execve("/bin/ls", teste, NULL);
-			}
-			else if (i == 1)
-			{
-// printf("i == 1\n");
-				char	*teste[] = {"wc", "-l", NULL};
-				execve("/bin/wc", teste, NULL);
-			}
-			exit_shell(argv, str, *argenv, env_list);
+// 			if (i == 0)	// AKI EU POSSO FAZER UMA FUNCAO Q DEPENDENDO DO VALOR DE i ELE VAI PEGANDO ARGUMENTOS APOS O NUMERO DE i DO PIPE
+// 			{
+// // printf("i == 0\n");
+// 				char	*teste[] = {"ls", "-all", NULL};
+// 				execve("/bin/ls", teste, NULL);
+// 			}
+// 			else if (i == 1)
+// 			{
+// // printf("i == 1\n");
+// 				char	*teste[] = {"wc", "-l", NULL};
+// 				execve("/bin/wc", teste, NULL);
+// 			}
+// 			exit_shell(argv, str, *argenv, env_list);
 				// TROCAR ESSE TRECHO DE CODIGO PELA FUNCAO redirection_operators()
+
+
+
+			// args_process = args_pipe(argv, i);
+			args_process = args_pipe(argv, i);
+			// redirection_operators(str, args_process, argenv, env_list);
+			exit(0);
+// 			exit_shell(argv, str, *argenv, env_list);
+
+
+
+
+
 
 								// PROCESSAMENTO DE DADOS
 // char	*teste[] = {argv[index], argv[index + 1], NULL};

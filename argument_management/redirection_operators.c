@@ -86,7 +86,7 @@ void	redirection_operators(char *str, char **argv, char ***argenv, t_str **env_l
 	process = 0;
 	while (argv[process])
 	{
-//   |   -->  1
+//   |   -->  1 // NAO ME IMPORTO MAIS COM ESSE VALOR PQ argv NAO RECEBERA MAIS PIPE
 //   >   -->  2
 //   >>  -->  3
 //   <   -->  4
@@ -117,29 +117,29 @@ void	redirection_operators(char *str, char **argv, char ***argenv, t_str **env_l
 // INTERPRETA O REDIRECIONADOR // cat < list > teste
 		// > REDIRECIONA
 		// | ABRE O PROCESSO
-		while (argv[process + 1] && argv[process][0] != '|')
+		while (argv[process + 1]/* && argv[process][0] != '|'*/)
 		{
 			operator = search_next_operator(&argv[process]);
-			if (operator == 1)
-			{
-// int	i = 0;
-// while (argv[process + i])
-// {
-// 	printf("&argv[process]: %s\n", argv[process + i]);
-// 	i++;
-// }
-// i = 0;
-// while (args_process[i])
-// {
-// 	printf("args_process: %s\n", args_process[i]);
-// 	i++;
-// }
-				// command_pipe(str, args_process, argenv, env_list);
+// 			if (operator == 1) // RETIRANDO O PIPE DAKI (AGR O PIPE VAI CHAMAR ESSA FUNCAO)
+// 			{
+// // int	i = 0;
+// // while (argv[process + i])
+// // {
+// // 	printf("&argv[process]: %s\n", argv[process + i]);
+// // 	i++;
+// // }
+// // i = 0;
+// // while (args_process[i])
+// // {
+// // 	printf("args_process: %s\n", args_process[i]);
+// // 	i++;
+// // }
+// 				// command_pipe(str, args_process, argenv, env_list);
 
 
-				// pid[?] = init_pipe(); // COMO VOU CONTAR EM QUAL PID ESTOU SE JA USEI A QUANTIDADE MAXIMA DE VARIAVEIS NESSA FUNCAO? ACHO Q VOU USAR UMA FUNCAO PRA RETORNAR O PROXIMO NUMERO IGUAL NA PHILOSOPHERS // ACHO Q NAO DA PRA SEGUIR ESSA LINHA DE RACIOCINIO PQ OS PROCESSOS FILHOS VAI CONTINUAR NO LOOP E SE MULTIPLICAREM COMO UMA ARVORE
-			}
-			else if (operator == 2)
+// 				// pid[?] = init_pipe(); // COMO VOU CONTAR EM QUAL PID ESTOU SE JA USEI A QUANTIDADE MAXIMA DE VARIAVEIS NESSA FUNCAO? ACHO Q VOU USAR UMA FUNCAO PRA RETORNAR O PROXIMO NUMERO IGUAL NA PHILOSOPHERS // ACHO Q NAO DA PRA SEGUIR ESSA LINHA DE RACIOCINIO PQ OS PROCESSOS FILHOS VAI CONTINUAR NO LOOP E SE MULTIPLICAREM COMO UMA ARVORE
+// 			}
+			if (operator == 2)
 			{
 				init_bigger_then(&argv[process]);
 			}
@@ -248,7 +248,7 @@ void	redirection_operators(char *str, char **argv, char ***argenv, t_str **env_l
 
 		free_split(args_process);
 
-		while (argv[process + 1] && argv[process][0] != '|')
+		while (argv[process + 1]/* && argv[process][0] != '|'*/)
 		{
 			process++;
 		}
