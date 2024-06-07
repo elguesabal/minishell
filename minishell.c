@@ -99,6 +99,7 @@ while (arg[i] && arg[i + 1] != NULL)
 
 int	main(int argc, char **argv, char **argenv)
 {
+// printf("main getpid(): %d\n", getpid());
 	char	*str;
 	char	**args;
 	t_str	*env_list;
