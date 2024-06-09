@@ -147,9 +147,10 @@ char	**args_pipe(char **argv, int process) // ESSA FUNCAO DEVE RETORNAR OS ARGUM
 
 void	command_pipe(char *str, char **argv, char ***argenv, t_str **env_list)
 {
-	pid_t	pid[2];
-	int	fd[2];
-	int	n_pipe;
+	pid_t	pid[20]; // ANTES EU SO TINHA ESPACO SO PRA 2 PROCESSOS
+	// int	fd[2]; // NA VDD EU PRECISO DE UM PAR DE FD PARA CADA COMUNICACAO ENTRE PROCESSOS
+	int	fd[20][2]; // AFF TENHO Q USAR malloc() NO fd E NO pid
+	int	n_process;
 	int	i;
 	char	**args_process;
 (void)str;
@@ -157,20 +158,37 @@ void	command_pipe(char *str, char **argv, char ***argenv, t_str **env_list)
 (void)env_list;
 (void)args_process;
 
-	pipe(fd);
-	n_pipe = count_pipe(argv);
+
+	n_process = count_pipe(argv);
+
 	i = 0;
-	while (i <= n_pipe)
+	while (i < n_process)
 	{
+		pipe(fd[i]);
+		i++;
+	}
+
+	i = 0;
+	while (i <= n_process)
+	{
+// printf("o processo foi iniciado: %d\n", i);
+// printf("i: %d\tn_process: %d\n", i, n_process);
 		pid[i] = fork();
 
 		if (pid[i] == 0)
 		{
-			dup2(fd[0], STDIN_FILENO);
-			close(fd[0]);
-			if (i != n_pipe)
-				dup2(fd[1], STDOUT_FILENO);
-			close(fd[1]);
+			if (i > 0)
+				dup2(fd[i - 1][0], STDIN_FILENO);
+			if (i < n_process)
+				dup2(fd[i][1], STDOUT_FILENO);
+
+			int	j = 0; // ESSA BAGACA ME LASCA EM
+			while (j <= i)
+			{
+				close(fd[j][0]);
+				close(fd[j][1]);
+				j++;
+			}
 
 			args_process = args_pipe(argv, i);
 			if (search_operator(args_process, '>') || search_operator(args_process, '<'))
@@ -188,12 +206,23 @@ void	command_pipe(char *str, char **argv, char ***argenv, t_str **env_list)
 		i++;
 	}
 
-	close(fd[0]);
-	close(fd[1]);
-	while (i)
+// printf("i: %d\tn_process: %d\n", i, n_process);
+
+	i = 0;
+	while (i < n_process)
 	{
+		close(fd[i][0]);
+		close(fd[i][1]);
+		i++;
+	}
+
+	i = 0;
+	while(i <= n_process)
+	{
+// printf("esperando processo %d\n", i);
 		waitpid(pid[i], NULL, 0);
-		i--;
+// printf("processo respondido %d\n", i);
+		i++;
 	}
 }
 
@@ -231,6 +260,18 @@ void	command_pipe(char *str, char **argv, char ***argenv, t_str **env_list)
 // 	variable_status(WEXITSTATUS(status), env_list); // AINDA NAO SEI AO CERTO QUAL STATUS COLOCAR
 // }
 
+
+
+
+
+// POSSIVEI ERROS:
+
+// OS PROCESSOS SAO CRIADOS E VAO DIRETO EXECUTAR OS COMANDOS SEM ESPERAR O ANTERIO (NO CASO DE "ls | cat | cat" OS 3 INICIAM JUNTOS POREM O TERCEIRO CAT PODE COMECAR SEM ESPERAR O SEGUNDO ACABAR)
+
+// EU ESTOU USANDO waitpid() NA ORDEM INVERSA EXEMPLO:
+// PRIMEIRO waitpid() ENCERRA O ULTIMO PROCESSO
+// SEGUNDO waitpid() ENCERRA O PENULTIMO PROCESSO
+// ULTIMO waitpid() ENCERRA O PRIMEIRO PROCESSO
 
 
 
