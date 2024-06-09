@@ -25,18 +25,12 @@
 
 
 
-// LISTA USADA PARA ARMAZENAR OS INDERECOS DE MEMORIA DAS VARIAVEIS DE AMBIENTE MAS NAO DISPONIBILIZAR PARA SIBPROCESSOS
+// LISTA USADA PARA ARMAZENAR OS INDERECOS DE MEMORIA DAS VARIAVEIS DE AMBIENTE MAS NAO DISPONIBILIZAR PARA SUBPROCESSOS
 typedef struct s_str
 {
 	char	*str;
 	struct s_str	*next;
 }	t_str;
-
-// typedef struct s_quotes
-// {
-// 	int	*single_quotes;
-// 	int	*double_quotes;
-// }	t_quotes;
 
 
 
@@ -91,17 +85,14 @@ void	error_message(char *message, char *arg, int status, t_str **env_list);
 
 
 // ./argument management/argument_management.c
-// int	len_args_operators(char	**args); // AGR ESTOU SEPARANDO OS ARGUMENTOS ANTES DE USAR ft_split()
 int	len_separating_operators(char *str);
 void	separate_redirection_operators(char **str);
 void	argument_management(char ***argv, t_str **env_list);
 
 // ./argument management/environment_variable.c
 int	search_dollar_sign(char *str);
-// char	*expand_variable(char *str, char *new_str); // SEM USO PQ ESTOU USANDO A FUNCAO copy_str()
-// char	*environment_variable(char *arg, t_str **env_list);
 char	*malloc_variable(char *str, t_str **env_list);
-char	*expand_variable(char *str, t_str **env_list); // SEM USO PQ ESTOU USANDO A FUNCAO copy_str() // VOLTEI ATRAS KKK
+char	*expand_variable(char *str, t_str **env_list);
 char	*environment_variable(char *arg, t_str **env_list);
 
 // ./argument management/quotes.c
@@ -117,30 +108,33 @@ void	revert_caracter(char **args);
 // ./argument management/redirection_operators.c
 int	len_arguments(char **argv);
 char	**next_process(char **argv);
+char	**init_redirection(char **argv, int *process, int *operator, t_str **env_list);
+void	finish_redirection(int operator, int *new_std, char **args_process);
 void	redirection_operators(char *str, char **argv, char ***argenv, t_str **env_list);
 
 // ./argument management/pipe.c
-// int	search_pipe(char **argv);
 int	count_pipe(char **argv);
-// char	**args_pipe(char **argv, int process);
+int	**init_fd(int n_process);
+void	close_fds(int **fd, int n_process);
+int	count_args(char **args);
+void	redirection_pipe(int current_process, int **fd, int n_process);
+char	**args_pipe(char **argv, int process);
+void	execute_process(char *str, char **args_process, char ***argenv, t_str **env_list);
+void	finish_pipe(int **fd, int n_process, pid_t *pid);
 void	command_pipe(char *str, char **argv, char ***argenv, t_str **env_list);
-// pid_t	init_pipe();
 
 // ./argument management/bigger_then.c
 void	init_bigger_then(char **args);
-void	finish_bigger_then(int new_stdout);
 
 // ./argument management/bigger_then.c
 void	init_bigger_bigger_than(char **args);
-void	finish_bigger_bigger_than(int new_stdout);
 
 // ./argument management/less_than.c
 void	init_less_than(char **args);
-void	finish_less_than(int new_stdin);
 
 // ./argument management/smaller_smaller_than.c
 void	init_smaller_smaller_than(char **args, t_str **env_list);
-void	finish_smaller_smaller_than(int new_stdin);
+
 
 
 // ./commands/add_variable.c

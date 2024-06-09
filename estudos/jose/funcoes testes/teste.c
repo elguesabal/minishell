@@ -635,10 +635,17 @@
 // }
 
 
+void	teste(int *i)
+{
+	(*i)++;
+}
 
 int	main(void)
 {
-	printf("teste\n");
+	int	i = 0;
+
+	teste(&i);
+	printf("i: %d\n", i);
 	return (0);
 }
 

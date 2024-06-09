@@ -1,5 +1,8 @@
 #include "../minishell.h"
 
+/// @brief RECEBE OS ARGUMENTOS E CONTA ATE O PROXIMO OPERADOR DE REDIRECIONAMENTO
+/// @param argv ARRAY COM TODOS ARGUMENTOS
+/// @return RETORNA O TAMANHO DOS ARGUMENTOS ATE O PROXIMO OPERADOR DE REDIRECIONAMENTO
 int	len_arguments(char **argv)
 {
 	int	len;
@@ -10,6 +13,9 @@ int	len_arguments(char **argv)
 	return (len);
 }
 
+/// @brief RECEBE OS ARGUMENTOS ALLOCA MEMORIA CORRETAMENTE E COPIA OS ARGUMENTOS ANTES DO PRIMEIRO OPERADOR DE REDIRECIONAMENTO ENCONTRADO
+/// @param argv ARRAY COM TODOS ARGUMENTOS
+/// @return RETORNA UMA COPIA DOS ARGUMENTOS DO COMANDO ATE ENCONTRAR UM OPERADOR DE REDIRECIONAMENTO
 char	**next_process(char **argv)
 {
 	char	**args_process;
@@ -28,14 +34,52 @@ char	**next_process(char **argv)
 	return (args_process);
 }
 
+/// @brief INICIALIZA O PROCESSO DE REDIRECIONAMENTO DA FUNCAO redirection_operators()
+/// @param argv ARRAY COM TODOS ARGUMENTOS
+/// @param process POSICAO DO ARGUMENTO ATUAL
+/// @param operator IDENTIFICADOR DO PROXIMO OPERADOR
+/// @param env_list LISTA ENCADEADA COM TODAS AS VARIAVEIS DE AMBIENTE
+/// @return RETORNA UMA COPIA DOS ARGUMENTOS DO COMANDO ATE ENCONTRAR UM OPERADOR DE REDIRECIONAMENTO
+char	**init_redirection(char **argv, int *process, int *operator, t_str **env_list)
+{
+	char	**args_process;
+
+	args_process = next_process(&argv[*process]);
+	while (argv[*process + 1] && argv[*process][0] != '|')
+	{
+		*operator = search_next_operator(&argv[*process]);
+		if (*operator == 2)
+			init_bigger_then(&argv[*process]);
+		else if (*operator == 3)
+			init_bigger_bigger_than(&argv[*process]);
+		else if (*operator == 4)
+			init_less_than(&argv[*process]);
+		else if (*operator == 5)
+			init_smaller_smaller_than(&argv[*process], env_list);
+		while (argv[*process + 1] && argv[*process][0] != '|' && argv[*process][0] != '>' && argv[*process][0] != '<')
+			(*process)++;
+		(*process)++;
+	}
+	revert_caracter(args_process);
+	return (args_process);
+}
+
+/// @brief TERMINA O REDIRECIONAMENTO DE redirection_operators()
+/// @param argv ARRAY COM TODOS ARGUMENTOS
+/// @param new_std COPIAS (DUPLICACOES) SALVAS DE STDIN_FILENO E STDOUT_FILENO ANTES DE QUALQUER REDIRECIONAMENTO
+void	finish_redirection(int operator, int *new_std, char **args_process)
+{
+	if (operator == 2 || operator == 3 || operator == 4 || operator == 5)
+	{
+		dup2(new_std[0], STDIN_FILENO);
+		dup2(new_std[1], STDOUT_FILENO);
+		unlink(".heredoc");
+	}
+	free_split(args_process);
+}
 
 void	redirection_operators(char *str, char **argv, char ***argenv, t_str **env_list)
 {
-(void)str;
-(void)argv;
-(void)argenv;
-(void)env_list;
-
 	int	process;
 	int	operator;
 	char	**args_process;
@@ -46,77 +90,12 @@ void	redirection_operators(char *str, char **argv, char ***argenv, t_str **env_l
 	process = 0;
 	while (argv[process])
 	{
-//   |   -->  1 // NAO ME IMPORTO MAIS COM ESSE VALOR PQ argv NAO RECEBERA MAIS PIPE
-//   >   -->  2
-//   >>  -->  3
-//   <   -->  4
-//   <<  -->  5
-
-
-		args_process = next_process(&argv[process]);
-		// free_split(args_process); // USAR ISSO DPS
-// int	i = 0;
-// while (args_process[i])
-// {
-// 	printf("args[%d]: %s\n", i, args_process[i]);
-// 	i++;
-// }
-// printf("\n");
-
-// printf("getpid(): %d\n", getpid());
-// printf("entrou no redirection_init\n");
-
-		while (argv[process + 1] && argv[process][0] != '|')
-		{
-			operator = search_next_operator(&argv[process]);
-// printf("operator: %d\targv[process]: %s\n", operator, argv[process]);
-			if (operator == 2)
-				init_bigger_then(&argv[process]);
-			else if (operator == 3)
-				init_bigger_bigger_than(&argv[process]);
-			else if (operator == 4)
-				init_less_than(&argv[process]);
-			else if (operator == 5)
-				init_smaller_smaller_than(&argv[process], env_list);
-			else if (operator == 0)
-			{
-// printf("operator == 0\n");
-// printf("argv[%d]: %s\n", process, argv[process]);
-			}
-			while (argv[process + 1] && argv[process][0] != '|' && argv[process][0] != '>' && argv[process][0] != '<')
-				process++;
-			process++;
-		}
-
-// printf("saiu do redirection_init\n");
-
-		revert_caracter(args_process); // AKI OS METACARACTERES NAO INTERPRETADOS VOLTAM AO NORMAL (APENAS OS CARACTERES DO PROCESSO ATUAL DENTRO DE args_process E O RESTANTE CONTINUA INVERTIDO)
-
-// int	i = 0;
-// while (args_process[i])
-// {
-// 	printf("args_process[i]: %s\n", args_process[i]);
-// 	i++;
-// }
-// printf("operator: %d\n\n", operator);
+		args_process = init_redirection(argv, &process, &operator, env_list);
 		if (operator == 2 || operator == 3 || operator == 4 || operator == 5)
 			commands(str, args_process, argenv, env_list);
-
-
-
-		if (operator == 2 || operator == 3 || operator == 4 || operator == 5)
-		{
-			dup2(new_std[0], STDIN_FILENO);
-			dup2(new_std[1], STDOUT_FILENO);
-			unlink(".heredoc"); // TALVEZ SEJA MELHOR APAGAR SO DPS DO LOOP PRINCIPAL JUNTO COM close(new_stdin) E close(new_stdout)
-		}
-
-		free_split(args_process);
-
+		finish_redirection(operator, new_std, args_process);
 		while (argv[process + 1])
-		{
 			process++;
-		}
 		process++;
 	}
 	close(new_std[0]);

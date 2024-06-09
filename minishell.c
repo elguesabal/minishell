@@ -13,33 +13,6 @@
 #include "minishell.h"
 
 
-// 				IDEAIA DE COMO FAZER INTERPRETACAO DE ASPAS (NAO INTERPRETAR METACARACTERES DENTRO DAS ASPAS)
-
-// a tabela ascii vai de 0 a 127, alguns caracteres talvez nao tenham possibilidade de uso em um shell, dito isso, talvez possa usar alguns desses
-// para nao interpretar propositalmente os metacaracteres (tbm estou verificando a possibildade de utrapassar os valores de 0 a 127 do UTF-8)
-
-// se caso definirmos um "codigo" para cada metacaracterer, poderiamos substitui-los antes de ser interpretado por nossa minishell
-// EXEMPLO: imagine que eu troque o $ por 500 ($ na tabela ascii vale 36)
-
-// int caracter = '$'; /* OU */ int caracter = 36;
-
-// printf("%c", caracter); // PRINT: $
-// caracter = 500;
-// printf("%c", caracter); // PRINT: �
-
-// ou seja, uma variavel do tipo char pode assumir um caracter alem da tabela ascii, sendo assim eu poderia definir um consenso:
-// $ -> 500
-// > -> 501
-// >> -> nada pq seria a juncao de char string[3] = { 501, 501, NULL };
-// | -> 502
-// < -> 503
-// << nada pq seria a juncao de char string[3] = { 503, 503, NULL };
-
-// se fizer uma substituicao dos metacaracteres por valores inexistente a funcao argument_management() nao vai identificar algo a ser feito
-// dps de passado por essa funcao so retornar ao estado original e limpar com a funcao ft_trim()
-
-
-
 void check_operator(char **arg)
 {
     int i;
@@ -99,7 +72,6 @@ while (arg[i] && arg[i + 1] != NULL)
 
 int	main(int argc, char **argv, char **argenv)
 {
-// printf("main getpid(): %d\n", getpid());
 	char	*str;
 	char	**args;
 	t_str	*env_list;
@@ -111,7 +83,6 @@ int	main(int argc, char **argv, char **argenv)
 	creat_list(&env_list, argenv);
 	argenv = array_to_list(&env_list);
 	insert_last(&env_list, copy_str("?=0"));
-
 
 	while (1)
 	{
@@ -125,19 +96,12 @@ int	main(int argc, char **argv, char **argenv)
 		swap_tab(args);
 		argument_management(&args, &env_list);
 
-// int	i = 0;
-// while (args[i])
-// {
-// 	printf("%s\n", args[i]);
-// 	i++;
-// }
-// printf("fim do teste\n\n");
 
 		if (search_operator(args, '|'))
 		{
 			command_pipe(str, args, &argenv, &env_list);
 		}
-		else if (search_operator(args, '>') || search_operator(args, '<')) // AKI EU DEVERIA SEPARAR ENTRE REDIRECIONADORES PARA ARQUIVO E PROGRAMAS (AI EU PODERIA USAR redirection_operators() DENTRO DE command_pipe())
+		else if (search_operator(args, '>') || search_operator(args, '<'))
 		{
 			redirection_operators(str, args, &argenv, &env_list);
 		}
@@ -146,34 +110,6 @@ int	main(int argc, char **argv, char **argenv)
 			revert_caracter(args);
 			commands(str, args, &argenv, &env_list);
 		}
-
-		// revert_caracter(args); // FOI DESTRIBUIDO PARA MOMENTOS ESPECIFICOS QUE SERA OU NAO INTERPRETADO OS METACARACTERES
-
-
-// i = 0;
-// while (args[i])
-// {
-// 	printf("%s\n", args[i]);
-// 	i++;
-// }
-// printf("fim do teste\n\n");
-
-// int	i = 0;
-// while (argenv[i])
-// {
-// 	printf("%s\n", argenv[i]);
-// 	i++;
-// }
-
-
-// 		if (search_operator(args, '|') || search_operator(args, '>') || search_operator(args, '<'))	// FOI JUNTADO COM O IF IDENTICO A ESSE ACIMA
-// 		{
-// // printf("chegou aki\n");
-// 		}
-// 		else
-// 		{
-// 			commands(str, args, &argenv, &env_list);
-// 		}
 
 		free(str);
 		free_split(args);
