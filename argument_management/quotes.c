@@ -1,17 +1,5 @@
 #include "../minishell.h"
 
-// /// @brief TROCA TODOS AS TABULACAO POR ESPACOES
-// /// @param str STRING QUE SERA PERCORRIDA
-// void	swap_space(char *str)
-// {
-// 	while (*str)
-// 	{
-// 		if (*str == '	')
-// 			*str = ' ';
-// 		str++;
-// 	}
-// }
-
 /// @brief TROCA TODOS AS TABULACAO POR ESPACOES
 /// @param args ARRAY DE STRING QUE SERA PERCORRIDA
 void	swap_tab(char **args) // FUNCAO USADA PARA TESTAR SEM TAB E COM SPACE ANTES DE GERENCIAR OS ARGUMENTOS // AGR CANONIZADA
@@ -57,21 +45,6 @@ int closing_quotes(char *str, char quotes)
 /// @param double_quotes SINALIZADOR QUE IDENTIFICA EXISTENCIA DE ASPAS ABERTAS
 void    swap_caracter(char *c, int single_quotes, int double_quotes)
 {
-    // TABELA ASCII
-    // " == 34
-    // ' == 39
-
-    // ' -> 200 -> -1
-    // " -> 201 -> -2
-    // $ -> 202 -> -3
-    // > -> 203 -> -4
-    // >> -> 
-    // | -> 204 -> -5
-    // < -> 205 -> -6
-    // << -> 
-	// SPACE -> -7
-	// TAB -> -8
-
     if (*c == '	' && single_quotes == 0 && double_quotes == 0)
         *c = ' ';
     else if (*c == ' ' && (single_quotes == 1 || double_quotes == 1))
@@ -94,10 +67,6 @@ void    swap_caracter(char *c, int single_quotes, int double_quotes)
 /// @param str STRING QUE SERA PERCORRIDA
 void	quotes(char *str)
 {
-    // TABELA ASCII
-    // " == 34
-    // ' == 39
-
 	int	single_quotes;
 	int	double_quotes;
 
@@ -109,62 +78,14 @@ void	quotes(char *str)
 			single_quotes++;
 		else if (*str == 34 && single_quotes == 0 && (double_quotes == 1 || closing_quotes(str, 34)))
 			double_quotes++;
-
         swap_caracter(str, single_quotes, double_quotes);
-
 		if (single_quotes == 2)
 			single_quotes = 0;
 		else if (double_quotes == 2)
 			double_quotes = 0;
-
 		str++;
 	}
 }
-
-/// @brief REMOVE AS ASPAS COM VALORES ALTERNATIVOS ' == -1 E " == -2
-/// @param str STRING QUE SERA REMOVIDA AS ASPAS
-/// @return RETORNA UM NOVO ENDERECO DE MEMORIA COM A MESMA STRING MAS SEM AS ASPAS MODIFICADAS (USA free() NO ANTIGO ENDERECO)
-/// @return RETORNA O PROPRIO ENDERECO DE str CASO NAO TENHA ASPAS MODIFICADA
-// char	*remove_quotes(char *str)
-// {
-//     // ' -> 200 -> -1
-//     // " -> 201 -> -2
-
-// 	int	i;
-// 	int	j;
-// 	int	quotes;
-// 	char	*new_str;
-
-// 	if (str == NULL)
-// 		return (NULL);
-// 	quotes = 0;
-// 	i = 0;
-// 	while (str[i])
-// 	{
-// 		if (str[i] == -1 || str[i] == -2)
-// 			quotes++;
-// 		i++;
-// 	}
-// 	if (quotes == 0)
-// 		return (str);
-// 	new_str = malloc((ft_strlen(str) + 1 - quotes) * sizeof(char));
-// 	if (new_str == NULL)
-// 		return (str);
-// 	i = 0;
-// 	j = 0;
-// 	while (str[i])
-// 	{
-// 		if (str[i] != -1 && str[i] != -2)
-// 		{
-// 			new_str[j] = str[i];
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// 	new_str[j] = '\0';
-// 	free(str);
-// 	return (new_str);
-// }
 
 /// @brief REMOVE AS ASPAS COM VALORES ALTERNATIVOS ' == -1 E " == -2 REUTILIZANDO O ANTIGO ENDERECO DE MEMORIA E COLOCANDO '\0' NO FIM DA STRING EXEMPLO: "teste"\0 -> teste\0"\0
 /// @param str STRING QUE SERA REMOVIDA AS ASPAS
@@ -188,17 +109,6 @@ void	remove_quotes(char *str) // ALTERNATIVA DE char *remove_quotes(char *str) (
 /// @param args STRINGS A SEREM REVERTIDAS
 void	revert_caracter(char **args)
 {
-    // ' -> 200 -> -1
-    // " -> 201 -> -2
-    // $ -> 202 -> -3
-    // > -> 203 -> -4
-    // >> -> 
-    // | -> 204 -> -5
-    // < -> 205 -> -6
-    // << -> 
-	// SPACE -> -7
-	// TAB -> -8
-
 	int	i;
 	int	j;
 

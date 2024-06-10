@@ -25,13 +25,11 @@
 
 
 
-// LISTA USADA PARA ARMAZENAR OS INDERECOS DE MEMORIA DAS VARIAVEIS DE AMBIENTE MAS NAO DISPONIBILIZAR PARA SUBPROCESSOS
 typedef struct s_str
 {
 	char	*str;
 	struct s_str	*next;
 }	t_str;
-
 
 
 // ./assistant/len.c
@@ -54,7 +52,6 @@ char	*skip_c(char *str, char c);
 
 // ./assistant/copy.c
 char	*copy_str(char *str);
-// char	**copy_str_str(char	**ptr);
 
 // ./assistant/search.c
 int	compare(char *s1, char *s2);
@@ -72,10 +69,7 @@ void	free_list(t_str **no);
 
 // ./assistant/ft_itoa.c
 char	*ft_itoa(int n);
-/// @param str STRING QUE SERA PERCORRIDA
-/// @param c CHAR Q SERA USADO COMO REFERENCIA PARA PARAR O WHILE
-/// @return RETORNA O ENDERECO DO PRIMEIRO ELEMENTO DIFERENTE DO CHAR c
-/// @return RETORNA NULL CASO str SEJA NULL
+
 // ./assistant/ft_atoi.c
 int	ft_atoi(const char *str);
 
@@ -87,21 +81,21 @@ void	error_message(char *message, char *arg, int status, t_str **env_list);
 // ./argument management/argument_management.c
 int	len_separating_operators(char *str);
 void	separate_redirection_operators(char **str);
-void	argument_management(char ***argv, t_str **env_list);
+void	new_args(char **str, char **copy_str);
+int	argument_management(char **str, char ***argv, t_str **env_list);
 
 // ./argument management/environment_variable.c
 int	search_dollar_sign(char *str);
 char	*malloc_variable(char *str, t_str **env_list);
+void	swap_variable(t_str **env_list, char **str, char *copy_new, int *i);
 char	*expand_variable(char *str, t_str **env_list);
 char	*environment_variable(char *arg, t_str **env_list);
 
 // ./argument management/quotes.c
-// void	swap_space(char *str);
 void	swap_tab(char **args);
 int closing_quotes(char *str, char quotes);
 void    swap_caracter(char *c, int single_quotes, int double_quotes);
 void	quotes(char *str);
-// char	*remove_quotes(char *str);
 void	remove_quotes(char *str);
 void	revert_caracter(char **args);
 
@@ -188,6 +182,8 @@ void	commands(char *str, char **args, char ***argenv, t_str **env_list);
 
 
 // ./minishell.c
+void	init_shell(t_str **env_list, char ***argenv);
+void	execute_command(char *str, char **args, char ***argenv, t_str **env_list);
 
 
 

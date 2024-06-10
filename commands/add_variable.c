@@ -79,7 +79,6 @@ void	swap_variable_array(char *old_variable, char *new_variable, char **env)
 	}
 }
 
-
 void	add_variable(char **argv, char **env, t_str **env_list)
 {
 	int	i;
@@ -91,9 +90,9 @@ void	add_variable(char **argv, char **env, t_str **env_list)
 	while (argv[i])
 	{
 		name_variable = copy_name_variable(argv[i]);
-		no = search_variable_list(env_list, name_variable); // search_variable_list() ESPERA COMO SEGUNDO ARGUMENTO APENAS O NOME DA VARIAVEL
+		no = search_variable_list(env_list, name_variable);
 		free(name_variable);
-		if (no) // PROCURA SE A VARIAVEL JA EXISTE E CASO SIM REDECLARAR ELA COM SEU NOVO VALOR
+		if (no)
 		{
 			new_variable = copy_str(argv[i]);
 			swap_variable_array(no->str, new_variable, env);

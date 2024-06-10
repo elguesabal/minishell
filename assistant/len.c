@@ -67,32 +67,19 @@ int	listlen(t_str *no)
 /// @return TAMANHO CORRETO QUE str DEVE ASSSUMIR PARA RECEBER str COM TODAS AS VARIAVEIS EXPANDIDAS
 int	len_all_variable(char *str, t_str **env_list)
 {
-	// int	i;
 	int	len;
 	t_str	*no;
 
-	// i = 0;
 	len = 0;
 	while (*str)
 	{
 		if (*str == '$')
 		{
-			// i += TAMANHO DA VARIAVEL
-			no = search_variable_list(env_list, str + 1); // $PWD -> PWD=/nfs/homes/joseanto/minishell
-// printf("return: %s\n", no->str);
+			no = search_variable_list(env_list, str + 1);
 			if (no)
 			{
-				len += ft_strlen(no->str) - strlen_char(no->str, '=') - 1; // ESTOU INCREMENTANDO NA CONTAGEM POREM TBM USO i PARA MARCAR O INDICE
-// printf("variavel: %s -> ft_strlen(no->str): %ld -> strlen_char(str, '='): %d\n", no->str, ft_strlen(no->str), strlen_char(no->str, '='));
-// (void)no;
-// if (no == NULL)
-// 	printf("NULL\n");
-// printf("len_all_variable: %s\n", no->str);
-
-				// while (*str && ((*str >= '0' && *str <= '9') || (*str >= 'A' && *str <= 'Z') || (*str >= 'a' && *str <= 'z') || *str == '_')) // ALTERNATIVA BURRA PARA str += strlen_char(no->str, '=');
-				// 	str++;
-
-				str += strlen_char(no->str, '='); // QUE MERDA EU TAVA FAZENDO AKI?? PIOR Q EU FIZ ESSA MEGA CAGADA E O CODIGO TAVA FUNCIONANDO KKKKKKKK ZERO LOGICA
+				len += ft_strlen(no->str) - strlen_char(no->str, '=') - 1;
+				str += strlen_char(no->str, '=');
 			}
 			else
 			{
@@ -104,7 +91,5 @@ int	len_all_variable(char *str, t_str **env_list)
 			len++;
 		str++;
 	}
-// printf("aki nao deu bo: %d\n", len);
-// printf("len: %d\n", len);
 	return (len);
 }

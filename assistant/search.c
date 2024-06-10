@@ -12,7 +12,6 @@ int	compare(char *s1, char *s2)
 	if (s2 == NULL)
 		return (0);
 	i = 0;
-	// while ((s1[i] || s2[i]) && s2[i] != ' ' && s2[i] != '	') // CONDICAO USADA ANTES DA FUNCAO compare() RECEBER args[0] (ANTES RECEBIA str)
 	while (s1[i] || s2[i])
 	{
 		if (s1[i] != s2[i])
@@ -26,33 +25,14 @@ int	compare(char *s1, char *s2)
 /// @param s1 STRING A SER COMPARADA
 /// @param s2 STRING A SER COMPARADA
 /// @return SE AO FINAL DA COMPARACAO TENHA '\0' em s1 e '=' em s2 RETORNA 1 EXEMPLO: "PWD", "PWD=/home/jose/programacao/minishell"
-int	compare_variable(char *s1, char *s2) // "teste$PWD teste" -> teste/home/jose/programacao/minishell teste // NA TEORIA ISSO NAO ACONTECERIA COM O CODIGO Q ESTA COMENTADO
+int	compare_variable(char *s1, char *s2)
 {
-	// int			i;
-
-	// if (s2 == NULL)
-	// 	return (0);
-	// i = 0;
-	// while (s1[i] && s2[i] && s2[i] != ' ' && s2[i] != '	' && s2[i] != '$') // while (s1[i] && s2[i]) // TENTANTO ARRUMAR O ERRO DE NAO CONSEGUIR INTERPRETAR NADA DPS DO NOME DA VARIAVEL NO MESMO ARGUMENTO
-	// {
-	// 	if (s1[i] != s2[i])
-	// 		return (0);
-	// 	i++;
-	// }
-	// if ((s1[i] == '=' && s2[i] == '\0') || (s1[i] == '=' && s2[i] == ' ') || (s1[i] == '=' && s2[i] == '	') || (s1[i] == '=' && s2[i] == '$')) // if (s1[i] == '=' && s2[i] == '\0') // TENTANTO ARRUMAR O ERRO DE NAO CONSEGUIR INTERPRETAR NADA DPS DO NOME DA VARIAVEL NO MESMO ARGUMENTO
-	// 	return (1);
-	// else
-	// 	return (0);
-
-
-// printf("compare: %s\n", s2);
-
 	int			i;
 
 	if (s2 == NULL)
 		return (0);
 	i = 0;
-	while (s1[i] && s2[i] && ((s2[i] >= '0' && s2[i] <= '9') || (s2[i] >= 'A' && s2[i] <= 'Z') || (s2[i]>= 'a' && s2[i] <= 'z') || s2[i] == '_')) // while (s1[i] && s2[i]) // TENTANTO ARRUMAR O ERRO DE NAO CONSEGUIR INTERPRETAR NADA DPS DO NOME DA VARIAVEL NO MESMO ARGUMENTO
+	while (s1[i] && s2[i] && ((s2[i] >= '0' && s2[i] <= '9') || (s2[i] >= 'A' && s2[i] <= 'Z') || (s2[i]>= 'a' && s2[i] <= 'z') || s2[i] == '_'))
 	{
 		if (s1[i] != s2[i])
 			return (0);
@@ -60,7 +40,6 @@ int	compare_variable(char *s1, char *s2) // "teste$PWD teste" -> teste/home/jose
 	}
 	return (1);
 }
-
 
 /// @brief PROCURA UM CHAR DENTRO DE UMA ESTRING
 /// @param str STRING A SER ANALIZADA
@@ -139,9 +118,5 @@ int	compare_str(char *s1, char *s2)
 		s1++;
 		s2++;
 	}
-	// if (*s1 == '\0' && *s2 == '\0')
-	// 	return (1);
-	// else
-	// 	return (0);
 	return (*s1 == '\0' && *s2 == '\0');
 }

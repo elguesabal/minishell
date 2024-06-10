@@ -35,6 +35,38 @@ char	*malloc_variable(char *str, t_str **env_list)
 	return (copy_new);
 }
 
+/// @brief TROCA A VARIAVEL DE AMBIENTE POR SEU VALOR
+/// @param env_list LISTA ENCADEADA COM TODAS AS VARIAVEIS DE AMBIENTE
+/// @param str STRING Q VAI TER AS VARIAVEIS ESPANDIDAS
+/// @param copy_new ESTRING Q ESTA RECEBENDO str COM AS VARIAVEIS EXPANDIDAS
+/// @param i POSICAO DE GRAVACAO DE copy_new
+void	swap_variable(t_str **env_list, char **str, char *copy_new, int *i)
+{
+	t_str	*no;
+	char	*variable;
+
+	no = search_variable_list(env_list, &str[0][1]);
+	if (no)
+	{
+		variable = skip_c(no->str, '=') + 1;
+		while (*variable)
+		{
+			copy_new[*i] = *variable;
+			variable++;
+			(*i)++;
+		}
+	}
+	if (str[0][0] == '$' && str[0][1] == '?')
+		(*str)++;
+	else
+	{
+		while (str[0][1] && ((str[0][1] >= '0' && str[0][1] <= '9')
+			|| (str[0][1] >= 'A' && str[0][1] <= 'Z')
+			|| (str[0][1] >= 'a' && str[0][1] <= 'z') || str[0][1] == '_'))
+			(*str)++;
+	}
+}
+
 /// @brief RETORNA UM NOVO ENDERECO DE MEMORIA COPIANDO O CONTEUDO DE str ATE E SUBISTITUINDO $VARIAVEL POR SEU VALOR
 /// @param str STRING Q VAI TER AS VARIAVEIS ESPANDIDAS
 /// @param env_list LISTA ENCADEADA COM TODAS AS VARIAVEIS DE AMBIENTE
@@ -43,8 +75,6 @@ char	*expand_variable(char *str, t_str **env_list)
 {
 	char	*copy_new;
 	int	i;
-	t_str	*no;
-	char	*variable;
 
 	copy_new = malloc_variable(str, env_list);
 	if (copy_new == NULL)
@@ -53,28 +83,12 @@ char	*expand_variable(char *str, t_str **env_list)
 	while (*str)
 	{
 		if (*str == '$')
+			swap_variable(env_list, &str, copy_new, &i);
+		else
 		{
-			no = search_variable_list(env_list, str + 1);
-			if (no)
-			{
-				variable = skip_c(no->str, '=') + 1;
-				while (*variable)
-				{
-					copy_new[i] = *variable;
-					variable++;
-					i++;
-				}
-			}
-			if (*str == '$' && *(str + 1) == '?')
-				str++;
-			else
-			{
-				while (*(str + 1) && ((*(str + 1) >= '0' && *(str + 1) <= '9') || (*(str + 1) >= 'A' && *(str + 1) <= 'Z') || (*(str + 1) >= 'a' && *(str + 1) <= 'z') || *(str + 1) == '_'))
-					str++;
-			}
-		}
-		else if (++i)
+			i++;
 			copy_new[i - 1] = *str;
+		}
 		str++;
 	}
 	copy_new[i] = '\0';

@@ -115,28 +115,3 @@ char	**ft_split(char const *s, char c)
 	free(aux);
 	return (r);
 }
-
-// #include <stdio.h>
-
-// int	main(void)
-// {
-// 	char	**mat;
-// 	int	i;
-// 	int	j;
-
-// 	mat = ft_split("micro-onda", '-');	
-// 	i = 0;
-// 	while (mat[i])
-// 	{
-// 		j = 0;
-// 		while (mat[i][j])
-// 		{
-// 			printf("%c", mat[i][j]);
-// 			j++;
-// 		}
-// 		printf("\n");
-// 		i++;
-// 	}
-// 	free(mat);
-// 	return (0);
-// }
