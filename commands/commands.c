@@ -9,13 +9,13 @@ void	commands(char *str, char **args, char ***argenv, t_str **env_list)
 	else if (compare("cd", args[0]))
 		cd(str, *argenv, env_list);
 	else if (compare("pwd", args[0]))
-		pwd();
+		pwd(env_list);
 	else if (compare("export", args[0]))
 		export(args, argenv, env_list);
 	else if (compare("unset", args[0]))
 		unset(args, env_list, *argenv);
 	else if (compare("env", args[0]))
-		env(*argenv);
+		env(*argenv, env_list);
 	else if (compare("exit", args[0]))
 		exit_shell(args, str, *argenv, env_list);
 	else

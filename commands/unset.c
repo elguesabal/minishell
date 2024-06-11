@@ -1,22 +1,5 @@
 #include "../minishell.h"
 
-// char	*search_and_return_previous(t_str **no, char *str) // SEMELHANTE A search_variable_list() MAS RETORNA O NO ANTERIOR
-// {
-// 	t_str	*assist;
-//     t_str   *previous;
-
-// 	assist = *no;
-// 	while (assist)
-// 	{
-// 		if (compare_variable(assist->str, str))
-// 			return (assist->str);
-// 		assist = assist->next;
-// 	}
-// 	return (NULL);
-// }
-
-
-
 /// @brief PROCURA UMA STRING DENTRO DO ARRAY PASSADO E REMOVE O ELEMENTO ENCONTRADO MOVENDO OS ELEMENTOS SEGUINTES E DEIXANDO 2 ELEMENTOS NULL AO FIM (UM NULL NORMAL DO ARRAY E OUTRO DEIXADO AO REMOVER)
 /// @param env ARRAY A QUE TERA SEU ELEMENTO REMOVIDO
 /// @param str STRING QUE SERA COMPARADA DENTRO DO ARRAY
@@ -40,20 +23,6 @@ void	remove_variable_array(char **env, char *str)
 		else
 			i++;
 	}
-
-	// while (*env) // OUTRO JEITO DE FAZER MAS TA DANDO CORE DUMPED // ACHO QUE NAO DA PQ EU ESTARIA PERDENDO O PRIMEIRO ENDERECO PARA SALVAR OS PROXIMOS TALVEZ EU VERIFIQUE MELHOR DPS
-	// {
-	// 	if (compare_variable(*env, str))
-	// 	{
-	// 		while (*env)
-	// 		{
-	// 			env = env + 1;
-	// 			env++;
-	// 		}
-	// 	}
-	// 	else
-	// 		env++;
-	// }
 }
 
 /// @brief PROCURA UMA STRING DENTRO DA LISTA ENCADEADA PASSADA E REMOVE O ELEMENTO E DANDO FREE
@@ -85,8 +54,9 @@ void	remove_variable_list(t_str **no, char *str)
 
 void	unset(char **argv, t_str **env_list, char **env)
 {
+	variable_status(0, env_list); // PRIMEIRO EU ATUALIZO COMO 0 SE DER ERRO ATUALIZA DNV KKKKK
 	while (*argv)
-    {
+	{
 		remove_variable_array(env, *argv);
 		remove_variable_list(env_list, *argv);
         argv++;

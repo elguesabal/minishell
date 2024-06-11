@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-void	env(char **env)
+void	env(char **env, t_str **env_list)
 {
 	if (env == NULL)
 		return ;
@@ -9,12 +9,5 @@ void	env(char **env)
 		printf("%s\n", *env);
 		env++;
 	}
-
-	// printf("%s\n", env[0]);
-	// printf("%s\n", env[1]);
-	// printf("%s\n", env[2]);
-	// printf("%s\n", env[3]);
-	// printf("%s\n", env[4]);
-	// if (env)
-	// 	printf("teste: %p\n", env);
+	variable_status(0, env_list);
 }

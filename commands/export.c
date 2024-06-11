@@ -10,17 +10,12 @@ t_str	*search_variable_list(t_str **no, char *str)
 	t_str	*assist;
 
 	assist = *no;
-// printf("str: %s\n", str);
-// printf("str: %c\n", assist->str[0]);
-	if (str[0] == '?' && str[1] == '\0') // TIVE Q FAZER ESSA GAMBIARRA POR CAUSA DA EXCECAO DA VARIAVEL DE STATUS (?) // NAO FUNCIONOU
+	if (str[0] == '?' && str[1] == '\0')
 	{
 		while (assist)
 		{
 			if (assist->str[0] == '?' && assist->str[1] == '=')
-			{
-// printf("coringuei: %s\n", assist->str);
 				return (assist);
-			}
 			assist = assist->next;
 		}
 	}
@@ -30,7 +25,6 @@ t_str	*search_variable_list(t_str **no, char *str)
 			return (assist);
 		assist = assist->next;
 	}
-// printf("retornou NULL tbm; str: %s\n", str);
 	return (NULL);
 }
 
@@ -73,27 +67,8 @@ void	export_variable(char ***env, char *str) // ESTA FUNCAO NAO RETORNA MAIS NAD
 	}
 	new_env[i] = str;
 	new_env[i + 1] = NULL;
-
-// printf("env[0][0]: %s\n", env[0][0]);
-// printf("env[0][1]: %s\n", env[0][1]);
-// printf("env[0][2]: %s\n", env[0][2]);
-
-// printf("env[0]: %p\n", env[0]);
-// printf("env: %p\n", env);
-// printf("env: %s\n", env[0][0]);
-// printf("new_env: %p\n", new_env);
-
-// i = 0;
-// while (new_env[i])
-// {
-// 	printf("new_env[i]: %s\n", new_env[i]);
-// 	i++;
-// }
-
 	free(*env);
-	*env = new_env;	// KARAI ESSA POHA TA ME VENCENDO
-	// return (new_env);
-// printf("teste: %p\n", env[0]);
+	*env = new_env;
 }
 
 /// @brief COMPARTILHA O ENDERECO DE MEMORIA CITADO EM **argv Q ESTA ARMAZENADO EM **env_list ASSIM QUANDO OUVER ALGUM SUBPROCESSO SERA PASSADO **env COMO ARGUMENTO
@@ -102,42 +77,35 @@ void	export_variable(char ***env, char *str) // ESTA FUNCAO NAO RETORNA MAIS NAD
 /// @param env_list LISTA ENCADEADA Q CONTEM TODAS AS VARIAVEIS DE AMBIENTE
 /// @return RETORNA UM NOVO ENDERECO DE MEMORIA COM TODOS AS VARIAVEIS DE AMBIENTE CASO ENCONTRADO A VARIAVEL CITADA EM argv
 /// @return RETORNA O ENDERECO DE MEMORIA ANTIGO CASO A VARIAVEL NAO SEJA ENCONTRADA NA LISTA ENCADEADA
-void	export(char **argv, char ***env, t_str **env_list) // ESTA FUNCAO NAO RETORNA MAIS NADA E FAZ A MODIFICACAO DIRETO NO ENDERECO DE MEMORIA DO PONTEIRO char **argenv DA MAIN
+void	export(char **argv, char ***env, t_str **env_list)
 {
 	int	i;
 	t_str	*return_env;
 	char	*name_variable;
 	char	**arg;
 
+	variable_status(0, env_list); // PRIMEIRO EU ATUALIZO COMO 0 SE DER ERRO ATUALIZA DNV KKKKK
 	i = 1;
 	while (argv[i])
 	{
-// printf("argv[%d]: %s\n", i, argv[i]);
-		if (declaration_variable(argv[i])) // SE TRUE argv[i] == "ARG=VALOR"
+		if (declaration_variable(argv[i]))
 		{
-			arg = malloc(2 * sizeof(char *)); // ALTERNATIVA PARA A LINHA:  add_variable(&argv[i], *env, env_list); (90)
+			arg = malloc(2 * sizeof(char *));
 			if (argv == NULL)
 				return ;
 			arg[0] = argv[i];
 			arg[1] = NULL;
 			add_variable(arg, *env, env_list);
-			free(arg); // ALTERNATIVA PARA A LINHA: add_variable(&argv[i], *env, env_list); (90)
-			// add_variable(&argv[i], *env, env_list); ALTERNATIVA PARA AS LINHAS: arg = malloc(2 * sizeof(char *)); (83) A free(arg); (89)
+			free(arg);
 			name_variable = copy_name_variable(argv[i]);
 			free(argv[i]);
 			argv[i] = name_variable;
 		}
 		else if (argv[i] == NULL || (argv[i][0] >= '0' && argv[i][0] <= '9') || metacaracterer(argv[i]))
 			error_message("-minishell: export: `%s': não é um identificador válido\n", argv[i], 912, env_list); // AINDA NAO SEI AO CERTO QUAL STATUS COLOCAR
-		// else
-		// 	printf("ja existia mas nao era exportado\n");
-// printf("env: %p\n", env);
-
-		return_env = search_variable_list(env_list, argv[i]); // SE declaration_variable() RETORNAR 1 SIGNIFICA Q A STRING TEM O SEU CONTEUDO "=..." E A FUNCAO search_variable_list ESPERA SO O NOME DA VARIAVEL
+		return_env = search_variable_list(env_list, argv[i]);
 		if (return_env && !search_variable_array(*env, return_env->str))
 			export_variable(env, return_env->str);
-// printf("return_env->str: %s\n", return_env->str);
-// printf("env: %p\n", env);
 		i++;
 	}
 }

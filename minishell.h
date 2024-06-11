@@ -141,17 +141,14 @@ void	update_status(t_str **no, char *str);
 void	variable_status(int status, t_str **env_list);
 
 // ./commands/echo.c
-// int	search_operator(char *str, char *operator) // TEMPORARIO // NAO USANDO POR ENQUANTO
-// int	search_operator(char **argv, char *operator); // TEMPORARIO // NAO USANDO POR ENQUANTO
 void	echo(char **argv, t_str **env_list);
 
 // ./commands/cd.c
 char	*new_pwd(char *pwd);
-void	cd(char *command, char **env, t_str **env_list); // DESSE MODO O COMANDO FUNCIONA MESMO Q EU ESTEJA ENTRANDO EM UMA PASTA Q CONTENHA ESPACO NO NOME
-// void	cd(char **argv);
+void	cd(char *command, char **env, t_str **env_list);
 
 // ./commands/pwd.c
-void	pwd(void);
+void	pwd(t_str **env_list);
 
 // ./commands/export.c
 t_str	*search_variable_list(t_str **no, char *str);
@@ -165,10 +162,10 @@ void	remove_variable_list(t_str **no, char *str);
 void 	unset(char **argv, t_str **env_list, char **env);
 
 // ./commands/env.c
-void	env(char **env);
+void	env(char **env, t_str **env_list);
 
 // ./commands/exit.c
-void	free_split(char **argv);    // TEMPORARIO
+void	free_split(char **argv);
 void	exit_shell(char **argv, char *str, char **env, t_str **env_list);
 
 // ./commands/exec_program.c

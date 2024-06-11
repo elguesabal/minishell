@@ -13,7 +13,7 @@ char    *build_path(char *str1, char *str2)
     if (str1 == NULL || str2 == NULL)
         return (NULL);
     str = malloc((ft_strlen(str1) + ft_strlen(str2) + 2) * sizeof(char));
-	if (str == NULL)
+	if (str == NULL) // FALTOU LINHA DA UM CREU AKI
 	{
 		printf("Error: a funcao malloc() retornou NULL\n");
 		return (NULL);

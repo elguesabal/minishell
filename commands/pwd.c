@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-void	pwd(void)
+void	pwd(t_str **env_list)
 {
 	char	*pwd;
 
@@ -9,6 +9,7 @@ void	pwd(void)
 	{
 		printf("%s\n", pwd);
 		free(pwd);
+		variable_status(0, env_list);
 	}
 	else
 		printf("Error\na funcao getcwp() retornou NULL\n");
