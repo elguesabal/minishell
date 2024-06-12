@@ -42,14 +42,13 @@ int	strlen_char(char *str, char c) // VOU CONFIAR NA VRIFICACAO DA FUNCAO search
 	return (-1);
 }
 
-
 /// @brief CONTA E RETORNA O TAMNHO DA LISTA ENCADEADA
 /// @param no LISTA QUE SERA CONTADO OS ELEMENTOS
 /// @return RETORNA O TAMNHO DA LISTA
 int	listlen(t_str *no)
 {
 	t_str	*assist;
-	int	i;
+	int		i;
 
 	assist = no;
 	i = 0;
@@ -67,7 +66,7 @@ int	listlen(t_str *no)
 /// @return TAMANHO CORRETO QUE str DEVE ASSSUMIR PARA RECEBER str COM TODAS AS VARIAVEIS EXPANDIDAS
 int	len_all_variable(char *str, t_str **env_list)
 {
-	int	len;
+	int		len;
 	t_str	*no;
 
 	len = 0;

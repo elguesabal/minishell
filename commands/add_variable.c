@@ -38,7 +38,7 @@ int	declaration_variable(char *str)
 char	*copy_name_variable(char *str)
 {
 	char	*name;
-	int	i;
+	int		i;
 
 	if (str == NULL)
 		return (NULL);
@@ -81,7 +81,7 @@ void	swap_variable_array(char *old_variable, char *new_variable, char **env)
 
 void	add_variable(char **argv, char **env, t_str **env_list)
 {
-	int	i;
+	int		i;
 	char	*name_variable;
 	char	*new_variable;
 	t_str	*no;
@@ -131,7 +131,7 @@ void	variable_status(int status, t_str **env_list)
 {
 	char	*num;
 	char	*new_variable;
-	int	i;
+	int		i;
 
 	num = ft_itoa(status);
 	new_variable = malloc((ft_strlen(num) + 3) * sizeof(char));

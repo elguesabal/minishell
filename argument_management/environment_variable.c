@@ -74,7 +74,7 @@ void	swap_variable(t_str **env_list, char **str, char *copy_new, int *i)
 char	*expand_variable(char *str, t_str **env_list)
 {
 	char	*copy_new;
-	int	i;
+	int		i;
 
 	copy_new = malloc_variable(str, env_list);
 	if (copy_new == NULL)
@@ -99,7 +99,7 @@ char	*environment_variable(char *arg, t_str **env_list)
 {
 	char	*arg_free;
 	t_str	*no;
-	int	i;
+	int		i;
 
 	if (search_dollar_sign(arg))
 	{

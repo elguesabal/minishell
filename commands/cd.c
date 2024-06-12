@@ -1,9 +1,12 @@
 #include "../minishell.h"
 
+/// @brief NOVO CAMINHO ATUAL DA VARIAVEL DE AMBIENTE PWD
+/// @param pwd CAMINHO ATUALIZADO
+/// @return RETORNA A STRING COM VARIAVEL DE AMBIENTE PRONTA PARA SER ATUALIZADA
 char	*new_pwd(char *pwd)
 {
 	char	*variable;
-	int	i;
+	int		i;
 
 	variable = malloc((ft_strlen(pwd) + 5) * sizeof(char));
 	if (variable == NULL)
@@ -26,7 +29,7 @@ char	*new_pwd(char *pwd)
 void    cd(char *command, char **env, t_str **env_list)
 {
 	struct stat	info;
-	char	*argv[2];
+	char		*argv[2];
 
 	command = skip_char(command);
 	command = skip_space(command);

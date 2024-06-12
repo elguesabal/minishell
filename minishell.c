@@ -100,7 +100,7 @@ int	main(int argc, char **argv, char **argenv)
 {
 	char	*str;
 	char	**args;
-	t_str	*env_list;
+	t_str	*env_list; 
 
 	(void)argc;
 	(void)argv;

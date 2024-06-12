@@ -7,7 +7,7 @@
 /// @return CASO NO FINAL DA COMPARACAO TENHA ALGO DIFERENTE RETORNA 0 EXEMPLO: "ls", "ls-all" ou "pwd", "pwdx"
 int	compare(char *s1, char *s2)
 {
-	int			i;
+	int	i;
 
 	if (s2 == NULL)
 		return (0);
@@ -27,7 +27,7 @@ int	compare(char *s1, char *s2)
 /// @return SE AO FINAL DA COMPARACAO TENHA '\0' em s1 e '=' em s2 RETORNA 1 EXEMPLO: "PWD", "PWD=/home/jose/programacao/minishell"
 int	compare_variable(char *s1, char *s2)
 {
-	int			i;
+	int	i;
 
 	if (s2 == NULL)
 		return (0);

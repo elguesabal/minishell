@@ -47,8 +47,9 @@ int	**init_fd(int n_process)
 /// @param n_process NUMERO DE FILE DESCRIPTIONS A SEREM FECHADOS
 void	close_fds(int **fd, int n_process)
 {
-	int	i = 0;
+	int	i;
 
+	i = 0;
 	while (i < n_process)
 	{
 		close(fd[i][0]);
@@ -90,9 +91,9 @@ void	redirection_pipe(int current_process, int **fd, int n_process)
 char	**args_pipe(char **argv, int process)
 {
 	char	**return_arg;
-	int	current_process;
-	int	i;
-	int	j;
+	int		current_process;
+	int		i;
+	int		j;
 
 	current_process = 0;
 	i = 0;
@@ -159,9 +160,9 @@ void	finish_pipe(int **fd, int n_process, pid_t *pid)
 void	command_pipe(char *str, char **argv, char ***argenv, t_str **env_list)
 {
 	pid_t	*pid;
-	int	**fd;
-	int	n_process;
-	int	i;
+	int		**fd;
+	int		n_process;
+	int		i;
 
 	n_process = count_pipe(argv);
 	pid = malloc((n_process + 1) * sizeof(pid_t));

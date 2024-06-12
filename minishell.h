@@ -171,6 +171,7 @@ void	exit_shell(char **argv, char *str, char **env, t_str **env_list);
 // ./commands/exec_program.c
 char    *build_path(char *str1, char *str2);
 char    *tester_path(char **path, char *file);
+void	error_execve(char *path_file, t_str **env_list, char **argv);
 void    exec_program(char **argv, char **env, char *str, t_str **env_list);
 
 // ./commands/commands.c

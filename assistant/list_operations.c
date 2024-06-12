@@ -44,7 +44,7 @@ char	**array_to_list(t_str **no)
 {
 	char	**array;
 	t_str	*assist;
-	int	i;
+	int		i;
 
 	array = malloc((listlen(*no) + 1) * sizeof(char *));
 	if (!array)
@@ -64,6 +64,8 @@ char	**array_to_list(t_str **no)
 	return (array);
 }
 
+/// @brief USA A FUNCAO free() EM TODOS OS NOS DE LISTA ENCADEADA QUE CONTENHA APENAS UMA STRING str
+/// @param no ENDERECO DE MEMORIA DO PRIMEIRO NO DA LISTA
 void	free_list(t_str **no)
 {
 	t_str	*assist;

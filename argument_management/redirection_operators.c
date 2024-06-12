@@ -19,7 +19,7 @@ int	len_arguments(char **argv)
 char	**next_process(char **argv)
 {
 	char	**args_process;
-	int	i;
+	int		i;
 
 	args_process = malloc((len_arguments(argv) + 1) * sizeof(char *));
 	if (args_process == NULL)
@@ -80,10 +80,10 @@ void	finish_redirection(int operator, int *new_std, char **args_process)
 
 void	redirection_operators(char *str, char **argv, char ***argenv, t_str **env_list)
 {
-	int	process;
-	int	operator;
+	int		process;
+	int		operator;
 	char	**args_process;
-	int	new_std[2];
+	int		new_std[2];
 
 	new_std[0] = dup(STDIN_FILENO);
 	new_std[1] = dup(STDOUT_FILENO);

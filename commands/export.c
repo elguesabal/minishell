@@ -54,7 +54,7 @@ int	search_variable_array(char **env, char *str)
 void	export_variable(char ***env, char *str) // ESTA FUNCAO NAO RETORNA MAIS NADA E FAZ A MODIFICACAO DIRETO NO ENDERECO DE MEMORIA DO PONTEIRO char **argenv DA MAIN
 {
 	char	**new_env;
-	int	i;
+	int		i;
 
 	new_env = malloc((strstrlen(*env) + 2) * sizeof(char *));
 	if (new_env == NULL)
@@ -79,7 +79,7 @@ void	export_variable(char ***env, char *str) // ESTA FUNCAO NAO RETORNA MAIS NAD
 /// @return RETORNA O ENDERECO DE MEMORIA ANTIGO CASO A VARIAVEL NAO SEJA ENCONTRADA NA LISTA ENCADEADA
 void	export(char **argv, char ***env, t_str **env_list)
 {
-	int	i;
+	int		i;
 	t_str	*return_env;
 	char	*name_variable;
 	char	**arg;

@@ -3,7 +3,7 @@
 void	echo(char **argv, t_str **env_list)
 {
 	char	flag;
-	int	i;
+	int		i;
 
 	flag = '\n';
 	i = 1;

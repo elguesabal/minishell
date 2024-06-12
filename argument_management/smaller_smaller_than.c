@@ -2,7 +2,7 @@
 
 void	init_smaller_smaller_than(char **args, t_str **env_list)
 {
-	int	fd;
+	int		fd;
 	char	*line;
 
 	while (*args && args[0][0] != '<')
