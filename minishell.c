@@ -72,6 +72,7 @@ while (arg[i] && arg[i + 1] != NULL)
 
 void	init_shell(t_str **env_list, char ***argenv)
 {
+	init_history();
 	*env_list = NULL;
 	creat_list(env_list, *argenv);
 	*argenv = array_to_list(env_list);
@@ -109,7 +110,8 @@ int	main(int argc, char **argv, char **argenv)
 	{
 		str = readline("minishell: ");
 // printf("testando ctrl+d\n");
-		add_history(str);
+		// add_history(str);
+		new_history(str);
 
 		if (*str && argument_management(&str, &args, &env_list) == 0)
 			execute_command(str, args, &argenv, &env_list);

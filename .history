@@ -1,0 +1,29 @@
+echo a
+export k=kkkkkkkk
+ls -all
+exit
+echo $USER
+echo '$USER'
+echo "$USER"
+echo "$USER
+echo "$USER'
+echo '$USER
+echo "'$USER'"
+echo "klsjdklajs      askjdlahsdj"
+clear
+env
+clear
+env
+cleaclear
+clear
+ls
+clear
+clear
+echo $?
+ahsdkjahsdkj
+ahsdkjahsdkj
+echo $?
+echo testanto history
+exit
+echo testanto history
+exit

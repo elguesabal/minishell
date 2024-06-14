@@ -76,6 +76,18 @@ int	ft_atoi(const char *str);
 // ./assistant/error_message.c
 void	error_message(char *message, char *arg, int status, t_str **env_list);
 
+// ./assistant/ft_strchr.c
+char	*ft_strchr(char *s, int c);
+
+// ./assistant/ft_strjoin.c
+char	*ft_strjoin(char *rest_line, char *buffer);
+
+// ./assistant/get_next_line.c
+char	*get_line(char *rest_line);
+char	*new_line(char *rest_line);
+char	*read_rest_line(int fd, char *rest_line);
+char	*get_next_line(int fd);
+
 
 
 // ./argument management/argument_management.c
@@ -128,6 +140,10 @@ void	init_less_than(char **args);
 
 // ./argument management/smaller_smaller_than.c
 void	init_smaller_smaller_than(char **args, t_str **env_list);
+
+// ./argument management/history.c
+void	init_history();
+void	new_history(char *str);
 
 
 

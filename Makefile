@@ -25,6 +25,9 @@ FILE =	minishell.c\
 	$(ASSISTANT)ft_itoa.c\
 	$(ASSISTANT)ft_atoi.c\
 	$(ASSISTANT)error_message.c\
+	$(ASSISTANT)ft_strchr.c\
+	$(ASSISTANT)ft_strjoin.c\
+	$(ASSISTANT)get_next_line.c\
 	$(ARGUMENTS)environment_variable.c\
 	$(ARGUMENTS)argument_management.c\
 	$(ARGUMENTS)quotes.c\
@@ -35,6 +38,7 @@ FILE =	minishell.c\
 	$(ARGUMENTS)smaller_smaller_than.c\
 	$(ARGUMENTS)redirection_operators.c\
 	$(ARGUMENTS)signal.c\
+	$(ARGUMENTS)history.c\
 	$(COMMANDS)add_variable.c\
 	$(COMMANDS)echo.c\
 	$(COMMANDS)cd.c\
