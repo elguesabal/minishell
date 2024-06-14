@@ -3,13 +3,12 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: wfranco <wfranco@student.42.rio>           +#+  +:+       +#+         #
+#    By: joseanto <joseanto@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/26 09:55:22 by joseanto          #+#    #+#              #
-#    Updated: 2024/06/04 19:18:05 by wfranco          ###   ########.fr        #
+#    Updated: 2024/06/14 20:42:46 by joseanto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
 
 ASSISTANT = ./assistant/
 COMMANDS = ./commands/
@@ -31,7 +30,8 @@ FILE =	minishell.c\
 	$(ARGUMENTS)environment_variable.c\
 	$(ARGUMENTS)argument_management.c\
 	$(ARGUMENTS)quotes.c\
-	$(ARGUMENTS)pipe.c\
+	$(ARGUMENTS)pipe1.c\
+	$(ARGUMENTS)pipe2.c\
 	$(ARGUMENTS)bigger_then.c\
 	$(ARGUMENTS)bigger_bigger_than.c\
 	$(ARGUMENTS)less_than.c\
@@ -40,6 +40,7 @@ FILE =	minishell.c\
 	$(ARGUMENTS)signal.c\
 	$(ARGUMENTS)history.c\
 	$(COMMANDS)add_variable.c\
+	$(COMMANDS)variable_status.c\
 	$(COMMANDS)echo.c\
 	$(COMMANDS)cd.c\
 	$(COMMANDS)pwd.c\

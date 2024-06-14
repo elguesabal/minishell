@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joseanto <joseanto@student.42.rio>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/14 20:07:30 by joseanto          #+#    #+#             */
+/*   Updated: 2024/06/14 20:09:57 by joseanto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 /// @brief NOVO CAMINHO ATUAL DA VARIAVEL DE AMBIENTE PWD
@@ -10,7 +22,7 @@ char	*new_pwd(char *pwd)
 
 	variable = malloc((ft_strlen(pwd) + 5) * sizeof(char));
 	if (variable == NULL)
-		return NULL;
+		return (NULL);
 	variable[0] = 'P';
 	variable[1] = 'W';
 	variable[2] = 'D';
@@ -26,22 +38,22 @@ char	*new_pwd(char *pwd)
 	return (variable);
 }
 
-void    cd(char *command, char **env, t_str **env_list)
+void	cd(char *command, char **env, t_str **env_list)
 {
 	struct stat	info;
 	char		*argv[2];
 
+	variable_status(0, env_list);
 	command = skip_char(command);
 	command = skip_space(command);
 	if (stat(command, &info) == 0 && S_ISDIR(info.st_mode) && access(command, X_OK) == -1)
-		error_message("-minishel: cd: %s: Permissão negada\n", command, 123, env_list); // AINDA NAO SEI AO CERTO QUAL STATUS COLOCAR
+		error_message("-minishel: cd: %s: Permissão negada\n", command, 1, env_list);
 	else if (stat(command, &info) == 0 && !S_ISDIR(info.st_mode))
-		error_message("-minishell: cd: %s: Não é um diretório\n", command, 666, env_list); // AINDA NAO SEI AO CERTO QUAL STATUS COLOCAR
+		error_message("-minishell: cd: %s: Não é um diretório\n", command, 1, env_list);
 	else if (chdir(command) == -1)
-		error_message("-minishell: cd: %s: Arquivo ou diretório inexistente\n", command, 999, env_list); // AINDA NAO SEI AO CERTO QUAL STATUS COLOCAR
+		error_message("-minishell: cd: %s: Arquivo ou diretório inexistente\n", command, 1, env_list);
 	argv[0] = new_pwd(getcwd(NULL, 0));
 	argv[1] = NULL;
 	add_variable(argv, env, env_list);
 	free(argv[0]);
-	variable_status(0, env_list);
 }

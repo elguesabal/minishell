@@ -1,25 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   search.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joseanto <joseanto@student.42.rio>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/14 20:07:15 by joseanto          #+#    #+#             */
+/*   Updated: 2024/06/14 20:37:05 by joseanto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
-
-/// @brief PROCURA UMA ESTRING NO COMECO DE OUTRA LEVANADO EM CONSIDERACAO O FINAL DA COMPARACAO
-/// @param s1 STRING A SER COMPARADA
-/// @param s2 STRING A SER COMPARADA
-/// @return SE AO FINAL DA COMPARACAO TENHA ' ' '	' OU '\0' RETORNA 1 EXEMPLO: "ls", "ls -all" ou "pwd", "pwd"
-/// @return CASO NO FINAL DA COMPARACAO TENHA ALGO DIFERENTE RETORNA 0 EXEMPLO: "ls", "ls-all" ou "pwd", "pwdx"
-int	compare(char *s1, char *s2)
-{
-	int	i;
-
-	if (s2 == NULL)
-		return (0);
-	i = 0;
-	while (s1[i] || s2[i])
-	{
-		if (s1[i] != s2[i])
-			return (0);
-		i++;
-	}
-	return (1);
-}
 
 /// @brief PROCURA UMA ESTRING NO COMECO DE OUTRA LEVANDO EM CONSIDERACAO O FINAL DA COMPARACAO
 /// @param s1 STRING A SER COMPARADA
@@ -32,7 +23,9 @@ int	compare_variable(char *s1, char *s2)
 	if (s2 == NULL)
 		return (0);
 	i = 0;
-	while (s1[i] && s2[i] && ((s2[i] >= '0' && s2[i] <= '9') || (s2[i] >= 'A' && s2[i] <= 'Z') || (s2[i]>= 'a' && s2[i] <= 'z') || s2[i] == '_'))
+	while (s1[i] && s2[i] && ((s2[i] >= '0' && s2[i] <= '9')
+			|| (s2[i] >= 'A' && s2[i] <= 'Z')
+			|| (s2[i] >= 'a' && s2[i] <= 'z') || s2[i] == '_'))
 	{
 		if (s1[i] != s2[i])
 			return (0);
@@ -93,15 +86,15 @@ int	search_next_operator(char **argv)
 	while (*argv)
 	{
 		if ((*argv)[0] == '|' && (*argv)[1] == '\0')
-			return(1);
+			return (1);
 		else if ((*argv)[0] == '>' && (*argv)[1] == '\0')
-			return(2);
+			return (2);
 		else if ((*argv)[0] == '>' && (*argv)[1] == '>')
-			return(3);
+			return (3);
 		else if ((*argv)[0] == '<' && (*argv)[1] == '\0')
-			return(4);
+			return (4);
 		else if ((*argv)[0] == '<' && (*argv)[1] == '<')
-			return(5);
+			return (5);
 		argv++;
 	}
 	return (0);

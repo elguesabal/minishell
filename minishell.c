@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wfranco <wfranco@student.42.rio>           +#+  +:+       +#+        */
+/*   By: joseanto <joseanto@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 18:23:25 by joseanto          #+#    #+#             */
-/*   Updated: 2024/06/04 19:16:25 by wfranco          ###   ########.fr       */
+/*   Updated: 2024/06/14 20:04:31 by joseanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 void check_operator(char **arg)
 {
@@ -69,7 +68,9 @@ while (arg[i] && arg[i + 1] != NULL)
 		printf("syntax error near '%c'\n", arg[i][0]);
 }
 
-
+/// @brief EXECUTA OS COMANDOS DE ACORDO OS OPERADORES DE REDIRECIONAMENTO
+/// @param env_list NO INICIAL QUE CAI CONTER TODAS AS VARIAVEIS DE AMBIENTE
+/// @param argenv PONTEIRO QUE VAI CONTER TOADAS AS VARIAVEIS DE AMBIENTE EXPORTADAS
 void	init_shell(t_str **env_list, char ***argenv)
 {
 	init_history();
@@ -110,7 +111,6 @@ int	main(int argc, char **argv, char **argenv)
 	{
 		str = readline("minishell: ");
 // printf("testando ctrl+d\n");
-		// add_history(str);
 		new_history(str);
 
 		if (*str && argument_management(&str, &args, &env_list) == 0)

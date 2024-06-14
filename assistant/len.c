@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   len.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joseanto <joseanto@student.42.rio>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/14 20:07:09 by joseanto          #+#    #+#             */
+/*   Updated: 2024/06/14 20:07:10 by joseanto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 size_t	ft_strlen(const char *str)
@@ -15,12 +27,12 @@ size_t	ft_strlen(const char *str)
 /// @return RETORNA A QUANTIDADE DE STRINGS
 int strstrlen(char **array_ptr)
 {
-    int i;
+	int i;
 
-    i = 0;
-    while (array_ptr[i])
-        i++;
-    return (i);
+	i = 0;
+	while (array_ptr[i])
+		i++;
+	return (i);
 }
 
 /// @brief ANALIZA UMA STRING A PROCURA DE UM CHAR E RETORNA O NUMERO DA SUA POSICAO

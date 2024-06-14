@@ -1,4 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joseanto <joseanto@student.42.rio>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/14 20:07:51 by joseanto          #+#    #+#             */
+/*   Updated: 2024/06/14 20:07:52 by joseanto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
+
+/// @brief DECLARA E EXPORTA UMA VARIAVEL DE AMBIENTE
+/// @param i INDICE QUE argv DEVE SER ACESSADO
+/// @param argv ARGUMENTOS PASSADO COMO COMANDO
+/// @param env ARRAY COM VARIAVEIS DE AMBIENTE EXPORTADAS
+/// @param env_list LISTA ENCADEADA COM TODAS AS VARIAVEIS DE AMBIENTE
+void	declaration_and_export(int i, char ***argv, char ***env, t_str **env_list)
+{
+	char	**arg;
+	char	*name_variable;
+
+	arg = malloc(2 * sizeof(char *));
+	if (*argv == NULL)
+		return ;
+	arg[0] = argv[0][i];
+	arg[1] = NULL;
+	add_variable(arg, *env, env_list);
+	free(arg);
+	name_variable = copy_name_variable(argv[0][i]);
+	free(argv[0][i]);
+	argv[0][i] = name_variable;
+}
 
 /// @brief PROCURA UMA ESTRING (VARIAVEL DE AMBIENTE) DENTRO DE UMA LISTA ENCADEADA
 /// @param no LISTA A SER PERCORRIDA
@@ -81,28 +115,18 @@ void	export(char **argv, char ***env, t_str **env_list)
 {
 	int		i;
 	t_str	*return_env;
-	char	*name_variable;
-	char	**arg;
 
-	variable_status(0, env_list); // PRIMEIRO EU ATUALIZO COMO 0 SE DER ERRO ATUALIZA DNV KKKKK
+	variable_status(0, env_list);
 	i = 1;
 	while (argv[i])
 	{
 		if (declaration_variable(argv[i]))
-		{
-			arg = malloc(2 * sizeof(char *));
-			if (argv == NULL)
-				return ;
-			arg[0] = argv[i];
-			arg[1] = NULL;
-			add_variable(arg, *env, env_list);
-			free(arg);
-			name_variable = copy_name_variable(argv[i]);
-			free(argv[i]);
-			argv[i] = name_variable;
-		}
-		else if (argv[i] == NULL || (argv[i][0] >= '0' && argv[i][0] <= '9') || metacaracterer(argv[i]))
-			error_message("-minishell: export: `%s': não é um identificador válido\n", argv[i], 912, env_list); // AINDA NAO SEI AO CERTO QUAL STATUS COLOCAR
+			declaration_and_export(i, &argv, env, env_list);
+		else if (argv[i] == NULL || (argv[i][0] >= '0' && argv[i][0] <= '9')
+			|| metacaracterer(argv[i]))
+			error_message(
+				"-minishell: export: `%s': não é um identificador válido\n",
+				argv[i], 1, env_list);
 		return_env = search_variable_list(env_list, argv[i]);
 		if (return_env && !search_variable_array(*env, return_env->str))
 			export_variable(env, return_env->str);

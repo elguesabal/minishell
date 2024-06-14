@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_program.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joseanto <joseanto@student.42.rio>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/14 20:07:43 by joseanto          #+#    #+#             */
+/*   Updated: 2024/06/14 20:07:44 by joseanto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 /// @brief CONCATENA O PRIMEIRO ARGUMENTO COM O SEGUNDO EM UM NOVO ENDERECO DE MEMORIA ADICIONANDO UM '/' NO MEIO
@@ -12,7 +24,8 @@ char	*build_path(char *str1, char *str2)
 
 	if (str1 == NULL || str2 == NULL)
 		return (NULL);
-	str = malloc((ft_strlen(str1) + ft_strlen(str2) + 2) * sizeof(char));
+	str = malloc((ft_strlen(str1) + ft_strlen(str2) + 2)
+			* sizeof(char));
 	i = 0;
 	while (*str1)
 	{
@@ -41,7 +54,7 @@ char	*build_path(char *str1, char *str2)
 char	*tester_path(char **path, char *file)
 {
 	char		*path_file;
-	struct stat info;
+	struct stat	info;
 
 	if (stat(file, &info) == 0)
 		return (copy_str(file));
@@ -67,13 +80,16 @@ void	error_execve(char *path_file, t_str **env_list, char **argv)
 	struct stat	info;
 
 	if (path_file[0] != '\0' && access(path_file, X_OK) == -1)
-		error_message("-minishell: %s: Permissão negada\n", path_file, 11, env_list); // AINDA NAO SEI AO CERTO QUAL STATUS COLOCAR
+		error_message("-minishell: %s: Permissão negada\n",
+			path_file, 126, env_list);
 	else if (stat(path_file, &info) == 0 && S_ISDIR(info.st_mode))
-		error_message("-minishell: %s: É um diretório\n", path_file, 12, env_list); // AINDA NAO SEI AO CERTO QUAL STATUS COLOCAR
+		error_message("-minishell: %s: É um diretório\n",
+			path_file, 126, env_list);
 	else if (*argv[0] == '.' && stat(path_file, &info) == -1)
-		error_message("-minishell: %s: Arquivo ou diretório inexistente\n", *argv, 13, env_list); // AINDA NAO SEI AO CERTO QUAL STATUS COLOCAR
+		error_message("-minishell: %s: Arquivo ou diretório inexistente\n",
+			*argv, 127, env_list);
 	else if (path_file[0] == '\0' && *argv[0] != '.')
-		error_message("%s: comando não encontrado\n", *argv, 14, env_list); // AINDA NAO SEI AO CERTO QUAL STATUS COLOCAR
+		error_message("%s: comando não encontrado\n", *argv, 127, env_list);
 	free(path_file);
 }
 
@@ -101,5 +117,5 @@ void	exec_program(char **argv, char **env, char *str, t_str **env_list)
 	}
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
-		variable_status(WEXITSTATUS(status), env_list); // AINDA NAO SEI AO CERTO QUAL STATUS COLOCAR
+		variable_status(WEXITSTATUS(status), env_list);
 }

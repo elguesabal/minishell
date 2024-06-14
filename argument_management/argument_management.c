@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   argument_management.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joseanto <joseanto@student.42.rio>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/14 20:04:54 by joseanto          #+#    #+#             */
+/*   Updated: 2024/06/14 20:04:55 by joseanto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 /// @brief CONTA O TAMANHO QUE A STRING DEVERIA TER CASO OS OPERADORES DE REDIRECIONAMENTO ESTIVESSEM SEPARADOS

@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   history.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joseanto <joseanto@student.42.rio>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/14 20:05:15 by joseanto          #+#    #+#             */
+/*   Updated: 2024/06/14 20:05:16 by joseanto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
-void	init_history()
+/// @brief ADICIONA O HISTORICO DE OUTRAS SESSOES QUE ESTA ARMAZENADO EM CACHE
+void	init_history(void)
 {
 	int		fd;
 	char	*history;
@@ -18,6 +31,8 @@ void	init_history()
 	}
 }
 
+/// @brief ADICIONA NOVOS COMANDOS AO HISTORICO
+/// @param str COMANDO A SER ADICIONADO
 void	new_history(char *str)
 {
 	int	fd;

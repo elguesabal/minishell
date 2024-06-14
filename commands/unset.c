@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   unset.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joseanto <joseanto@student.42.rio>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/14 20:07:56 by joseanto          #+#    #+#             */
+/*   Updated: 2024/06/14 20:07:57 by joseanto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 /// @brief PROCURA UMA STRING DENTRO DO ARRAY PASSADO E REMOVE O ELEMENTO ENCONTRADO MOVENDO OS ELEMENTOS SEGUINTES E DEIXANDO 2 ELEMENTOS NULL AO FIM (UM NULL NORMAL DO ARRAY E OUTRO DEIXADO AO REMOVER)
@@ -54,11 +66,11 @@ void	remove_variable_list(t_str **no, char *str)
 
 void	unset(char **argv, t_str **env_list, char **env)
 {
-	variable_status(0, env_list); // PRIMEIRO EU ATUALIZO COMO 0 SE DER ERRO ATUALIZA DNV KKKKK
+	variable_status(0, env_list);
 	while (*argv)
 	{
 		remove_variable_array(env, *argv);
 		remove_variable_list(env_list, *argv);
-        argv++;
-    }
+		argv++;
+	}
 }

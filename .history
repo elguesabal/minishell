@@ -27,3 +27,48 @@ echo testanto history
 exit
 echo testanto history
 exit
+echo $?
+cd klsadkahsklhda
+echo $?
+echo $?
+cd klsadkahsklhda
+echo $?
+cd teste/
+cd teste/
+echo $?
+echo $?
+cd teste/
+echo $?
+cd ./a
+echo $?
+echo $?
+aksldjklasjlkads
+echo $?
+./estudos/
+echo $?
+./kjdkjfhdsjhdfkjs
+echo $?
+cd estudos/jose/funcoes testes/
+echo a
+echo $?
+a=aaaaaaaaaaaaaaaaaa
+echo $a
+echo $A
+echo | wc -l
+ls -all > a
+export k=kkkkkkkkkkkkkkkkkkk
+env
+unset k
+env
+EXIT
+exit
+ls | cat > a
+ls | cat
+echo a
+echo a | cat
+echo a
+k=kkkkkkkkkkkkkkkkkkk
+echo $k
+export k
+env
+exit

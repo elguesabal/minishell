@@ -635,20 +635,27 @@
 // }
 
 
-void	teste(int *i)
-{
-	(*i)++;
-}
+// void	teste(int *i)
+// {
+// 	(*i)++;
+// }
+
+// int	main(void)
+// {
+// 	int	i = 0;
+
+// 	teste(&i);
+// 	printf("i: %d\n", i);
+// 	return (0);
+// }
+
+
 
 int	main(void)
 {
-	int	i = 0;
-
-	teste(&i);
-	printf("i: %d\n", i);
+	printf("teste\n");
 	return (0);
 }
-
 
 
 
