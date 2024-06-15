@@ -12,62 +12,6 @@
 
 #include "minishell.h"
 
-void check_operator(char **arg)
-{
-    int i;
-
-i = 0;
-while (arg[i] && arg[i + 1] != NULL)
-{
-	if (arg[i][0] == '|')
-	{
-		if (arg[i + 1][0] == '|' || arg[i + 1][0] == '>' || arg[i + 1][0] == '<')
-		{
-			printf("syntax error near '%c'\n", arg[i][0]);
-			return ;
-		}
-		if (arg[i][1] == '|' || arg[i][1] == '>' || arg[i][1] == '<')
-		{
-			printf("syntax error near '%c'\n", arg[i][0]);
-			return ;
-		}
-	}
-	else if (arg[i][0] == '>')
-	{
-		if (arg[i + 1][0] == '|' || arg[i + 1][0] == '<')
-		{
-			printf("syntax error near '%c'\n", arg[i + 1][0]);
-			return ;
-		}
-		if (arg[i][1] == '|' || arg[i][1] == '<')
-		{
-			printf("syntax error near '%c'\n", arg[i][0]);
-			return ;
-		}
-	}
-	else if (arg[i][0] == '<')
-	{
-		if (arg[i + 1][0] == '|' || arg[i + 1][0] == '>')
-		{
-			printf("syntax error near '%c'\n", arg[i + 1][0]);
-			return ;
-		}
-		if (arg[i][1] == '|' || arg[i][1] == '>')
-		{
-			printf("syntax error near '%c'\n", arg[i][0]);
-			return ;
-		}
-	}
-	i++;
-}
-	if (arg[i][0] == '|' && (arg[i][1] == '>' || arg[i][1] == '|' || arg[i][1] == '<'))
-		printf("syntax error near '%c'\n", arg[i][0]);
-	else if (arg[i][0] == '>' && (arg[i][1] == '|' || arg[i][1] == '<'))
-		printf("syntax error near '%c'\n", arg[i][0]);
-	else if (arg[i][0] == '<' && (arg[i][1] == '|' || arg[i][1] == '>'))
-		printf("syntax error near '%c'\n", arg[i][0]);
-}
-
 /// @brief EXECUTA OS COMANDOS DE ACORDO OS OPERADORES DE REDIRECIONAMENTO
 /// @param env_list NO INICIAL QUE CAI CONTER TODAS AS VARIAVEIS DE AMBIENTE
 /// @param argenv PONTEIRO QUE VAI CONTER TOADAS AS VARIAVEIS DE AMBIENTE EXPORTADAS
@@ -102,7 +46,7 @@ int	main(int argc, char **argv, char **argenv)
 {
 	char	*str;
 	char	**args;
-	t_str	*env_list; 
+	t_str	*env_list;
 
 	(void)argc;
 	(void)argv;
@@ -112,10 +56,8 @@ int	main(int argc, char **argv, char **argenv)
 		str = readline("minishell: ");
 // printf("testando ctrl+d\n");
 		new_history(str);
-
 		if (*str && argument_management(&str, &args, &env_list) == 0)
 			execute_command(str, args, &argenv, &env_list);
-
 		if (*str)
 		{
 			free(str);

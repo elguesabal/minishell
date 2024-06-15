@@ -25,9 +25,9 @@ size_t	ft_strlen(const char *str)
 /// @brief CONTA O TAMANHO DE UM ARRAY DE STRINGS
 /// @param array_ptr RECEBE UM PONTEIRO DE ARRAY DE STRINGS
 /// @return RETORNA A QUANTIDADE DE STRINGS
-int strstrlen(char **array_ptr)
+int	strstrlen(char **array_ptr)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (array_ptr[i])

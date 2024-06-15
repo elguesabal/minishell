@@ -29,7 +29,8 @@ FILE =	minishell.c\
 	$(ASSISTANT)get_next_line.c\
 	$(ARGUMENTS)environment_variable.c\
 	$(ARGUMENTS)argument_management.c\
-	$(ARGUMENTS)quotes.c\
+	$(ARGUMENTS)quotes1.c\
+	$(ARGUMENTS)quotes2.c\
 	$(ARGUMENTS)pipe1.c\
 	$(ARGUMENTS)pipe2.c\
 	$(ARGUMENTS)bigger_then.c\
@@ -39,6 +40,7 @@ FILE =	minishell.c\
 	$(ARGUMENTS)redirection_operators.c\
 	$(ARGUMENTS)signal.c\
 	$(ARGUMENTS)history.c\
+	$(ARGUMENTS)check_arguments.c\
 	$(COMMANDS)add_variable.c\
 	$(COMMANDS)variable_status.c\
 	$(COMMANDS)echo.c\

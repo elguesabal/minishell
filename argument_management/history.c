@@ -18,7 +18,7 @@ void	init_history(void)
 	int		fd;
 	char	*history;
 
-	fd = open(".history", O_RDONLY);
+	fd = open(".minishell_history", O_RDONLY);
 	if (fd == -1)
 		return ;
 	history = get_next_line(fd);

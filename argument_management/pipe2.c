@@ -77,7 +77,7 @@ void	finish_pipe(int **fd, int n_process, pid_t *pid)
 	}
 	free(fd);
 	i = 0;
-	while(i <= n_process)
+	while (i <= n_process)
 	{
 		waitpid(pid[i], NULL, 0);
 		i++;

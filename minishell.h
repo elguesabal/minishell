@@ -102,10 +102,12 @@ void	swap_variable(t_str **env_list, char **str, char *copy_new, int *i);
 char	*expand_variable(char *str, t_str **env_list);
 char	*environment_variable(char *arg, t_str **env_list);
 
-// ./argument management/quotes.c
+// ./argument management/quotes1.c
 void	swap_tab(char **args);
 int 	closing_quotes(char *str, char quotes);
 void	swap_caracter(char *c, int single_quotes, int double_quotes);
+
+// ./argument management/quotes1.c
 void	quotes(char *str);
 void	remove_quotes(char *str);
 void	revert_caracter(char **args);
@@ -145,6 +147,9 @@ void	init_smaller_smaller_than(char **args, t_str **env_list);
 // ./argument management/history.c
 void	init_history(void);
 void	new_history(char *str);
+
+// ./argument management/check_arguments.c
+void	check_operator(char **arg);
 
 
 

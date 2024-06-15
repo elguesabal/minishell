@@ -24,7 +24,7 @@ void	init_smaller_smaller_than(char **args, t_str **env_list)
 	{
 		line = readline("> ");
 		if (compare_str(args[1], line))
-			break;
+			break ;
 		line = environment_variable(line, env_list);
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);

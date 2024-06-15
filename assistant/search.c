@@ -106,7 +106,7 @@ int	search_next_operator(char **argv)
 /// @return RETORNA 1 CASO IDENTICA E 0 CASO NAO
 int	compare_str(char *s1, char *s2)
 {
-	while(*s1 && *s2 && *s1 == *s2)
+	while (*s1 && *s2 && *s1 == *s2)
 	{
 		s1++;
 		s2++;

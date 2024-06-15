@@ -25,7 +25,8 @@ char	*ft_strjoin(char *rest_line, char *buffer)
 	}
 	if (!rest_line || !buffer)
 		return (NULL);
-	str = malloc(sizeof(char) * ((ft_strlen(rest_line) + ft_strlen(buffer)) + 1));
+	str = malloc(sizeof(char)
+			* ((ft_strlen(rest_line) + ft_strlen(buffer)) + 1));
 	if (str == NULL)
 		return (NULL);
 	i = -1;
