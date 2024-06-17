@@ -93,7 +93,8 @@ int	argument_management(char **str, char ***argv, t_str **env_list)
 	remove_quotes(*str);
 	separate_redirection_operators(str);
 	*argv = ft_split(*str, ' ');
-	check_operator(*argv);
+	if (check_operator(*argv))
+		return (1);
 	swap_tab(*argv);
 	i = 0;
 	while (argv[0][i])

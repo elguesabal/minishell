@@ -12,38 +12,46 @@
 
 #include "../minishell.h"
 
-int check_syntax_error(char operator, char next_char)
+int check_syntax_error(char operator)
 {
-	(void)next_char;
 	printf("syntax error near '%c'\n", operator);
 	return (1);
 }
 
 int check_pipe(char **arg, int i)
 {
+	int	error;
+
+	error = 0;
 	if (arg[i + 1][0] == '|' || arg[i + 1][0] == '>' || arg[i + 1][0] == '<')
-		check_syntax_error(arg[i][0], arg[i + 1][0]);
+		error += check_syntax_error(arg[i][0]);
 	if (arg[i][1] == '|' || arg[i][1] == '>' || arg[i][1] == '<')
-		check_syntax_error(arg[i][0], arg[i][1]);
-	return (0);
+		error += check_syntax_error(arg[i][0]);
+	return (error);
 }
 
 int check_greater(char **arg, int i)
 {
+	int	error;
+
+	error = 0;
 	if (arg[i + 1][0] == '|' || arg[i + 1][0] == '<')
-		check_syntax_error(arg[i + 1][0], arg[i + 1][0]);
+		error += check_syntax_error(arg[i + 1][0]);
 	if (arg[i][1] == '|' || arg[i][1] == '<')
-		check_syntax_error(arg[i][0], arg[i][1]);
-	return (0);
+		error += check_syntax_error(arg[i][0]);
+	return (error);
 }
 
 int check_less(char **arg, int i)
 {
+	int	error;
+
+	error = 0;
 	if (arg[i + 1][0] == '|' || arg[i + 1][0] == '>')
-		check_syntax_error(arg[i + 1][0], arg[i + 1][0]);
+		error += check_syntax_error(arg[i + 1][0]);
 	if (arg[i][1] == '|' || arg[i][1] == '>')
-		check_syntax_error(arg[i][0], arg[i][1]);
-	return (0);
+		error += check_syntax_error(arg[i][0]);
+	return (error);
 }
 
 int check_operator(char **arg)
@@ -64,10 +72,10 @@ int check_operator(char **arg)
 		i++;
 	}
 	if (arg[i][0] == '|' && (arg[i][1] == '>' || arg[i][1] == '|' || arg[i][1] == '<'))
-		error += check_syntax_error(arg[i][0], arg[i][1]);
+		error += check_syntax_error(arg[i][0]);
 	else if (arg[i][0] == '>' && (arg[i][1] == '|' || arg[i][1] == '<'))
-		error += check_syntax_error(arg[i][0], arg[i][1]);
+		error += check_syntax_error(arg[i][0]);
 	else if (arg[i][0] == '<' && (arg[i][1] == '|' || arg[i][1] == '>'))
-		error += check_syntax_error(arg[i][0], arg[i][1]);
-	return (0);
+		error += check_syntax_error(arg[i][0]);
+	return (error);
 }

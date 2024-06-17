@@ -22,6 +22,7 @@ void	init_shell(t_str **env_list, char ***argenv)
 	creat_list(env_list, *argenv);
 	*argenv = array_to_list(env_list);
 	insert_last(env_list, copy_str("?=0"));
+	check_signal();
 }
 
 /// @brief EXECUTA OS COMANDOS DE ACORDO OS OPERADORES DE REDIRECIONAMENTO
@@ -54,13 +55,24 @@ int	main(int argc, char **argv, char **argenv)
 	while (1)
 	{
 		str = readline("minishell: ");
-// printf("testando ctrl+d\n");
+
+// printf("teste: %d\n", (str == NULL));
+
+// // printf("testando ctrl+d\n");
+// // if (*str == '\0')
+// // 	write(1, "aaaaa\n", 6);
+// if (str == NULL)
+// 	write(1, "bbbbb\n", 6);
+
+
+
 		new_history(str);
-		if (*str && argument_management(&str, &args, &env_list) == 0)
+		if (str && argument_management(&str, &args, &env_list) == 0)
 			execute_command(str, args, &argenv, &env_list);
-		if (*str)
+		if (str)
 		{
 			free(str);
+			str = NULL;
 			free_split(args);
 		}
 	}

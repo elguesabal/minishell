@@ -149,11 +149,18 @@ void	init_history(void);
 void	new_history(char *str);
 
 // ./argument management/check_arguments.c
-int 	check_syntax_error(char operator, char next_char);
+int 	check_syntax_error(char operator);
 int		check_pipe(char **arg, int i);
 int 	check_greater(char **arg, int i);
 int		check_less(char **arg, int i);
 int		check_operator(char **arg);
+
+// ./argument management/signal.c
+void	handle_sigint(int sign);
+void	handle_sigquit(int sign);
+void	check_signal(void);
+
+
 
 // ./commands/add_variable.c
 int		metacaracterer(char *str);

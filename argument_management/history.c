@@ -37,7 +37,7 @@ void	new_history(char *str)
 {
 	int	fd;
 
-	if (str[0] == '\0')
+	if (str == NULL)
 		return ;
 	add_history(str);
 	fd = open(".history", O_WRONLY | O_APPEND | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
