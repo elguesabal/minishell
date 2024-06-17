@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   argument_management.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joseanto <joseanto@student.42.rio>         +#+  +:+       +#+        */
+/*   By: wfranco <wfranco@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 20:04:54 by joseanto          #+#    #+#             */
-/*   Updated: 2024/06/14 20:04:55 by joseanto         ###   ########.fr       */
+/*   Updated: 2024/06/17 07:31:34 by wfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ int	argument_management(char **str, char ***argv, t_str **env_list)
 	remove_quotes(*str);
 	separate_redirection_operators(str);
 	*argv = ft_split(*str, ' ');
+	check_operator(*argv);
 	swap_tab(*argv);
 	i = 0;
 	while (argv[0][i])
