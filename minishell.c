@@ -15,6 +15,7 @@
 /// @brief EXECUTA OS COMANDOS DE ACORDO OS OPERADORES DE REDIRECIONAMENTO
 /// @param env_list NO INICIAL QUE CAI CONTER TODAS AS VARIAVEIS DE AMBIENTE
 /// @param argenv PONTEIRO QUE VAI CONTER TOADAS AS VARIAVEIS DE AMBIENTE EXPORTADAS
+// void	init_shell(t_str **env_list, char ***argenv, sigaction *sa, t_signal *info)
 void	init_shell(t_str **env_list, char ***argenv)
 {
 	init_history();
@@ -22,7 +23,8 @@ void	init_shell(t_str **env_list, char ***argenv)
 	creat_list(env_list, *argenv);
 	*argenv = array_to_list(env_list);
 	insert_last(env_list, copy_str("?=0"));
-	check_signal();
+	signal(SIGINT, handle_signal);
+	signal(SIGQUIT, SIG_IGN);
 }
 
 /// @brief EXECUTA OS COMANDOS DE ACORDO OS OPERADORES DE REDIRECIONAMENTO
@@ -45,9 +47,9 @@ void	execute_command(char *str, char **args, char ***argenv, t_str **env_list)
 
 int	main(int argc, char **argv, char **argenv)
 {
-	char	*str;
-	char	**args;
-	t_str	*env_list;
+	char			*str;
+	char			**args;
+	t_str			*env_list;
 
 	(void)argc;
 	(void)argv;
@@ -55,21 +57,9 @@ int	main(int argc, char **argv, char **argenv)
 	while (1)
 	{
 		str = readline("minishell: ");
-
-// printf("teste: %d\n", (str == NULL));
-
-// // printf("testando ctrl+d\n");
-// // if (*str == '\0')
-// // 	write(1, "aaaaa\n", 6);
-// if (str == NULL)
-// 	write(1, "bbbbb\n", 6);
-
-
-
-		new_history(str);
-		if (str && argument_management(&str, &args, &env_list) == 0)
+		if (argument_management(&str, &args, argenv, &env_list) == 0)
 			execute_command(str, args, &argenv, &env_list);
-		if (str)
+		if (*str)
 		{
 			free(str);
 			str = NULL;

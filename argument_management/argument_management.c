@@ -85,10 +85,18 @@ void	separate_redirection_operators(char **str)
 	*str = copy_str;
 }
 
-int	argument_management(char **str, char ***argv, t_str **env_list)
+int	argument_management(char **str, char ***argv, char **env, t_str **env_list)
 {
 	int	i;
 
+	if (*str == NULL)
+	{
+		printf("exit\n");
+		exit_shell(NULL, NULL, env, env_list);
+	}
+	else if (**str == '\0')
+		return 1;
+	new_history(*str);
 	quotes(*str);
 	remove_quotes(*str);
 	separate_redirection_operators(str);

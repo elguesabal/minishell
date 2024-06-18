@@ -4,6 +4,10 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <fcntl.h>
+#include <signal.h>
+#include <string.h>
+
+
 
 // size_t	ft_strlen(const char *str)
 // {
@@ -651,10 +655,55 @@
 
 
 
-int	main(void)
-{
-	printf("teste\n");
-	return (0);
+// int	main(void)
+// {
+// 	printf("teste\n");
+// 	return (0);
+// }
+
+
+
+
+// Handler para SIGINT usando sa_sigaction
+void handle_sigint(int sig, siginfo_t *siginfo, void *context) {
+	(char *)context;
+	printf("contexto: %s\n", context);
+    printf("Caught signal %d\n", sig);
+    printf("Signal originates from process %lu\n", (unsigned long)siginfo->si_pid);
+    // Limpeza e saída do programa
+    exit(0);
+}
+
+int main() {
+    struct sigaction sa;
+	char teste = "teste";]
+
+	// char *teste = malloc(3 * sizeof(char));
+	// teste[0] = 'a';
+	// teste[1] = 'b';
+	// teste[2] = '\0';
+	// (void)teste;
+
+    // Configura o manipulador de sinal usando sa_sigaction
+    sa.sa_sigaction = handle_sigint;
+    sa.sa_flags = SA_SIGINFO;  // Necessário para usar sa_sigaction
+
+    // Inicializa a máscara de sinais
+    sigemptyset(&sa.sa_mask);
+
+    // Configura a ação do sinal para SIGINT
+    if (sigaction(SIGINT, &sa, NULL) == -1) {
+        perror("sigaction");
+        exit(EXIT_FAILURE);
+    }
+
+    // Loop infinito para manter o programa em execução
+    while (1) {
+        printf("Running... Press Ctrl+C to stop.\n");
+        sleep(1); // Dorme por 1 segundo
+    }
+
+    return 0;
 }
 
 
@@ -662,10 +711,17 @@ int	main(void)
 
 
 
+int	main(void)
+{
+	char	str = "teste";
 
-
-
-
+	signal(SIGINT, funcao);
+	while (1)
+	{
+		
+	}
+	return (0);
+}
 
 
 

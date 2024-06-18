@@ -24,10 +24,9 @@
 # include <signal.h>
 
 
-
 typedef struct s_str
 {
-	char	*str;
+	char			*str;
 	struct s_str	*next;
 }	t_str;
 
@@ -93,7 +92,7 @@ char	*get_next_line(int fd);
 int		len_separating_operators(char *str);
 void	separate_redirection_operators(char **str);
 void	new_args(char **str, char **copy_str);
-int		argument_management(char **str, char ***argv, t_str **env_list);
+int		argument_management(char **str, char ***argv, char **env, t_str **env_list);
 
 // ./argument management/environment_variable.c
 int		search_dollar_sign(char *str);
@@ -156,9 +155,7 @@ int		check_less(char **arg, int i);
 int		check_operator(char **arg);
 
 // ./argument management/signal.c
-void	handle_sigint(int sign);
-void	handle_sigquit(int sign);
-void	check_signal(void);
+void	handle_signal(int sign);
 
 
 

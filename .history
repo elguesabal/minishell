@@ -26,3 +26,22 @@ exit
 exit
 exit
 
+exit
+exit
+exit
+exit
+exit
+exit
+exit
+exit
+exit
+echo a
+
+
+
+lsecho a
+echo a
+echo a
+echo a
+echo a >| a
+echo a >| a
