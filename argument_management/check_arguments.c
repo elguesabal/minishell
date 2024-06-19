@@ -14,18 +14,24 @@
 
 int check_syntax_error(char operator)
 {
-	printf("syntax error near '%c'\n", operator);
+	if (operator)
+		printf("-minishell: erro de sintaxe próximo ao token inesperado `%c'\n", operator);
+	else
+		printf("-minishell: erro de sintaxe próximo ao token inesperado `newline'\n");
 	return (1);
 }
 
 int check_pipe(char **arg, int i)
 {
+// printf("teste com pipe: %d\n", arg[i + 1] == NULL);
 	int	error;
 
 	error = 0;
+	// if (arg[i + 1] == NULL)
+	// 	error += check_syntax_error('\0');
 	if (arg[i + 1][0] == '|' || arg[i + 1][0] == '>' || arg[i + 1][0] == '<')
 		error += check_syntax_error(arg[i][0]);
-	if (arg[i][1] == '|' || arg[i][1] == '>' || arg[i][1] == '<')
+	else if (arg[i][1] == '|' || arg[i][1] == '>' || arg[i][1] == '<')
 		error += check_syntax_error(arg[i][0]);
 	return (error);
 }
@@ -37,7 +43,7 @@ int check_greater(char **arg, int i)
 	error = 0;
 	if (arg[i + 1][0] == '|' || arg[i + 1][0] == '<')
 		error += check_syntax_error(arg[i + 1][0]);
-	if (arg[i][1] == '|' || arg[i][1] == '<')
+	else if (arg[i][1] == '|' || arg[i][1] == '<')
 		error += check_syntax_error(arg[i][0]);
 	return (error);
 }
@@ -49,7 +55,7 @@ int check_less(char **arg, int i)
 	error = 0;
 	if (arg[i + 1][0] == '|' || arg[i + 1][0] == '>')
 		error += check_syntax_error(arg[i + 1][0]);
-	if (arg[i][1] == '|' || arg[i][1] == '>')
+	else if (arg[i][1] == '|' || arg[i][1] == '>')
 		error += check_syntax_error(arg[i][0]);
 	return (error);
 }
@@ -61,9 +67,15 @@ int check_operator(char **arg)
 
 	i = 0;
 	error = 0;
-	while (arg[i] && arg[i + 1] != NULL)
+	// while (arg[i] && arg[i + 1] != NULL)
+	while (arg[i])
 	{
-		if (arg[i][0] == '|')
+		if (arg[i + 1] == NULL && (arg[i][0] == '|' || arg[i][0] == '>' || arg[i][0] == '<'))
+		{
+			error += check_syntax_error('\0');
+			break;
+		}
+		else if (arg[i][0] == '|')
 			error += check_pipe(arg, i);
 		else if (arg[i][0] == '>')
 			error += check_greater(arg, i);
