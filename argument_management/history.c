@@ -40,7 +40,9 @@ void	new_history(char *str)
 	if (str == NULL)
 		return ;
 	add_history(str);
-	fd = open(".minishell_history", O_WRONLY | O_APPEND | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
+	fd = open(".minishell_history",
+			O_WRONLY | O_APPEND | O_CREAT, S_IRUSR
+			| S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
 	write(fd, str, ft_strlen(str));
 	write(fd, "\n", 1);
 	close(fd);

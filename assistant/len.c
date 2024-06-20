@@ -40,7 +40,7 @@ int	strstrlen(char **array_ptr)
 /// @param c CHAR USADO PARA ANALIZAR A STRING
 /// @return RETORNA O NUMERO DA POSICAO CASO ENCONTRADO EXEMPLO: "teste$PATH", '$' RETORNA 5
 /// @return RETORNA -1 CASO NAO ENCONTRE O CHAR
-int	strlen_char(char *str, char c) // VOU CONFIAR NA VRIFICACAO DA FUNCAO search_dollar_sign() KKKKKKK
+int	strlen_char(char *str, char c)
 {
 	int	i;
 

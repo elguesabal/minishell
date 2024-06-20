@@ -46,12 +46,17 @@ void	cd(char *command, char **env, t_str **env_list)
 	variable_status(0, env_list);
 	command = skip_char(command);
 	command = skip_space(command);
-	if (stat(command, &info) == 0 && S_ISDIR(info.st_mode) && access(command, X_OK) == -1)
-		error_message("-minishel: cd: %s: Permissão negada\n", command, 1, env_list);
-	else if (stat(command, &info) == 0 && !S_ISDIR(info.st_mode))
-		error_message("-minishell: cd: %s: Não é um diretório\n", command, 1, env_list);
+	if (stat(command, &info) == 0
+		&& S_ISDIR(info.st_mode) && access(command, X_OK) == -1)
+		error_message("-minishel: cd: %s: Permissão negada\n",
+			command, 1, env_list);
+	else if (stat(command, &info) == 0
+		&& !S_ISDIR(info.st_mode))
+		error_message("-minishell: cd: %s: Não é um diretório\n",
+			command, 1, env_list);
 	else if (chdir(command) == -1)
-		error_message("-minishell: cd: %s: Arquivo ou diretório inexistente\n", command, 1, env_list);
+		error_message("-minishell: cd: %s: Arquivo ou diretório inexistente\n",
+			command, 1, env_list);
 	argv[0] = new_pwd(getcwd(NULL, 0));
 	argv[1] = NULL;
 	add_variable(argv, env, env_list);

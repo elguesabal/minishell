@@ -75,7 +75,8 @@ void	separate_redirection_operators(char **str)
 {
 	char	*copy_str;
 
-	if (!(search_char(*str, '|') || search_char(*str, '>') || search_char(*str, '<')))
+	if (!(search_char(*str, '|') || search_char(*str, '>')
+			|| search_char(*str, '<')))
 		return ;
 	copy_str = malloc((len_separating_operators(*str) + 1) * sizeof(char));
 	if (copy_str == NULL)
@@ -95,7 +96,7 @@ int	argument_management(char **str, char ***argv, char **env, t_str **env_list)
 		exit_shell(NULL, NULL, env, env_list);
 	}
 	else if (**str == '\0')
-		return 1;
+		return (1);
 	new_history(*str);
 	quotes(*str);
 	remove_quotes(*str);

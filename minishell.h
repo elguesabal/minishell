@@ -114,9 +114,9 @@ void	revert_caracter(char **args);
 // ./argument management/redirection_operators.c
 int		len_arguments(char **argv);
 char	**next_process(char **argv);
-char	**init_redirection(char **argv, int *process, int *operator, t_str **env_list);
+char	**init_redirection(char **argv, int *i, int *operator, t_str **env_list);
 void	finish_redirection(int operator, int *new_std, char **args_process);
-void	redirection_operators(char *str, char **argv, char ***argenv, t_str **env_list);
+void	redirection_operators(char *str, char **argv, char ***arge, t_str **env);
 
 // ./argument management/pipe1.c
 int		count_pipe(char **argv);
@@ -125,9 +125,9 @@ void	close_fds(int **fd, int n_process);
 int		count_args(char **args);
 void	redirection_pipe(int current_process, int **fd, int n_process);
 
-// ./argument management/pipe1.c
+// ./argument management/pipe2.c
 char	**args_pipe(char **argv, int process);
-void	execute_process(char *str, char **args_process, char ***argenv, t_str **env_list);
+void	execute_process(char *str, char **argv, char ***arge, t_str **env);
 void	finish_pipe(int **fd, int n_process, pid_t *pid);
 void	command_pipe(char *str, char **argv, char ***argenv, t_str **env_list);
 
@@ -181,7 +181,7 @@ void	cd(char *command, char **env, t_str **env_list);
 void	pwd(t_str **env_list);
 
 // ./commands/export.c
-void	declaration_and_export(int i, char ***argv, char ***env, t_str **env_list);
+void	declaration_and_export(int i, char ***argv, char ***arge, t_str **env);
 t_str	*search_variable_list(t_str **no, char *str);
 int		search_variable_array(char **env, char *str);
 void	export_variable(char ***env, char *str);
@@ -213,7 +213,7 @@ void	commands(char *str, char **args, char ***argenv, t_str **env_list);
 
 // ./minishell.c
 void	init_shell(t_str **env_list, char ***argenv);
-void	execute_command(char *str, char **args, char ***argenv, t_str **env_list);
+void	execute_command(char *str, char **args, char ***env, t_str **env_list);
 
 
 

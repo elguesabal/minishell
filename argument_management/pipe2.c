@@ -45,19 +45,19 @@ char	**args_pipe(char **argv, int process)
 
 /// @brief EXECUTA O COMANDO VERIFICANDO SE HA ALGUM OPERADOR DE REDIRECIONAMENTO E LIBERA MEMORIA CASO  A FUNCAO execve() NAO MATE O PROCESSO
 /// @param str STRING RETORNADA POR readline()
-/// @param args_process ARRAY DE STRING COM OS ARGUMENTOS DO ATUAL PROCESSO
-/// @param argenv ARRAY DE STRING COM AS VARIAVEIS DE AMBIENTE EXPORTADAS
-/// @param env_list LISTA ENCADEADA COM TODAS AS VARIAVEIS DE AMBIENTE (EXPORTADAS E NAO EXPORTADAS)
-void	execute_process(char *str, char **args_process, char ***argenv, t_str **env_list)
+/// @param argv ARRAY DE STRING COM OS ARGUMENTOS DO ATUAL PROCESSO
+/// @param arge ARRAY DE STRING COM AS VARIAVEIS DE AMBIENTE EXPORTADAS
+/// @param env LISTA ENCADEADA COM TODAS AS VARIAVEIS DE AMBIENTE (EXPORTADAS E NAO EXPORTADAS)
+void	execute_process(char *str, char **argv, char ***arge, t_str **env)
 {
-	if (search_operator(args_process, '>') || search_operator(args_process, '<'))
-		redirection_operators(str, args_process, argenv, env_list);
+	if (search_operator(argv, '>') || search_operator(argv, '<'))
+		redirection_operators(str, argv, arge, env);
 	else
 	{
-		revert_caracter(args_process);
-		commands(str, args_process, argenv, env_list);
+		revert_caracter(argv);
+		commands(str, argv, arge, env);
 	}
-	free_split(args_process);
+	free_split(argv);
 }
 
 /// @brief FINALIZA A FUNCAO command_pipe() USANDO close() EM TODOS OS FDS NO PROCESSO PAI E USANDO free() EM TODOS OS PONTEIRO DO PROCESSO

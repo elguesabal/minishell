@@ -15,9 +15,9 @@
 /// @brief DECLARA E EXPORTA UMA VARIAVEL DE AMBIENTE
 /// @param i INDICE QUE argv DEVE SER ACESSADO
 /// @param argv ARGUMENTOS PASSADO COMO COMANDO
-/// @param env ARRAY COM VARIAVEIS DE AMBIENTE EXPORTADAS
-/// @param env_list LISTA ENCADEADA COM TODAS AS VARIAVEIS DE AMBIENTE
-void	declaration_and_export(int i, char ***argv, char ***env, t_str **env_list)
+/// @param arge ARRAY COM VARIAVEIS DE AMBIENTE EXPORTADAS
+/// @param env LISTA ENCADEADA COM TODAS AS VARIAVEIS DE AMBIENTE
+void	declaration_and_export(int i, char ***argv, char ***arge, t_str **env)
 {
 	char	**arg;
 	char	*name_variable;
@@ -27,7 +27,7 @@ void	declaration_and_export(int i, char ***argv, char ***env, t_str **env_list)
 		return ;
 	arg[0] = argv[0][i];
 	arg[1] = NULL;
-	add_variable(arg, *env, env_list);
+	add_variable(arg, *arge, env);
 	free(arg);
 	name_variable = copy_name_variable(argv[0][i]);
 	free(argv[0][i]);
@@ -85,7 +85,7 @@ int	search_variable_array(char **env, char *str)
 /// @param env ARRAY COM TODAS AS VARIAVEIS DE AMBIENTE MENO A NOVA
 /// @param str NOVA VARIAVEL DE AMBIENTE A SER INCLUIDA EM env
 /// @return RETORNA UM NOVO ENDERECO DE MEMORIA COM TODOS AS VARIAVEIS DE AMBIENTE
-void	export_variable(char ***env, char *str) // ESTA FUNCAO NAO RETORNA MAIS NADA E FAZ A MODIFICACAO DIRETO NO ENDERECO DE MEMORIA DO PONTEIRO char **argenv DA MAIN
+void	export_variable(char ***env, char *str)
 {
 	char	**new_env;
 	int		i;

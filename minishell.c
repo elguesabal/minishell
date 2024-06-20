@@ -15,7 +15,6 @@
 /// @brief EXECUTA OS COMANDOS DE ACORDO OS OPERADORES DE REDIRECIONAMENTO
 /// @param env_list NO INICIAL QUE CAI CONTER TODAS AS VARIAVEIS DE AMBIENTE
 /// @param argenv PONTEIRO QUE VAI CONTER TOADAS AS VARIAVEIS DE AMBIENTE EXPORTADAS
-// void	init_shell(t_str **env_list, char ***argenv, sigaction *sa, t_signal *info)
 void	init_shell(t_str **env_list, char ***argenv)
 {
 	init_history();
@@ -30,18 +29,18 @@ void	init_shell(t_str **env_list, char ***argenv)
 /// @brief EXECUTA OS COMANDOS DE ACORDO OS OPERADORES DE REDIRECIONAMENTO
 /// @param str STRING RECEBIDA POR readline()
 /// @param args ARGUMENTOS QUE FORAM ORGANIZADOS PELA FUNCAO ft_split() E INTERPRETADOS POR argument_management()
-/// @param argenv VARIAVEIS DE AMBIENTE EXPORTADAS
+/// @param env VARIAVEIS DE AMBIENTE EXPORTADAS
 /// @param env_list TODAS AS VARIAVEIS DE AMBIENTE
-void	execute_command(char *str, char **args, char ***argenv, t_str **env_list)
+void	execute_command(char *str, char **args, char ***env, t_str **env_list)
 {
 	if (search_operator(args, '|'))
-		command_pipe(str, args, argenv, env_list);
+		command_pipe(str, args, env, env_list);
 	else if (search_operator(args, '>') || search_operator(args, '<'))
-		redirection_operators(str, args, argenv, env_list);
+		redirection_operators(str, args, env, env_list);
 	else
 	{
 		revert_caracter(args);
-		commands(str, args, argenv, env_list);
+		commands(str, args, env, env_list);
 	}
 }
 

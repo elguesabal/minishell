@@ -20,7 +20,8 @@ int	len_arguments(char **argv)
 	int	len;
 
 	len = 0;
-	while (argv[len] && argv[len][0] != '|' && argv[len][0] != '>' && argv[len][0] != '<')
+	while (argv[len] && argv[len][0] != '|'
+		&& argv[len][0] != '>' && argv[len][0] != '<')
 		len++;
 	return (len);
 }
@@ -37,7 +38,8 @@ char	**next_process(char **argv)
 	if (args_process == NULL)
 		return (NULL);
 	i = 0;
-	while (argv[i] && argv[i][0] != '|' && argv[i][0] != '>' && argv[i][0] != '<')
+	while (argv[i] && argv[i][0] != '|'
+		&& argv[i][0] != '>' && argv[i][0] != '<')
 	{
 		args_process[i] = copy_str(argv[i]);
 		i++;
@@ -48,29 +50,30 @@ char	**next_process(char **argv)
 
 /// @brief INICIALIZA O PROCESSO DE REDIRECIONAMENTO DA FUNCAO redirection_operators()
 /// @param argv ARRAY COM TODOS ARGUMENTOS
-/// @param process POSICAO DO ARGUMENTO ATUAL
+/// @param i POSICAO DO ARGUMENTO ATUAL
 /// @param operator IDENTIFICADOR DO PROXIMO OPERADOR
-/// @param env_list LISTA ENCADEADA COM TODAS AS VARIAVEIS DE AMBIENTE
+/// @param env LISTA ENCADEADA COM TODAS AS VARIAVEIS DE AMBIENTE
 /// @return RETORNA UMA COPIA DOS ARGUMENTOS DO COMANDO ATE ENCONTRAR UM OPERADOR DE REDIRECIONAMENTO
-char	**init_redirection(char **argv, int *process, int *operator, t_str **env_list)
+char	**init_redirection(char **argv, int *i, int *operator, t_str **env_list)
 {
 	char	**args_process;
 
-	args_process = next_process(&argv[*process]);
-	while (argv[*process + 1] && argv[*process][0] != '|')
+	args_process = next_process(&argv[*i]);
+	while (argv[*i + 1] && argv[*i][0] != '|')
 	{
-		*operator = search_next_operator(&argv[*process]);
+		*operator = search_next_operator(&argv[*i]);
 		if (*operator == 2)
-			init_bigger_then(&argv[*process]);
+			init_bigger_then(&argv[*i]);
 		else if (*operator == 3)
-			init_bigger_bigger_than(&argv[*process]);
+			init_bigger_bigger_than(&argv[*i]);
 		else if (*operator == 4)
-			init_less_than(&argv[*process]);
+			init_less_than(&argv[*i]);
 		else if (*operator == 5)
-			init_smaller_smaller_than(&argv[*process], env_list);
-		while (argv[*process + 1] && argv[*process][0] != '|' && argv[*process][0] != '>' && argv[*process][0] != '<')
-			(*process)++;
-		(*process)++;
+			init_smaller_smaller_than(&argv[*i], env_list);
+		while (argv[*i + 1] && argv[*i][0] != '|'
+			&& argv[*i][0] != '>' && argv[*i][0] != '<')
+			(*i)++;
+		(*i)++;
 	}
 	revert_caracter(args_process);
 	return (args_process);
@@ -90,7 +93,7 @@ void	finish_redirection(int operator, int *new_std, char **args_process)
 	free_split(args_process);
 }
 
-void	redirection_operators(char *str, char **argv, char ***argenv, t_str **env_list)
+void	redirection_operators(char *str, char **argv, char ***arge, t_str **env)
 {
 	int		process;
 	int		operator;
@@ -102,9 +105,9 @@ void	redirection_operators(char *str, char **argv, char ***argenv, t_str **env_l
 	process = 0;
 	while (argv[process])
 	{
-		args_process = init_redirection(argv, &process, &operator, env_list);
+		args_process = init_redirection(argv, &process, &operator, env);
 		if (operator == 2 || operator == 3 || operator == 4 || operator == 5)
-			commands(str, args_process, argenv, env_list);
+			commands(str, args_process, arge, env);
 		finish_redirection(operator, new_std, args_process);
 		while (argv[process + 1])
 			process++;
