@@ -12,11 +12,6 @@
 
 #include "../minishell.h"
 
-/// @brief CONCATENA O PRIMEIRO ARGUMENTO COM O SEGUNDO EM UM NOVO ENDERECO DE MEMORIA ADICIONANDO UM '/' NO MEIO
-/// @param str1 STRING QUE SERA COPIADA ANTES DA '/'
-/// @param str2 STRING QUE SERA COPIADA APOS DA '/'
-/// @return RETORNA UM ENDERECO DE MEMORIA CASO PASSADO DUAS ESTRING EXEMPLO: concatenate("ft", "42") == "ft/42"
-/// @return RETORNA NULL CASO ALGUM PARAMETRO SEJA NULL OU TENHA ERRO NA FUNCAO malloc() EXEMPLO: concatenate("ft", NULL) == NULL
 char	*build_path(char *str1, char *str2)
 {
 	char	*str;
@@ -45,12 +40,6 @@ char	*build_path(char *str1, char *str2)
 	return (str);
 }
 
-/// @brief PROCURA O ARQUIVOS DO ARGUMENTO *file EM TODOS OS CAMINHOS DO ARGUMENTO **path
-/// @param path CAMINHOS A SEREM TESTADOS
-/// @param file AQUIVO A SER PROCURADO DENTRO DOS CAMINHOS
-/// @return RETORNA UMA COPIA DE file CASO stat(file, &info) == 0
-/// @return RETORNA O CAMIHNO ABSOLUTO CONSTRUIDO PELA FUNCAO build_path() CASO A FUNCAO stat() AFIRME Q O CAMINHO E ARQUIVO SAO VALIDOS
-/// @return CASO A FUNCAO stat() RETORN -1 EM TODAS AS TENTATIVAS A FUNCAO tester_path() RETORNA UM ENDERECO DE MEMORIA CONTENDO '\0'
 char	*tester_path(char **path, char *file)
 {
 	char		*path_file;
@@ -71,10 +60,6 @@ char	*tester_path(char **path, char *file)
 	return (path_file);
 }
 
-/// @brief GERENCIA ERRO CASO A FUNCAO execve() NAO FUNCIONA 
-/// @param path_file CAMINHO PASSADO COMO PRIMEIRO ARGUMENTO PARA execve()
-/// @param env_list LISTA ENCADEAD COM TODAS AS VARIAVEIS DE AMBIENTE
-/// @param argv ARGUMENTOS PASSADO PARA O PROCESSO QUE FALHOU
 void	error_execve(char *path_file, t_str **env_list, char **argv)
 {
 	struct stat	info;

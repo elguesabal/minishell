@@ -12,10 +12,6 @@
 
 #include "../minishell.h"
 
-/// @brief PROCURA UMA ESTRING NO COMECO DE OUTRA LEVANDO EM CONSIDERACAO O FINAL DA COMPARACAO
-/// @param s1 STRING A SER COMPARADA
-/// @param s2 STRING A SER COMPARADA
-/// @return SE AO FINAL DA COMPARACAO TENHA '\0' em s1 e '=' em s2 RETORNA 1 EXEMPLO: "PWD", "PWD=/home/jose/programacao/minishell"
 int	compare_variable(char *s1, char *s2)
 {
 	int	i;
@@ -34,10 +30,6 @@ int	compare_variable(char *s1, char *s2)
 	return (1);
 }
 
-/// @brief PROCURA UM CHAR DENTRO DE UMA ESTRING
-/// @param str STRING A SER ANALIZADA
-/// @param c CARACTER A SER PROCURADO
-/// @return RETORNA 1 CASO ENCONTRE O CARACTER c E 0 CASO NAO ENCONTRE
 int	search_char(char *str, char c)
 {
 	while (*str)
@@ -49,10 +41,6 @@ int	search_char(char *str, char c)
 	return (0);
 }
 
-/// @brief PROCURA UM OPERADOR DE REDIRECIONAMENTO DENTRO DE UMA ARRYA DE STRINGS (PROCURA POR 1 CHAR DE OPERADOR E NAO POR 2) EXEMPLO: ">>"
-/// @param argv ARRAY DE STRING A SER ANALIZADA
-/// @param operator OPERADOR PASSADO A SER PROCURADO
-/// @return RETORNA 1 CASO ENCONTRE O OPERADOR E 0 CASO NAO ENCONTRE
 int	search_operator(char **argv, char operator)
 {
 	int	i;
@@ -73,14 +61,6 @@ int	search_operator(char **argv, char operator)
 	return (0);
 }
 
-/// @brief PROCURAR POR OPERADORES E RETORNA QUAL E O PROXIMO OPERADOR
-/// @param argv ARRAY DE STRING A SER ANALIZADA
-/// @return RETORNA O NUMERO DO OPERADOR CASO ENCONTRE E 0 CASO NAO ENCONTRE
-/// @return NEXT OPERATOR -->  |   --> RETURN 1
-/// @return NEXT OPERATOR -->  >   --> RETURN 2
-/// @return NEXT OPERATOR -->  >>  --> RETURN 3
-/// @return NEXT OPERATOR -->  <   --> RETURN 4
-/// @return NEXT OPERATOR -->  <<  --> RETURN 5
 int	search_next_operator(char **argv)
 {
 	while (*argv)
@@ -100,10 +80,6 @@ int	search_next_operator(char **argv)
 	return (0);
 }
 
-/// @brief COMPARA SE DUAS STRINGS SAO IDENTICAS
-/// @param s1 STRING A SER COMPARADA
-/// @param s2 STRING A SER COMPARADA
-/// @return RETORNA 1 CASO IDENTICA E 0 CASO NAO
 int	compare_str(char *s1, char *s2)
 {
 	while (*s1 && *s2 && *s1 == *s2)

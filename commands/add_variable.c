@@ -12,10 +12,6 @@
 
 #include "../minishell.h"
 
-/// @brief IDENTIFICA SE HA METACARACTERES NAO PERMITIDOS EM NOMES DE VARIAVEIS DE AMBIENTE
-/// @param str STRING A SER ANALIZADA
-/// @return RETORNA 1 CASO O ARGUMENTO NAO ENCONTRE NENHUM METACARACTERE PROIBIDO
-/// @return RETORNA 0 CASO O NAO ATENDA OS REQUISITOS ACIMA
 int	metacaracterer(char *str)
 {
 	while (*str && *str != '=')
@@ -28,10 +24,6 @@ int	metacaracterer(char *str)
 	return (0);
 }
 
-/// @brief TESTA O PRIMEIRO ARGUMENTO PARA VER E UMA DECLARACAO DE AMBIENTE
-/// @param str STRING A SER TESTADA
-/// @return RETORNA 1 CASO O ARGUMENTO NAO COMECE COM NUMERO OU '=' E NO MEIO DELE TENHA '='
-/// @return RETORNA 0 CASO O NAO ATENDA OS REQUISITOS ACIMA
 int	declaration_variable(char *str)
 {
 	if (str == NULL || (*str >= '0' && *str <= '9') || metacaracterer(str))
@@ -45,9 +37,6 @@ int	declaration_variable(char *str)
 	return (0);
 }
 
-/// @brief RETORNA UMA COPIA DO NOME DA VARIAVEL DE AMBIENTE (ALOCA MEMORIA E COPIA TUDO ANTES DO '=')
-/// @param str STRING A SER ESTRAIDA O NOME DA VARIAVEL
-/// @return RETORNA UM NOVO ENDERECO COM O NOME DA VARIAVEL
 char	*copy_name_variable(char *str)
 {
 	char	*name;
@@ -70,10 +59,6 @@ char	*copy_name_variable(char *str)
 	return (name);
 }
 
-/// @brief COMPARA O ENDERECO DE MEMORIA old_variable COM TODOS OS ENDERECOS DE env CASO ENCONTRE O ENDERECO DE old_variable DENTRO DE env A FUNCAO TROCA O ANTIGO ENDERECO POR new_variable
-/// @param old_variable ANTIGO ENDERECO DE MEMORIA A SER SUBSTITUIDO
-/// @param new_variable NOVO ENDERECO DE MEMORIA A SUBSTITUIR
-/// @param env ARRAY DE ENDERECOS DE MEMORIA
 void	swap_variable_array(char *old_variable, char *new_variable, char **env)
 {
 	int	i;

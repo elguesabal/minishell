@@ -23,17 +23,15 @@
 # include <sys/stat.h>
 # include <signal.h>
 
-
 typedef struct s_str
 {
 	char			*str;
 	struct s_str	*next;
 }	t_str;
 
-
 // ./assistant/len.c
 size_t	ft_strlen(const char *str);
-int 	strstrlen(char **array_ptr);
+int		strstrlen(char **array_ptr);
 int		strlen_char(char *str, char c);
 int		listlen(t_str *no);
 int		len_all_variable(char *str, t_str **env_list);
@@ -86,13 +84,12 @@ char	*new_line(char *rest_line);
 char	*read_rest_line(int fd, char *rest_line);
 char	*get_next_line(int fd);
 
-
-
 // ./argument management/argument_management.c
 int		len_separating_operators(char *str);
 void	separate_redirection_operators(char **str);
 void	new_args(char **str, char **copy_str);
-int		argument_management(char **str, char ***argv, char **env, t_str **env_list);
+int		argument_management(char **str, char ***argv,
+			char **env, t_str **env_list);
 
 // ./argument management/environment_variable.c
 int		search_dollar_sign(char *str);
@@ -103,7 +100,7 @@ char	*environment_variable(char *arg, t_str **env_list);
 
 // ./argument management/quotes1.c
 void	swap_tab(char **args);
-int 	closing_quotes(char *str, char quotes);
+int		closing_quotes(char *str, char quotes);
 void	swap_caracter(char *c, int single_quotes, int double_quotes);
 
 // ./argument management/quotes1.c
@@ -114,9 +111,11 @@ void	revert_caracter(char **args);
 // ./argument management/redirection_operators.c
 int		len_arguments(char **argv);
 char	**next_process(char **argv);
-char	**init_redirection(char **argv, int *i, int *operator, t_str **env_list);
+char	**init_redirection(char **argv, int *i,
+			int *operator, t_str **env_list);
 void	finish_redirection(int operator, int *new_std, char **args_process);
-void	redirection_operators(char *str, char **argv, char ***arge, t_str **env);
+void	redirection_operators(char *str, char **argv,
+			char ***arge, t_str **env);
 
 // ./argument management/pipe1.c
 int		count_pipe(char **argv);
@@ -148,16 +147,14 @@ void	init_history(void);
 void	new_history(char *str);
 
 // ./argument management/check_arguments.c
-int 	check_syntax_error(char operator);
+int		check_syntax_error(char operator);
 int		check_pipe(char **arg, int i);
-int 	check_greater(char **arg, int i);
+int		check_greater(char **arg, int i);
 int		check_less(char **arg, int i);
 int		check_operator(char **arg);
 
 // ./argument management/signal.c
 void	handle_signal(int sign);
-
-
 
 // ./commands/add_variable.c
 int		metacaracterer(char *str);
@@ -190,7 +187,7 @@ void	export(char **argv, char ***env, t_str **env_list);
 // ./commands/unset.c
 void	remove_variable_array(char **env, char *str);
 void	remove_variable_list(t_str **no, char *str);
-void 	unset(char **argv, t_str **env_list, char **env);
+void	unset(char **argv, t_str **env_list, char **env);
 
 // ./commands/env.c
 void	env(char **env, t_str **env_list);
@@ -209,12 +206,8 @@ void	exec_program(char **argv, char **env, char *str, t_str **env_list);
 int		compare(char *s1, char *s2);
 void	commands(char *str, char **args, char ***argenv, t_str **env_list);
 
-
-
 // ./minishell.c
 void	init_shell(t_str **env_list, char ***argenv);
 void	execute_command(char *str, char **args, char ***env, t_str **env_list);
-
-
 
 #endif

@@ -12,7 +12,6 @@
 
 #include "../minishell.h"
 
-/// @brief ADICIONA O HISTORICO DE OUTRAS SESSOES QUE ESTA ARMAZENADO EM CACHE
 void	init_history(void)
 {
 	int		fd;
@@ -31,8 +30,6 @@ void	init_history(void)
 	}
 }
 
-/// @brief ADICIONA NOVOS COMANDOS AO HISTORICO
-/// @param str COMANDO A SER ADICIONADO
 void	new_history(char *str)
 {
 	int	fd;

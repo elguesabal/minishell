@@ -12,9 +12,6 @@
 
 #include "../minishell.h"
 
-/// @brief RECEBE OS ARGUMENTOS E CONTA ATE O PROXIMO OPERADOR DE REDIRECIONAMENTO
-/// @param argv ARRAY COM TODOS ARGUMENTOS
-/// @return RETORNA O TAMANHO DOS ARGUMENTOS ATE O PROXIMO OPERADOR DE REDIRECIONAMENTO
 int	len_arguments(char **argv)
 {
 	int	len;
@@ -26,9 +23,6 @@ int	len_arguments(char **argv)
 	return (len);
 }
 
-/// @brief RECEBE OS ARGUMENTOS ALLOCA MEMORIA CORRETAMENTE E COPIA OS ARGUMENTOS ANTES DO PRIMEIRO OPERADOR DE REDIRECIONAMENTO ENCONTRADO
-/// @param argv ARRAY COM TODOS ARGUMENTOS
-/// @return RETORNA UMA COPIA DOS ARGUMENTOS DO COMANDO ATE ENCONTRAR UM OPERADOR DE REDIRECIONAMENTO
 char	**next_process(char **argv)
 {
 	char	**args_process;
@@ -48,12 +42,6 @@ char	**next_process(char **argv)
 	return (args_process);
 }
 
-/// @brief INICIALIZA O PROCESSO DE REDIRECIONAMENTO DA FUNCAO redirection_operators()
-/// @param argv ARRAY COM TODOS ARGUMENTOS
-/// @param i POSICAO DO ARGUMENTO ATUAL
-/// @param operator IDENTIFICADOR DO PROXIMO OPERADOR
-/// @param env LISTA ENCADEADA COM TODAS AS VARIAVEIS DE AMBIENTE
-/// @return RETORNA UMA COPIA DOS ARGUMENTOS DO COMANDO ATE ENCONTRAR UM OPERADOR DE REDIRECIONAMENTO
 char	**init_redirection(char **argv, int *i, int *operator, t_str **env_list)
 {
 	char	**args_process;
@@ -79,9 +67,6 @@ char	**init_redirection(char **argv, int *i, int *operator, t_str **env_list)
 	return (args_process);
 }
 
-/// @brief TERMINA O REDIRECIONAMENTO DE redirection_operators()
-/// @param argv ARRAY COM TODOS ARGUMENTOS
-/// @param new_std COPIAS (DUPLICACOES) SALVAS DE STDIN_FILENO E STDOUT_FILENO ANTES DE QUALQUER REDIRECIONAMENTO
 void	finish_redirection(int operator, int *new_std, char **args_process)
 {
 	if (operator == 2 || operator == 3 || operator == 4 || operator == 5)

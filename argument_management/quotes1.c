@@ -12,8 +12,6 @@
 
 #include "../minishell.h"
 
-/// @brief TROCA TODOS AS TABULACAO POR ESPACOES
-/// @param args ARRAY DE STRING QUE SERA PERCORRIDA
 void	swap_tab(char **args)
 {
 	int	i;
@@ -33,11 +31,6 @@ void	swap_tab(char **args)
 	}
 }
 
-/// @brief VERIFICA SE AS ASPAS ABERTAS NO ENDERECO PASSADO ESTAO SENDO FECHADAS MAIS A FRENTE
-/// @param str STRING ANALIZADA
-/// @param quotes ASPAS QUE VAO SER PROCURADAS A FRENTE
-/// @return RETORNA 1 CASO EXISTA FECHAMENTO DE ASPAS POSTERIORMENTE
-/// @return RETORNA 0 CASO str SEJA NULL OU O PRIMEIRO ELEMENTO DE str NAO SEJA ASPAS MENCIONADA OU NAO EXISTA FECHAMENTO DE ASPAS
 int	closing_quotes(char *str, char quotes)
 {
 	if (str == NULL || *str != quotes)
@@ -51,10 +44,6 @@ int	closing_quotes(char *str, char quotes)
 	return (0);
 }
 
-/// @brief TROCA METACARACTERES FORA DE ASPAS PARA NAO SEREM INTERPRETADOS DENTRO DA FUNCAO argument_management() (ASPAS TBM SAO TROCADOS PARA SEREM REMOVIDO FACILMENTE)
-/// @param c CARACTER A SER ANALIZADO E TROCADO
-/// @param single_quotes SINALIZADOR QUE IDENTIFICA EXISTENCIA DE ASPAS ABERTAS
-/// @param double_quotes SINALIZADOR QUE IDENTIFICA EXISTENCIA DE ASPAS ABERTAS
 void	swap_caracter(char *c, int single_quotes, int double_quotes)
 {
 	if (*c == '	' && single_quotes == 0 && double_quotes == 0)

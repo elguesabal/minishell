@@ -12,11 +12,6 @@
 
 #include "../minishell.h"
 
-/// @brief DECLARA E EXPORTA UMA VARIAVEL DE AMBIENTE
-/// @param i INDICE QUE argv DEVE SER ACESSADO
-/// @param argv ARGUMENTOS PASSADO COMO COMANDO
-/// @param arge ARRAY COM VARIAVEIS DE AMBIENTE EXPORTADAS
-/// @param env LISTA ENCADEADA COM TODAS AS VARIAVEIS DE AMBIENTE
 void	declaration_and_export(int i, char ***argv, char ***arge, t_str **env)
 {
 	char	**arg;
@@ -34,11 +29,6 @@ void	declaration_and_export(int i, char ***argv, char ***arge, t_str **env)
 	argv[0][i] = name_variable;
 }
 
-/// @brief PROCURA UMA ESTRING (VARIAVEL DE AMBIENTE) DENTRO DE UMA LISTA ENCADEADA
-/// @param no LISTA A SER PERCORRIDA
-/// @param s2 STRING A SER COMPARADA
-/// @return RETORNA O NO CASO ENCONTRE A VARIAVEL
-/// @return SE NAO ENCONTRAR A VARIAVEL RETORNA NULL
 t_str	*search_variable_list(t_str **no, char *str)
 {
 	t_str	*assist;
@@ -62,11 +52,6 @@ t_str	*search_variable_list(t_str **no, char *str)
 	return (NULL);
 }
 
-/// @brief PROCURA UMA ESTRING (VARIAVEL DE AMBIENTE) DENTRO DE UM ARRAY
-/// @param env ARRAY A SER PROCURADO
-/// @param str STRING A SER COMPARADA
-/// @return RETORNA 0 CASO ENCONTRE A VARIAVEL
-/// @return RETORNA 1 CASO NAO ENCONTRAR A VARIAVEL
 int	search_variable_array(char **env, char *str)
 {
 	int	i;
@@ -81,10 +66,6 @@ int	search_variable_array(char **env, char *str)
 	return (0);
 }
 
-/// @brief CRIA UM NOVO PONTEIRO PARA PONTEIRO REUTILIZANDO AS ANTIGAS STRINGS E ADICIONANDO UMA NOVA AO FINAL
-/// @param env ARRAY COM TODAS AS VARIAVEIS DE AMBIENTE MENO A NOVA
-/// @param str NOVA VARIAVEL DE AMBIENTE A SER INCLUIDA EM env
-/// @return RETORNA UM NOVO ENDERECO DE MEMORIA COM TODOS AS VARIAVEIS DE AMBIENTE
 void	export_variable(char ***env, char *str)
 {
 	char	**new_env;
@@ -105,12 +86,6 @@ void	export_variable(char ***env, char *str)
 	*env = new_env;
 }
 
-/// @brief COMPARTILHA O ENDERECO DE MEMORIA CITADO EM **argv Q ESTA ARMAZENADO EM **env_list ASSIM QUANDO OUVER ALGUM SUBPROCESSO SERA PASSADO **env COMO ARGUMENTO
-/// @param argv ARGUMENTOS PASSADOS NO readline()
-/// @param env PONTEIRO PARA PONTEIRO QUE ESTA COM AS VARIAVEIS DISPONIVEIS PARA SUBPROCESSOS
-/// @param env_list LISTA ENCADEADA Q CONTEM TODAS AS VARIAVEIS DE AMBIENTE
-/// @return RETORNA UM NOVO ENDERECO DE MEMORIA COM TODOS AS VARIAVEIS DE AMBIENTE CASO ENCONTRADO A VARIAVEL CITADA EM argv
-/// @return RETORNA O ENDERECO DE MEMORIA ANTIGO CASO A VARIAVEL NAO SEJA ENCONTRADA NA LISTA ENCADEADA
 void	export(char **argv, char ***env, t_str **env_list)
 {
 	int		i;

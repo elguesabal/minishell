@@ -12,10 +12,6 @@
 
 #include "../minishell.h"
 
-/// @brief PROCURA SE A O SIMBULO $ Q INIDICA VARIAVEL DE AMBIENTE
-/// @param str STRING QUE IRAR PROCURAR $
-/// @return RETORNA 1 SE OUVER $ E ALGO APOS ISSO EXEMPLO: "teste$PATH"
-/// @return RETORNA 0 SE NAO OUVER $ OU SE NAO OUVER MAIS NADA APOS $ EXEMPLO: "teste" OU "teste$"
 int	search_dollar_sign(char *str)
 {
 	while (*str)
@@ -27,10 +23,6 @@ int	search_dollar_sign(char *str)
 	return (0);
 }
 
-/// @brief RETORNA O TAMANHO QUE A STRING str DEVERIA TER CASO AS VARIAVEIS DE AMBIENTE FOSSEM EXPANDIDAS
-/// @param str STRING Q VAI SR CONTADA O TAMANHO CASO EXPANDA AS VARIAVEIS DE AMBIENTE
-/// @param env_list LISTA ENCADEADA COM TODAS AS VARIAVEIS DE AMBIENTE
-/// @return RETORNA UM NOVO ENDERECO DE MEMORIA COM O TAMANHO CORRETO
 char	*malloc_variable(char *str, t_str **env_list)
 {
 	char	*copy_new;
@@ -47,11 +39,6 @@ char	*malloc_variable(char *str, t_str **env_list)
 	return (copy_new);
 }
 
-/// @brief TROCA A VARIAVEL DE AMBIENTE POR SEU VALOR
-/// @param env_list LISTA ENCADEADA COM TODAS AS VARIAVEIS DE AMBIENTE
-/// @param str STRING Q VAI TER AS VARIAVEIS ESPANDIDAS
-/// @param copy_new ESTRING Q ESTA RECEBENDO str COM AS VARIAVEIS EXPANDIDAS
-/// @param i POSICAO DE GRAVACAO DE copy_new
 void	swap_variable(t_str **env_list, char **str, char *copy_new, int *i)
 {
 	t_str	*no;
@@ -79,10 +66,6 @@ void	swap_variable(t_str **env_list, char **str, char *copy_new, int *i)
 	}
 }
 
-/// @brief RETORNA UM NOVO ENDERECO DE MEMORIA COPIANDO O CONTEUDO DE str ATE E SUBISTITUINDO $VARIAVEL POR SEU VALOR
-/// @param str STRING Q VAI TER AS VARIAVEIS ESPANDIDAS
-/// @param env_list LISTA ENCADEADA COM TODAS AS VARIAVEIS DE AMBIENTE
-/// @return RETORNA UM NOVO ENDERECO DE MEMORIA COM A VARIAVEL JA EXPANDIDA
 char	*expand_variable(char *str, t_str **env_list)
 {
 	char	*copy_new;

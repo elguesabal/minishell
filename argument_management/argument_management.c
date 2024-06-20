@@ -12,9 +12,6 @@
 
 #include "../minishell.h"
 
-/// @brief CONTA O TAMANHO QUE A STRING DEVERIA TER CASO OS OPERADORES DE REDIRECIONAMENTO ESTIVESSEM SEPARADOS
-/// @param str RECEBE UM PONTEIRO DE ARRAY DE CHAR COM ARGUMENTOS
-/// @return RETORNA O TAMANHO DA STRING QUE DEVERIA TER
 int	len_separating_operators(char *str)
 {
 	int	len;
@@ -37,9 +34,6 @@ int	len_separating_operators(char *str)
 	return (len);
 }
 
-/// @brief SEPARA OS OPERADORES DE REDIRECIONAMENTO DE OUTROS ARGUMENTOS
-/// @param str RECEBE UM PONTEIRO DE ARRAY DE CHAR COM ARGUMENTOS
-/// @param copy_str ENDERECO DE MEMORIA COM O TAMANHO CORRETO PARA SEPARA OS OPERADORES DE REDIRECIONAMENTO
 void	new_args(char **str, char **copy_str)
 {
 	int	i;
@@ -68,9 +62,6 @@ void	new_args(char **str, char **copy_str)
 	copy_str[0][i + j] = '\0';
 }
 
-/// @brief ALOCA UM NOVO ENDERECO DE MEMORIA E SEPARA OS OPERADORES DE REDIRECIONAMENTO DE OUTROS ARGUMENTOS POR UM ESPACO (USA free() NO ANTIGO ENDERECO DE MEMORIA)
-/// @param str RECEBE UM PONTEIRO DE CHAR COM ARGUMENTOS
-/// @return RETORNA UM NOVO ENDERECO DE MEMORIA COM OS AGUMENTOS SEPARADOS
 void	separate_redirection_operators(char **str)
 {
 	char	*copy_str;

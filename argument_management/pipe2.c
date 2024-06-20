@@ -12,10 +12,6 @@
 
 #include "../minishell.h"
 
-/// @brief RECEBE OS ARGUMENTOS COM TODOS OS PROCESSO E COM BASE NO PROCESSO ATUAL RETORNA APENAS OS ARGUMENTOS DO PROCESSO ATUAL
-/// @param argv ARRAY COM TODOS ARGUMENTOS E COMANDOS
-/// @param process NUMERO DO PROCESSO ATUAL
-/// @return RETORNA APENAS OS ARGUMENTOS DO PROCESSO ATUAL
 char	**args_pipe(char **argv, int process)
 {
 	char	**return_arg;
@@ -43,11 +39,6 @@ char	**args_pipe(char **argv, int process)
 	return (return_arg);
 }
 
-/// @brief EXECUTA O COMANDO VERIFICANDO SE HA ALGUM OPERADOR DE REDIRECIONAMENTO E LIBERA MEMORIA CASO  A FUNCAO execve() NAO MATE O PROCESSO
-/// @param str STRING RETORNADA POR readline()
-/// @param argv ARRAY DE STRING COM OS ARGUMENTOS DO ATUAL PROCESSO
-/// @param arge ARRAY DE STRING COM AS VARIAVEIS DE AMBIENTE EXPORTADAS
-/// @param env LISTA ENCADEADA COM TODAS AS VARIAVEIS DE AMBIENTE (EXPORTADAS E NAO EXPORTADAS)
 void	execute_process(char *str, char **argv, char ***arge, t_str **env)
 {
 	if (search_operator(argv, '>') || search_operator(argv, '<'))
@@ -60,10 +51,6 @@ void	execute_process(char *str, char **argv, char ***arge, t_str **env)
 	free_split(argv);
 }
 
-/// @brief FINALIZA A FUNCAO command_pipe() USANDO close() EM TODOS OS FDS NO PROCESSO PAI E USANDO free() EM TODOS OS PONTEIRO DO PROCESSO
-/// @param fd ARRAI DE FILE DESCRIPTIONS
-/// @param n_process NUMERO DE PIPES
-/// @param pid ARRAY COM TODOS OS PIDS DOS PROCESSOS FILHOS
 void	finish_pipe(int **fd, int n_process, pid_t *pid)
 {
 	int	i;

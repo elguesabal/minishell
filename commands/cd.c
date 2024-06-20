@@ -12,9 +12,6 @@
 
 #include "../minishell.h"
 
-/// @brief NOVO CAMINHO ATUAL DA VARIAVEL DE AMBIENTE PWD
-/// @param pwd CAMINHO ATUALIZADO
-/// @return RETORNA A STRING COM VARIAVEL DE AMBIENTE PRONTA PARA SER ATUALIZADA
 char	*new_pwd(char *pwd)
 {
 	char	*variable;

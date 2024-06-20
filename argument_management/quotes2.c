@@ -12,8 +12,6 @@
 
 #include "../minishell.h"
 
-/// @brief FUNCAO RESPONSAVEL POR GERENCIAR ABERTURA DE ASPAS, GARANTIR A EXISTENCIA DE FECHAMENTO, NAO INTERPRETAR ASPAS DENTRO DE ASPAS E CHAMAR A FUNCAO swap_caracter()
-/// @param str STRING QUE SERA PERCORRIDA
 void	quotes(char *str)
 {
 	int	single_quotes;
@@ -38,8 +36,6 @@ void	quotes(char *str)
 	}
 }
 
-/// @brief REMOVE AS ASPAS COM VALORES ALTERNATIVOS ' == -1 E " == -2 REUTILIZANDO O ANTIGO ENDERECO DE MEMORIA E COLOCANDO '\0' NO FIM DA STRING EXEMPLO: "teste"\0 -> teste\0"\0
-/// @param str STRING QUE SERA REMOVIDA AS ASPAS
 void	remove_quotes(char *str)
 {
 	int	quotes;
@@ -56,8 +52,6 @@ void	remove_quotes(char *str)
 	*(str - quotes) = '\0';
 }
 
-/// @brief REVERTE AS MUDIFICACOES FEITAS NAS STRINGS POR swap_caracter() EXEMPLO: char c == -3 VAI RECEBER $
-/// @param args STRINGS A SEREM REVERTIDAS
 void	revert_caracter(char **args)
 {
 	int	i;
